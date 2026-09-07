@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "aws",
   "client_version": 10011,
-  "label": "connects to the AWS server",
-  "published": "2026-09-07T02:38:04Z",
+  "label": "the launcher names the channel",
+  "published": "2026-09-07T03:07:10Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10011/files/",
   "files": [
     {
@@ -253,13 +253,13 @@
     },
     {
       "path": "README.txt",
-      "size": 5059,
-      "sha256": "c1b1c54b5b9bdf7828c7bebaabb7647edb7d7eb05f0db4b34142f1d271f1c21b"
+      "size": 4979,
+      "sha256": "b7a7c86616f0248bcf49fcbfd9fe76cb9989b67fdce1f4b239980ee56150e567"
     },
     {
       "path": "Set-Server.cmd",
-      "size": 1104,
-      "sha256": "833e3eaf2a6077c33a063c5d818d61d1d158beffaf374bec7d81299333c23042"
+      "size": 1093,
+      "sha256": "501550fcb32b541767fad4672307e2172468e38370edcb78c39c8c3c4a62463f"
     },
     {
       "path": "discord-rpc.jar",
@@ -268,8 +268,8 @@
     },
     {
       "path": "update/Launch.cmd",
-      "size": 3101,
-      "sha256": "964428d1dbf84574b97053420348daf082fcf42acfa18f9b74ad08c4abdbca02"
+      "size": 3079,
+      "sha256": "94d2de20f8f58c816c701c16189a02f7ba48f1f6a34097f8e68c323d8600c0dc"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9500585,
-    "sha256": "d3e55de63f61f29732157afe834942472fee225c89235ccc7fcf902e5162c0a7"
+    "size": 9500544,
+    "sha256": "5c2efcfb6c36e3d924704874d292eb121330fcaf27c2b3d3950fe23907f69e30"
   },
-  "content": "f8ef8964206bd3b6"
+  "content": "617c3b46dd128784"
 }
