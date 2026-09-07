@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "lan-xbox",
   "client_version": 10011,
-  "label": "client updater live",
-  "published": "2026-09-07T00:56:21Z",
+  "label": "installer seeds the server address",
+  "published": "2026-09-07T02:01:52Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan-xbox/10011/files/",
   "files": [
     {
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9500168,
-    "sha256": "d85259fe9f47bb550b7185c054f8c71bda8fcd8ec1260a9074805cbb5c7a7914"
+    "size": 9500469,
+    "sha256": "7c67de09127275780127f59c5033e50f2f38bb5b856e04e8b68443edb53bd7f2"
   },
   "content": "e8f37c2b8ef917eb"
 }
