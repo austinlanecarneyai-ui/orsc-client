@@ -1,8 +1,8 @@
 {
   "channel": "lan-xbox",
   "client_version": 10011,
-  "content": "e8f37c2b8ef917eb",
-  "label": "installer seeds the server address",
-  "published": "2026-09-07T02:01:52Z",
+  "content": "4e5ed3d4dfc85eb5",
+  "label": "the launcher names the channel",
+  "published": "2026-09-07T03:06:16Z",
   "manifest": "10011/manifest.json"
 }

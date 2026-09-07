@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "lan-xbox",
   "client_version": 10011,
-  "label": "installer seeds the server address",
-  "published": "2026-09-07T02:01:52Z",
+  "label": "the launcher names the channel",
+  "published": "2026-09-07T03:06:16Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan-xbox/10011/files/",
   "files": [
     {
@@ -253,13 +253,13 @@
     },
     {
       "path": "README.txt",
-      "size": 5016,
-      "sha256": "a237e9eb03f1d9eabf82aaffa844ad65e7d10174f4b90e54cba1c3199ec64d7f"
+      "size": 5026,
+      "sha256": "f84614be55a4e4cbc0f4cd4af799b6730285274c847de6b9f635651566651dec"
     },
     {
       "path": "Set-Server.cmd",
-      "size": 1104,
-      "sha256": "833e3eaf2a6077c33a063c5d818d61d1d158beffaf374bec7d81299333c23042"
+      "size": 1111,
+      "sha256": "2c0381ec13d9267338d1847c355bd407d47c691bd3fa08f8219b6abb2c416520"
     },
     {
       "path": "discord-rpc.jar",
@@ -268,8 +268,8 @@
     },
     {
       "path": "update/Launch.cmd",
-      "size": 3101,
-      "sha256": "964428d1dbf84574b97053420348daf082fcf42acfa18f9b74ad08c4abdbca02"
+      "size": 3115,
+      "sha256": "e2b11ac97164efb9b601c40b86712ffa006bdce04f8d765ede5c9c899cc3668a"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9500469,
-    "sha256": "7c67de09127275780127f59c5033e50f2f38bb5b856e04e8b68443edb53bd7f2"
+    "size": 9500484,
+    "sha256": "6ea30051b251a8944e73cce2e8f6573a33a39dd04392e95c61eb0ea3bf3e8b5e"
   },
-  "content": "e8f37c2b8ef917eb"
+  "content": "4e5ed3d4dfc85eb5"
 }
