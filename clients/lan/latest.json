@@ -1,8 +1,8 @@
 {
   "channel": "lan",
-  "client_version": 10012,
-  "content": "e2763dc3e822ebbb",
+  "client_version": 10013,
+  "content": "814a405ff3b8114d",
   "label": "",
-  "published": "2026-09-07T07:21:44Z",
-  "manifest": "10012/manifest.json"
+  "published": "2026-09-07T20:17:04Z",
+  "manifest": "10013/manifest.json"
 }
