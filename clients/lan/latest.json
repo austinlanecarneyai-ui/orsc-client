@@ -1,8 +1,8 @@
 {
   "channel": "lan",
-  "client_version": 10011,
-  "content": "c91893299377a6c6",
-  "label": "the launcher names the channel",
-  "published": "2026-09-07T03:03:44Z",
-  "manifest": "10011/manifest.json"
+  "client_version": 10012,
+  "content": "e2763dc3e822ebbb",
+  "label": "",
+  "published": "2026-09-07T07:21:44Z",
+  "manifest": "10012/manifest.json"
 }
