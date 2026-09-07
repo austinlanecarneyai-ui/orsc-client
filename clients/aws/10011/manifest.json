@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "aws",
   "client_version": 10011,
-  "label": "installer seeds the server address",
-  "published": "2026-09-07T02:01:01Z",
+  "label": "connects to the AWS server",
+  "published": "2026-09-07T02:37:38Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10011/files/",
   "files": [
     {
