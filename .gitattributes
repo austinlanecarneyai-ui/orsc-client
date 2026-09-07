@@ -1,0 +1,15 @@
+# Everything here is an ARTEFACT, not source. Git must not rewrite a byte.
+#
+# The manifest records the SHA-256 and the exact size of every file as it left
+# the publishing machine. Git for Windows sets core.autocrlf=true in its SYSTEM
+# config, so a clone normalises CRLF to LF on the way INTO a commit - and Pages
+# then serves a .cmd or a README one byte shorter per line than the manifest
+# says. The updater does exactly the right thing with that:
+#
+#     failed on README.txt: short read: 4905 bytes, the manifest says 5027
+#
+# and every friend's update aborted, on every launch, for three versions.
+#
+# `-text` disables the conversion whatever the machine's git is set to, which
+# is why it is committed here as well as set in the publishing clone.
+* -text
