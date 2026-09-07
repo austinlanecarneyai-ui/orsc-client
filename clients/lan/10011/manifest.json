@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "lan",
   "client_version": 10011,
-  "label": "client updater live",
-  "published": "2026-09-07T00:55:31Z",
+  "label": "installer seeds the server address",
+  "published": "2026-09-07T02:01:38Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10011/files/",
   "files": [
     {
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9500164,
-    "sha256": "870243b69c1849abc610137eceee1de42b1e80d308b7295989e582944108081e"
+    "size": 9500465,
+    "sha256": "96f866708ea8206ab250aeeb29203ed122e3cb4c0595d976dfd95059562c9eac"
   },
   "content": "e8f37c2b8ef917eb"
 }
