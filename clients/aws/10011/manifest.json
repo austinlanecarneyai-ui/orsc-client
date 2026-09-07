@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "aws",
   "client_version": 10011,
-  "label": "client updater live",
-  "published": "2026-09-07T00:55:12Z",
+  "label": "installer seeds the server address",
+  "published": "2026-09-07T02:01:01Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10011/files/",
   "files": [
     {
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9500282,
-    "sha256": "0a46532a8171fc93f39590318124768ba2fc9e0db3b01e9108c5dd38afccb609"
+    "size": 9500585,
+    "sha256": "d3e55de63f61f29732157afe834942472fee225c89235ccc7fcf902e5162c0a7"
   },
   "content": "f8ef8964206bd3b6"
 }
