@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "lan",
   "client_version": 10011,
-  "label": "installer seeds the server address",
-  "published": "2026-09-07T02:01:38Z",
+  "label": "internal LAN channel",
+  "published": "2026-09-07T02:37:24Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10011/files/",
   "files": [
     {
@@ -286,11 +286,6 @@
   "server": {
     "host": "192.168.1.98",
     "port": 43594
-  },
-  "setup": {
-    "path": "setup.zip",
-    "size": 9500465,
-    "sha256": "96f866708ea8206ab250aeeb29203ed122e3cb4c0595d976dfd95059562c9eac"
   },
   "content": "e8f37c2b8ef917eb"
 }
