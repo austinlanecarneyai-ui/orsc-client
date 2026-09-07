@@ -1,8 +1,8 @@
-OpenRSC - LAN client
-====================
+OpenRSC - LAN
+=============
 
-Copy this whole folder to any Windows machine on the same network, then
-double-click:
+Copy this whole folder to any Windows machine on the same network,
+then double-click:
 
     Play-OpenRSC.cmd
 

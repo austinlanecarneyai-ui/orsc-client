@@ -5,7 +5,7 @@
 :# Pre-flights the connection before starting the client, because a client that
 :# opens on a blank login screen has not told you whether the network, the
 :# firewall or the server is the problem.
-title OpenRSC LAN Client
+title OpenRSC - LAN
 
 :# One level up from update\, which is where this file lives. Everything below
 :# is relative to the folder, so it works from any drive or folder name.
@@ -22,7 +22,7 @@ if "%HOST%"=="" (
   exit /b 1
 )
 
-echo  OpenRSC LAN client
+echo  OpenRSC - LAN
 echo  Server: %HOST%:%PORT%
 echo.
 echo  Checking the connection...

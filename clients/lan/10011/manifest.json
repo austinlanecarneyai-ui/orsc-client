@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "lan",
   "client_version": 10011,
-  "label": "internal LAN channel",
-  "published": "2026-09-07T02:37:24Z",
+  "label": "the launcher names the channel",
+  "published": "2026-09-07T03:03:44Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10011/files/",
   "files": [
     {
@@ -253,13 +253,13 @@
     },
     {
       "path": "README.txt",
-      "size": 5016,
-      "sha256": "a237e9eb03f1d9eabf82aaffa844ad65e7d10174f4b90e54cba1c3199ec64d7f"
+      "size": 5002,
+      "sha256": "2a680db03cf3c1d9f5d41626a0eb17f3771f68502cac05ac2859da07829ab45a"
     },
     {
       "path": "Set-Server.cmd",
-      "size": 1104,
-      "sha256": "833e3eaf2a6077c33a063c5d818d61d1d158beffaf374bec7d81299333c23042"
+      "size": 1099,
+      "sha256": "2cf827a40aee0cc3cb76ccf28639e3fa10e5122392b9c545d8d466bd409a3a97"
     },
     {
       "path": "discord-rpc.jar",
@@ -268,8 +268,8 @@
     },
     {
       "path": "update/Launch.cmd",
-      "size": 3101,
-      "sha256": "964428d1dbf84574b97053420348daf082fcf42acfa18f9b74ad08c4abdbca02"
+      "size": 3091,
+      "sha256": "d6df84c33245554e78f8595fcfbf89963df92429cbbed33fb41b355749118863"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -287,5 +287,10 @@
     "host": "192.168.1.98",
     "port": 43594
   },
-  "content": "e8f37c2b8ef917eb"
+  "setup": {
+    "path": "setup.zip",
+    "size": 9500462,
+    "sha256": "b190d86f286ae35d29a688df15420ccc6ad37eb4ce790c44751be16c0810f681"
+  },
+  "content": "c91893299377a6c6"
 }

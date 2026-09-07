@@ -1,6 +1,6 @@
 @echo off
 :# Repoint this client at a different server, without editing any file by hand.
-title OpenRSC LAN Client - set server
+title OpenRSC - LAN - set server
 
 cd /d "%~dp0"
 
