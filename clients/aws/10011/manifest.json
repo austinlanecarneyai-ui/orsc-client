@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "aws",
   "client_version": 10011,
-  "label": "first GitHub Pages publish",
-  "published": "2026-09-07T00:54:01Z",
+  "label": "client updater live",
+  "published": "2026-09-07T00:55:12Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10011/files/",
   "files": [
     {
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9500290,
-    "sha256": "8a88f9346b06bc4ec770cf1af9dd2ae7eccbf9f506ed573961b9017c5476832e"
+    "size": 9500282,
+    "sha256": "0a46532a8171fc93f39590318124768ba2fc9e0db3b01e9108c5dd38afccb609"
   },
   "content": "f8ef8964206bd3b6"
 }
