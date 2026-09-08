@@ -1,0 +1,296 @@
+{
+  "schema": 1,
+  "channel": "lan",
+  "client_version": 10015,
+  "label": "",
+  "published": "2026-09-08T00:14:57Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10015/files/",
+  "files": [
+    {
+      "path": "Cache/MD5.SUM",
+      "size": 2326,
+      "sha256": "eb92695474a24a9a9cc01a0be20bdb6b94319dfee410bb53dfbd163bf18640d6"
+    },
+    {
+      "path": "Cache/audio/advance.wav",
+      "size": 12116,
+      "sha256": "e058fb4f95f84f089bc7f280824aa69996416dfacb6afdd512ecda8158e787c1"
+    },
+    {
+      "path": "Cache/audio/anvil.wav",
+      "size": 21040,
+      "sha256": "231b06c6632529be6c15a4bc5aca3cee2477603945ad1d1bea7918867b2b84fa"
+    },
+    {
+      "path": "Cache/audio/chisel.wav",
+      "size": 1314,
+      "sha256": "4a8f754cd3fe32d5d214851377835892faa6f8e1cb3ac8d10a38d6401f1ea29f"
+    },
+    {
+      "path": "Cache/audio/click.wav",
+      "size": 728,
+      "sha256": "3853ad8ecb9ab96be8a249bf8ccce545e84b370e2bdbd48700da5cae6a498df1"
+    },
+    {
+      "path": "Cache/audio/closedoor.wav",
+      "size": 7056,
+      "sha256": "3acd4402966558d589e88a881d3a4acb304f0d160aefd92e5bec251c8be1a5c4"
+    },
+    {
+      "path": "Cache/audio/coins.wav",
+      "size": 12366,
+      "sha256": "2f9268e325f195fc4237a15588645d43d07b15456c0b6dafc77966d298af1209"
+    },
+    {
+      "path": "Cache/audio/combat1a.wav",
+      "size": 3082,
+      "sha256": "7582cee1dc18872f26edb67a94a939740d8e8fc74f0b7d818cec3aa34f081d99"
+    },
+    {
+      "path": "Cache/audio/combat1b.wav",
+      "size": 2614,
+      "sha256": "d168afde5a52b5f700837e46580777fd93c488f148ae4fd62da97495ee6ba847"
+    },
+    {
+      "path": "Cache/audio/combat2a.wav",
+      "size": 5604,
+      "sha256": "99de1d14ba2a47e9ee0253c69da23a01ee4822166718cff47233230e1f438779"
+    },
+    {
+      "path": "Cache/audio/combat2b.wav",
+      "size": 8474,
+      "sha256": "1b45c36333c3569ab016a0df25c10f45a6cae9ad18a72e99ba9c82f9e87ea542"
+    },
+    {
+      "path": "Cache/audio/combat3a.wav",
+      "size": 9252,
+      "sha256": "ed904d93c7f6cd0bb38953abe76338ce1e22936ee043d0eaac1f7ff45a1c015b"
+    },
+    {
+      "path": "Cache/audio/combat3b.wav",
+      "size": 9194,
+      "sha256": "8c39ed3379d894a618df03cd6f0b0c7ae84d233959104769844b8d90e127825f"
+    },
+    {
+      "path": "Cache/audio/cooking.wav",
+      "size": 24370,
+      "sha256": "c45a9dc14084c1b8ab768e06500195b408f8e4b860412a02a2dcdc0f17108359"
+    },
+    {
+      "path": "Cache/audio/death.wav",
+      "size": 15988,
+      "sha256": "611e085b95a72e1c82ab10263f68956d7df7c3ff634863d5ec39656ca633cb41"
+    },
+    {
+      "path": "Cache/audio/dropobject.wav",
+      "size": 7264,
+      "sha256": "6e3c8214d6300dab9f5df352085dea0744fcd9fe913c4ce5ea681130d3911f40"
+    },
+    {
+      "path": "Cache/audio/eat.wav",
+      "size": 19852,
+      "sha256": "e5c03fd02ee03e0a7a113b0bf244e3e3867b6f6ad076a72f039c6fd0f2d257f8"
+    },
+    {
+      "path": "Cache/audio/filljug.wav",
+      "size": 13482,
+      "sha256": "8cc7d13ff437e6fbe7fc1acd3bc924ffe9588fbf0f0e105686be03b344852160"
+    },
+    {
+      "path": "Cache/audio/fish.wav",
+      "size": 5816,
+      "sha256": "2b5da2162047c29a8d1966d2b9ff401eb3e41dd239f2f0df582d6a47221e8ee9"
+    },
+    {
+      "path": "Cache/audio/foundgem.wav",
+      "size": 16044,
+      "sha256": "1100d325b00b6ca77aca82af6b38ada51db2c3ffd8bd6cb0b5fab1a1984e4057"
+    },
+    {
+      "path": "Cache/audio/mechanical.wav",
+      "size": 12898,
+      "sha256": "199da562879d63591e9d8f9cd2bf09d0d2421f93d55893a1b0ff67637a78ad4a"
+    },
+    {
+      "path": "Cache/audio/mine.wav",
+      "size": 3640,
+      "sha256": "843b74ad1776beadf9bcf4c41736149460b0b77254b245a9fdde917b5f0e100f"
+    },
+    {
+      "path": "Cache/audio/mix.wav",
+      "size": 9108,
+      "sha256": "5ad8e97ea4a3102d0d34271f7b30a71191ccd0697751edb61a7f0d56a61b8ad7"
+    },
+    {
+      "path": "Cache/audio/opendoor.wav",
+      "size": 13054,
+      "sha256": "225d43e283968c9a991829d0168850c2098d4dac05253ec0fa818732e27e0045"
+    },
+    {
+      "path": "Cache/audio/outofammo.wav",
+      "size": 13874,
+      "sha256": "ba832f6804b4bce447eb111ce104b7a2bea2ae5f57a37d3be5a49e2b4d06ce33"
+    },
+    {
+      "path": "Cache/audio/potato.wav",
+      "size": 1788,
+      "sha256": "73e447e5ad2df9a2ab89d2fb0959c8c4a11d3f7d01a48de53f1e083882c27152"
+    },
+    {
+      "path": "Cache/audio/prayeroff.wav",
+      "size": 2444,
+      "sha256": "55fb6f5e6cc50f69afd65d393699821cf755063ae8d2c86b35def3e3321111bb"
+    },
+    {
+      "path": "Cache/audio/prayeron.wav",
+      "size": 2444,
+      "sha256": "0b0c53fd9a4913f4b6e5bf85d1b0b2c701f8342dd7c43e0f8f75981f6638dc98"
+    },
+    {
+      "path": "Cache/audio/prospect.wav",
+      "size": 7248,
+      "sha256": "7f7707f4633802bcfb1196d55dff6d4b3ec321b373eac96455036db232dfd606"
+    },
+    {
+      "path": "Cache/audio/recharge.wav",
+      "size": 8044,
+      "sha256": "5a6106376fe5a98c86b185024b4b6c65a2341e91d9d94065c5eaf90540026a43"
+    },
+    {
+      "path": "Cache/audio/retreat.wav",
+      "size": 8044,
+      "sha256": "534364dc2019b100f49512a4b121b84cee69b5d2143ea66d381fbe2511e8fe18"
+    },
+    {
+      "path": "Cache/audio/secretdoor.wav",
+      "size": 15100,
+      "sha256": "4e35e5c4417bf090ed8e454ad90f04b2df3856f023af3c77d53866d18ff4576e"
+    },
+    {
+      "path": "Cache/audio/shoot.wav",
+      "size": 3682,
+      "sha256": "2271fd5f0cb8080904ce6f6f5a1d6941e9e9dea20c2d0354d6710d4c060059fb"
+    },
+    {
+      "path": "Cache/audio/sounds.mem",
+      "size": 114375,
+      "sha256": "07cdfb29c78348b2f0d9a69e4e16a7f2503a6bc83264d276bdffc634a651c1af"
+    },
+    {
+      "path": "Cache/audio/spellfail.wav",
+      "size": 10658,
+      "sha256": "24fe04413e56e73aeed51721a8a130dcdd73b9b06f7e205208fbadea40514f7a"
+    },
+    {
+      "path": "Cache/audio/spellok.wav",
+      "size": 11042,
+      "sha256": "ff03350aebe7db93644cb7cfc5eee4407db8e669bdd3f10bdbd62449b8f9e159"
+    },
+    {
+      "path": "Cache/audio/takeobject.wav",
+      "size": 1324,
+      "sha256": "0cda20b99c86e02baa75697f9e9a9c0fc8a643b256050fb401c341b0887261db"
+    },
+    {
+      "path": "Cache/audio/underattack.wav",
+      "size": 6444,
+      "sha256": "5d60ee4e969f7498ef58050cf04764ccb86f0cdb5d8f9732b2ac2ee05843b0d1"
+    },
+    {
+      "path": "Cache/audio/victory.wav",
+      "size": 8270,
+      "sha256": "9ae703b3f62e084db4850588e98d8dd3e82c9eab16a7f1a58b21e35a45d63156"
+    },
+    {
+      "path": "Cache/config.txt",
+      "size": 9,
+      "sha256": "22e6e86519b3901d75b89eaa5bfda0927b840820d9364c7442627a1ec7c3e622"
+    },
+    {
+      "path": "Cache/video/Authentic_Landscape.orsc",
+      "size": 945225,
+      "sha256": "48ed0e1634b870888f96c0bc3e31cbaf152570b913140fdfd3596897a3eb29fa"
+    },
+    {
+      "path": "Cache/video/Authentic_Sprites.orsc",
+      "size": 1332653,
+      "sha256": "cf861efa7307556b5e5ba4c20b838f17753faba8b530f85dca38e8c2839d5e69"
+    },
+    {
+      "path": "Cache/video/Custom_Landscape.orsc",
+      "size": 931848,
+      "sha256": "8b35843ed9c1be2f0328295c726c44e507a4a038d4dec76417ede4ff4f291394"
+    },
+    {
+      "path": "Cache/video/Custom_Sprites.osar",
+      "size": 923865,
+      "sha256": "ca5874de69a03382bfdc113f69a369260cf9da9525004dcdd840662c29bb9abf"
+    },
+    {
+      "path": "Cache/video/library.orsc",
+      "size": 15162,
+      "sha256": "4fec67f1a23bd43c13e8579af05592623e29685f94f62d016b3af0aea859e17e"
+    },
+    {
+      "path": "Cache/video/models.orsc",
+      "size": 1127184,
+      "sha256": "0041565749f14b211d6eabc5750b01d7ee168de148dae85d463356620d08c010"
+    },
+    {
+      "path": "Cache/video/spritepacks/Menus.osar",
+      "size": 3126,
+      "sha256": "d74f281331be202af13972433d14209247ce89a2d7572c2b140f4afcde68bcac"
+    },
+    {
+      "path": "Check-Controller.cmd",
+      "size": 985,
+      "sha256": "c006dc6c5d925d2d05b3af0efcf0983d9302ad7bbc538237e399de23a8d99eb1"
+    },
+    {
+      "path": "Open_RSC_Client.jar",
+      "size": 3372996,
+      "sha256": "41d24df77d2391bb05c8a899c681b63dbf2db191570720ed796746eaf122a2d8"
+    },
+    {
+      "path": "README.txt",
+      "size": 5003,
+      "sha256": "a52f3c45c89a9a1df21278b0bd3430161e36ecef16950f0530e68dc091129132"
+    },
+    {
+      "path": "Set-Server.cmd",
+      "size": 1099,
+      "sha256": "2cf827a40aee0cc3cb76ccf28639e3fa10e5122392b9c545d8d466bd409a3a97"
+    },
+    {
+      "path": "discord-rpc.jar",
+      "size": 2067033,
+      "sha256": "197b5686e2e98dd7aebfc69b2a7ac64294316ae8a36cd196c7591fcc419729bb"
+    },
+    {
+      "path": "update/Launch.cmd",
+      "size": 3091,
+      "sha256": "d6df84c33245554e78f8595fcfbf89963df92429cbbed33fb41b355749118863"
+    },
+    {
+      "path": "update/Update-Client.ps1",
+      "size": 22763,
+      "sha256": "e4b75853990068ad736b0f512b16aba55c57b9493864a898abc161fa7a225e81"
+    }
+  ],
+  "pad_conf": {
+    "tick.ms": 492
+  },
+  "delete": [
+    "Play-CoOp.cmd"
+  ],
+  "server": {
+    "host": "192.168.1.98",
+    "port": 43594
+  },
+  "setup": {
+    "path": "setup.zip",
+    "size": 9502851,
+    "sha256": "612bdcdd08561d28f7fcb4cdf1e7c468b2683d40902cb35fb7d80dc03493bfa0"
+  },
+  "content": "37d9a7f7d5179e26"
+}
