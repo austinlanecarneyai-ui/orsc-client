@@ -1,8 +1,8 @@
 {
   "channel": "aws",
-  "client_version": 10013,
-  "content": "08bd63f1eaad201a",
-  "label": "",
-  "published": "2026-09-07T23:33:48Z",
-  "manifest": "10013/manifest.json"
+  "client_version": 10014,
+  "content": "ee66366f09d74d03",
+  "label": "player folder, locked to the world",
+  "published": "2026-09-08T00:11:29Z",
+  "manifest": "10014/manifest.json"
 }
