@@ -1,8 +1,8 @@
 {
   "channel": "aws",
-  "client_version": 10015,
-  "content": "639b25240dcd4c33",
-  "label": "a player's folder, locked to the world",
-  "published": "2026-09-08T00:17:14Z",
-  "manifest": "10015/manifest.json"
+  "client_version": 10016,
+  "content": "43fed283748c494e",
+  "label": "Gamepad targeting: the lock holds in a crowd (PAD-191..201)",
+  "published": "2026-09-09T11:27:15Z",
+  "manifest": "10016/manifest.json"
 }

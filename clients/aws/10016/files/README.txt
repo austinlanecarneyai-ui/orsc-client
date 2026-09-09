@@ -1,40 +1,51 @@
 OpenRSC
 =======
 
-Nothing to set up. Double-click:
+Double-click:
 
     Play-OpenRSC.cmd
 
-It checks it can reach the server first and tells you what it finds. If the
-check fails it still offers to start the client, because the check is not the
-game and can be wrong.
+That is the whole thing. It brings the folder up to date, checks it can reach
+the world, and starts the game.
 
-Nothing needs installing. NOTE: this build has no bundled Java. The machine needs Java 8 on its PATH.
+It needs Java 8 on this machine and nothing else. If Java is missing,
+the launcher says so, and where to get it.
 
-Server
-------
+The world
+---------
 
     15.134.172.152:43594
 
-To point this copy at a different machine or port, run Set-Server.cmd. It
-rewrites Cache\ip.txt and Cache\port.txt, which is where the client reads the
-address from.
+This copy is locked to it. There is nothing to set up and nothing to point
+anywhere - if the address ever changes, the next launch brings the new one
+down with it.
+
+It keeps itself up to date
+--------------------------
+
+Every launch, before the game starts, this folder checks for a new build and
+installs only what changed - usually a second or two. You do not download the
+client again.
+
+If a login is ever refused saying the client is out of date, close the game and
+run Play-OpenRSC.cmd again. The update happens before the client starts, so the
+second run gets you in.
+
+An update never touches what is yours: your controller bindings, your saved
+login, your window size and this machine's identity all stay as they are. If
+the update server cannot be reached, it says so and starts the game you have.
 
 If it will not connect
 ----------------------
 
-Two things account for almost every failure:
+The launcher tells you what it found before the game starts. If it could not
+reach the world:
 
-1.  The server is not running. On the server machine (15.134.172.152), that is
-    Start-Server.cmd in C:\ORSC. It is up when TCP 43594 is listening.
-
-2.  The server machine's firewall is blocking inbound TCP 43594.
-    The LAN adapter is on the Public firewall profile and that profile
-    is OFF, so inbound 43594 is not blocked. If it is ever turned back
-    on, this needs an allow rule.
-
-A third, rarer one: the server's address changed. It is set manually on that
-machine, so it should not, but Set-Server.cmd is how you fix it if it does.
+  * Check your own internet first. A browser will tell you in a second.
+  * The world is probably off or restarting. Wait a few minutes and run
+    Play-OpenRSC.cmd again.
+  * If it keeps failing, tell whoever runs the server. Nothing on your side
+    needs fixing.
 
 The window
 ----------
@@ -48,12 +59,15 @@ goes the other way, as far as your display allows.
 Playing
 -------
 
-Log in with an account that exists on that server. If you are testing PvP
-against the AI in the wilderness, your character has to be combat level 20-28 -
-every AI is level 24, and RuneScape Classic only lets you fight someone within
-`min(your wilderness level, theirs)` combat levels of you. A high-level
-character will neither attack them nor be attacked, which looks exactly like a
-broken connection and is not one.
+Make an account on the login screen and that is you, permanently - it lives on
+the server, not in this folder, so it survives a reinstall.
+
+One rule of the world catches everybody out. The AI in the wilderness are
+combat level 24, and RuneScape Classic only lets two people fight when the
+difference in their combat levels is no more than the wilderness level they are
+both standing on. The AI post up at wilderness 1-4, so a character outside
+about combat 20-28 will neither attack them nor be attacked. That is the game's
+own rule, not a fault: they are not broken, you are out of range.
 
 
 Controller
@@ -118,4 +132,9 @@ One thing the controller still cannot do, so you are not left guessing:
   * The bank's type-an-amount prompt needs the keyboard. The 1 / 5 / 10 / All
     chooser on Y covers most of what it was for.
 
-Built 2026-09-07 from C:\ORSC by mod\tools\build-lan-client.py.
+If you ever need a fresh copy
+-----------------------------
+
+    https://austinlanecarneyai-ui.github.io/orsc-client/
+
+Build 10016.

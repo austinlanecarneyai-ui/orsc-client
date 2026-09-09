@@ -16,10 +16,15 @@ set "PORT="
 if exist "Cache\ip.txt"   set /p HOST=<"Cache\ip.txt"
 if exist "Cache\port.txt" set /p PORT=<"Cache\port.txt"
 if "%HOST%"=="" (
-  echo Cache\ip.txt is missing or empty. Run Set-Server.cmd to set the server.
-  echo.
-  pause
-  exit /b 1
+  :# This copy is locked to one world, so a missing address is repaired rather
+  :# than reported. The updater writes the same two files from the manifest;
+  :# this is the offline path, and the value is built in at 2026-09-09.
+  if not exist "Cache" mkdir "Cache"
+  >"Cache\ip.txt"   echo 15.134.172.152
+  >"Cache\port.txt" echo 43594
+  set "HOST=15.134.172.152"
+  set "PORT=43594"
+  echo  Restored the server address: 15.134.172.152:43594
 )
 
 echo  OpenRSC
@@ -32,10 +37,13 @@ set "PROBE=%ERRORLEVEL%"
 
 if not "%PROBE%"=="0" (
   echo.
-  echo  Things to check, in order:
-  echo    1. Is the server running on %HOST%?  Start-Server.cmd on that machine.
-  echo    2. Is %HOST% still its address?      Run Set-Server.cmd here to change it.
-  echo    3. Is a firewall blocking TCP %PORT% inbound on the server machine?
+  echo  Nothing on your side needs changing - this copy is locked to the world
+  echo  and the address is correct.
+  echo.
+  echo    1. Check your own internet. A browser will tell you in a second.
+  echo    2. The world is probably off or restarting. Wait a few minutes and
+  echo       run Play-OpenRSC.cmd again.
+  echo    3. If it keeps failing, tell whoever runs the server.
   echo.
   :# A probe is not the game, and it can be wrong. It warns; it does not decide.
   choice /C YN /N /M "  Start the client anyway? [Y/N] "
@@ -50,12 +58,12 @@ if not exist "%JAVA%" (
   where java >nul 2>&1
   if errorlevel 1 (
     echo.
-    echo  No Java found. This folder was built without a bundled runtime and
-    echo  this machine has no java on its PATH.
+    echo  No Java found. The game needs Java 8 and this machine does not have
+    echo  it on its PATH.
     echo.
-    echo  Either install Java 8, or rebuild the folder with the runtime
-    echo  included - on the server machine, mod\tools\Build-Lan-Client.cmd
-    echo  bundles it by default.
+    echo  Install it from either of these, then run Play-OpenRSC.cmd again:
+    echo    https://adoptium.net/temurin/releases/?version=8
+    echo    https://www.azul.com/downloads/?version=java-8-lts^&package=jre
     echo.
     pause
     exit /b 9009
