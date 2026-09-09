@@ -1,8 +1,8 @@
 {
   "channel": "lan",
-  "client_version": 10015,
-  "content": "37d9a7f7d5179e26",
-  "label": "",
-  "published": "2026-09-08T00:14:57Z",
-  "manifest": "10015/manifest.json"
+  "client_version": 10016,
+  "content": "5583375ea9105389",
+  "label": "Gamepad targeting: the lock holds in a crowd (PAD-191..201)",
+  "published": "2026-09-09T11:24:42Z",
+  "manifest": "10016/manifest.json"
 }

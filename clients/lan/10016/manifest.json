@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "lan",
-  "client_version": 10011,
-  "label": "the launcher names the channel",
-  "published": "2026-09-07T03:03:44Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10011/files/",
+  "client_version": 10016,
+  "label": "Gamepad targeting: the lock holds in a crowd (PAD-191..201)",
+  "published": "2026-09-09T11:24:42Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10016/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -218,8 +218,8 @@
     },
     {
       "path": "Cache/video/Custom_Landscape.orsc",
-      "size": 972992,
-      "sha256": "aa1ab62821c513c980c0ead852730b34866635a878e93af8046aed8e003ed784"
+      "size": 931848,
+      "sha256": "8b35843ed9c1be2f0328295c726c44e507a4a038d4dec76417ede4ff4f291394"
     },
     {
       "path": "Cache/video/Custom_Sprites.osar",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3358796,
-      "sha256": "927562c0839eff7bd553830abd85430d038274faf4f914f0bc66ee4c414f17a2"
+      "size": 3381031,
+      "sha256": "b19657cf6f9c3056257563687a60725aee1559a8f37861d1c800c7db88017aa0"
     },
     {
       "path": "README.txt",
-      "size": 5002,
-      "sha256": "2a680db03cf3c1d9f5d41626a0eb17f3771f68502cac05ac2859da07829ab45a"
+      "size": 5042,
+      "sha256": "e95686c2d12daaf35c0dc5a6fa64ee753ad74d059e51f0f585697984eca7400a"
     },
     {
       "path": "Set-Server.cmd",
@@ -273,8 +273,8 @@
     },
     {
       "path": "update/Update-Client.ps1",
-      "size": 20902,
-      "sha256": "e223b52c9b0e87bb8efd7f341d55f01d311fd4b0dd1cf06c2cafb99ae80baf34"
+      "size": 22763,
+      "sha256": "e4b75853990068ad736b0f512b16aba55c57b9493864a898abc161fa7a225e81"
     }
   ],
   "pad_conf": {
@@ -287,10 +287,5 @@
     "host": "192.168.1.98",
     "port": 43594
   },
-  "setup": {
-    "path": "setup.zip",
-    "size": 9500462,
-    "sha256": "b190d86f286ae35d29a688df15420ccc6ad37eb4ce790c44751be16c0810f681"
-  },
-  "content": "c91893299377a6c6"
+  "content": "5583375ea9105389"
 }
