@@ -10,7 +10,7 @@ It checks it can reach the server first and tells you what it finds. If the
 check fails it still offers to start the client, because the check is not the
 game and can be wrong.
 
-Nothing needs installing. A Java 8 runtime is bundled in jre\.
+Nothing needs installing. NOTE: this build has no bundled Java. The machine needs Java 8 on its PATH.
 
 Server
 ------
@@ -30,9 +30,9 @@ Two things account for almost every failure:
     Start-Server.cmd in C:\ORSC. It is up when TCP 43594 is listening.
 
 2.  The server machine's firewall is blocking inbound TCP 43594.
-    The LAN adapter is on the Public firewall profile and that profile
-    is OFF, so inbound 43594 is not blocked. If it is ever turned back
-    on, this needs an allow rule.
+    The LAN adapter is on the Private firewall profile and that
+    profile is OFF, so inbound 43594 is not blocked. If it is ever
+    turned back on, this needs an allow rule.
 
 A third, rarer one: the server's address changed. It is set manually on that
 machine, so it should not, but Set-Server.cmd is how you fix it if it does.
@@ -119,4 +119,4 @@ One thing the controller still cannot do, so you are not left guessing:
   * The bank's type-an-amount prompt needs the keyboard. The 1 / 5 / 10 / All
     chooser on Y covers most of what it was for.
 
-Built 2026-09-07 from C:\ORSC by mod\tools\build-lan-client.py.
+Built 2026-09-09 from C:\ORSC by mod\tools\build-lan-client.py.

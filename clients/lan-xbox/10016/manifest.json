@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "lan-xbox",
-  "client_version": 10011,
-  "label": "the launcher names the channel",
-  "published": "2026-09-07T03:06:16Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan-xbox/10011/files/",
+  "client_version": 10016,
+  "label": "Gamepad targeting: the lock holds in a crowd (PAD-191..201)",
+  "published": "2026-09-09T11:25:57Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan-xbox/10016/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -218,8 +218,8 @@
     },
     {
       "path": "Cache/video/Custom_Landscape.orsc",
-      "size": 972992,
-      "sha256": "aa1ab62821c513c980c0ead852730b34866635a878e93af8046aed8e003ed784"
+      "size": 931848,
+      "sha256": "8b35843ed9c1be2f0328295c726c44e507a4a038d4dec76417ede4ff4f291394"
     },
     {
       "path": "Cache/video/Custom_Sprites.osar",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3358796,
-      "sha256": "927562c0839eff7bd553830abd85430d038274faf4f914f0bc66ee4c414f17a2"
+      "size": 3381031,
+      "sha256": "b19657cf6f9c3056257563687a60725aee1559a8f37861d1c800c7db88017aa0"
     },
     {
       "path": "README.txt",
-      "size": 5026,
-      "sha256": "f84614be55a4e4cbc0f4cd4af799b6730285274c847de6b9f635651566651dec"
+      "size": 5066,
+      "sha256": "9ece2d40a9b5012612ab3c4a068892a9cf6078831436541fa5376ab1a691bc51"
     },
     {
       "path": "Set-Server.cmd",
@@ -273,8 +273,8 @@
     },
     {
       "path": "update/Update-Client.ps1",
-      "size": 20902,
-      "sha256": "e223b52c9b0e87bb8efd7f341d55f01d311fd4b0dd1cf06c2cafb99ae80baf34"
+      "size": 22763,
+      "sha256": "e4b75853990068ad736b0f512b16aba55c57b9493864a898abc161fa7a225e81"
     }
   ],
   "pad_conf": {
@@ -287,10 +287,5 @@
     "host": "192.168.1.98",
     "port": 43594
   },
-  "setup": {
-    "path": "setup.zip",
-    "size": 9500484,
-    "sha256": "6ea30051b251a8944e73cce2e8f6573a33a39dd04392e95c61eb0ea3bf3e8b5e"
-  },
-  "content": "4e5ed3d4dfc85eb5"
+  "content": "efd6b90578559530"
 }

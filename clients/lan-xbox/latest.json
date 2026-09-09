@@ -1,8 +1,8 @@
 {
   "channel": "lan-xbox",
-  "client_version": 10015,
-  "content": "c339d3802f097688",
-  "label": "",
-  "published": "2026-09-08T00:16:04Z",
-  "manifest": "10015/manifest.json"
+  "client_version": 10016,
+  "content": "efd6b90578559530",
+  "label": "Gamepad targeting: the lock holds in a crowd (PAD-191..201)",
+  "published": "2026-09-09T11:25:57Z",
+  "manifest": "10016/manifest.json"
 }
