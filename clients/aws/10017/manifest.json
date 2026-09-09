@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10012,
-  "label": "",
-  "published": "2026-09-07T07:24:57Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10012/files/",
+  "client_version": 10017,
+  "label": "Gamepad: targeting lock holds in a crowd, and the bank equipment tab on RT",
+  "published": "2026-09-09T12:46:58Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10017/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -248,18 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3360147,
-      "sha256": "d1ff7ae87628daea1f98b270d27999186b3a8f3068168acced4f67602212687e"
+      "size": 3385989,
+      "sha256": "49d4a20a47153e63180a4d2035a973d13138bb4cdd256c291601ea5b409bbdc3"
     },
     {
       "path": "README.txt",
-      "size": 4980,
-      "sha256": "b60a623db26a5fe6e1fa550fda136186586d3e3eab111aa1beaff62efb80b1c9"
-    },
-    {
-      "path": "Set-Server.cmd",
-      "size": 1093,
-      "sha256": "501550fcb32b541767fad4672307e2172468e38370edcb78c39c8c3c4a62463f"
+      "size": 5578,
+      "sha256": "af1a22cd5940b1bdade75148bd3b624344a6eb604ec2a39596e575f72ba39386"
     },
     {
       "path": "discord-rpc.jar",
@@ -268,29 +263,31 @@
     },
     {
       "path": "update/Launch.cmd",
-      "size": 3079,
-      "sha256": "94d2de20f8f58c816c701c16189a02f7ba48f1f6a34097f8e68c323d8600c0dc"
+      "size": 3534,
+      "sha256": "207ec71a5198a8a927a40f358960c90418bd9dbeef9de6c3a34a1a5e28c8b33d"
     },
     {
       "path": "update/Update-Client.ps1",
-      "size": 20902,
-      "sha256": "e223b52c9b0e87bb8efd7f341d55f01d311fd4b0dd1cf06c2cafb99ae80baf34"
+      "size": 22763,
+      "sha256": "e4b75853990068ad736b0f512b16aba55c57b9493864a898abc161fa7a225e81"
     }
   ],
   "pad_conf": {
     "tick.ms": 492
   },
   "delete": [
-    "Play-CoOp.cmd"
+    "Play-CoOp.cmd",
+    "Set-Server.cmd"
   ],
   "server": {
     "host": "15.134.172.152",
-    "port": 43594
+    "port": 43594,
+    "pinned": true
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9501799,
-    "sha256": "117b1dae79e221bffc1ec27fc41c9d9ddf72763b44d58d9c4546c494d68b36dc"
+    "size": 9527796,
+    "sha256": "98bd19ce09850c996cdfe739562fddcda1f6d76b087bdd912b2b4df9fe5920b3"
   },
-  "content": "4b5bf97c35c647b9"
+  "content": "10a30aafdfdcaa81"
 }

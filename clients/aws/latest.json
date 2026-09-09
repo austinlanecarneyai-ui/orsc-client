@@ -1,8 +1,8 @@
 {
   "channel": "aws",
-  "client_version": 10016,
-  "content": "e81b9ef033c3ef6f",
-  "label": "",
-  "published": "2026-09-09T12:39:47Z",
-  "manifest": "10016/manifest.json"
+  "client_version": 10017,
+  "content": "10a30aafdfdcaa81",
+  "label": "Gamepad: targeting lock holds in a crowd, and the bank equipment tab on RT",
+  "published": "2026-09-09T12:46:58Z",
+  "manifest": "10017/manifest.json"
 }
