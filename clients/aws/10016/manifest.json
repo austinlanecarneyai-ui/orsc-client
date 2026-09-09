@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "aws",
   "client_version": 10016,
-  "label": "Gamepad targeting: the lock holds in a crowd (PAD-191..201)",
-  "published": "2026-09-09T11:27:15Z",
+  "label": "",
+  "published": "2026-09-09T11:29:17Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10016/files/",
   "files": [
     {
