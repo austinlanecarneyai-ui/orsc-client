@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "aws",
   "client_version": 10018,
-  "label": "Gamepad: the pile chooser no longer toggles D-pad prayers",
-  "published": "2026-09-10T01:56:44Z",
+  "label": "",
+  "published": "2026-09-10T01:59:03Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10018/files/",
   "files": [
     {
