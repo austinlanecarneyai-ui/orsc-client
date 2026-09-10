@@ -1,8 +1,8 @@
 {
   "channel": "lan",
-  "client_version": 10017,
-  "content": "e510fdf985cc5dfe",
-  "label": "Gamepad: targeting lock holds in a crowd, and the bank equipment tab on RT",
-  "published": "2026-09-09T12:44:30Z",
-  "manifest": "10017/manifest.json"
+  "client_version": 10018,
+  "content": "b0958684326a0c81",
+  "label": "Gamepad: the pile chooser no longer toggles D-pad prayers",
+  "published": "2026-09-10T01:54:16Z",
+  "manifest": "10018/manifest.json"
 }
