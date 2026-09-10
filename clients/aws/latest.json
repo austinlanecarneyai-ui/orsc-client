@@ -1,8 +1,8 @@
 {
   "channel": "aws",
-  "client_version": 10017,
-  "content": "10a30aafdfdcaa81",
-  "label": "",
-  "published": "2026-09-09T23:23:57Z",
-  "manifest": "10017/manifest.json"
+  "client_version": 10018,
+  "content": "4a9a404aeabbf2e7",
+  "label": "Gamepad: the pile chooser no longer toggles D-pad prayers",
+  "published": "2026-09-10T01:56:44Z",
+  "manifest": "10018/manifest.json"
 }

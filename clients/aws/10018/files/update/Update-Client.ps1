@@ -124,6 +124,18 @@ function Get-Sha256($path) {
     return (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLower()
 }
 
+function Read-Line($path) {
+    # An EMPTY file is the case this exists for. Get-Content -Raw returns
+    # $null for one, and $null.Trim() is a terminating error - so a friend
+    # whose Cache\ip.txt had been emptied got "the updater hit a problem and
+    # stopped" INSTEAD of the repair that would have fixed it. Reading is
+    # allowed to find nothing. UPD-085.
+    if (-not (Test-Path -LiteralPath $path)) { return '' }
+    $raw = Get-Content -LiteralPath $path -Raw -ErrorAction SilentlyContinue
+    if (-not $raw) { return '' }
+    return $raw.Trim()
+}
+
 function Clear-ReadOnly($path) {
     # uid.dat is created read-only (mudclient.java:14251) and Windows will not
     # unlink a read-only file. Nothing on the never-touch list should reach
@@ -468,16 +480,44 @@ try {
         try { $state = Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json } catch { }
     }
     if ($manifest.server -and $manifest.server.host) {
-        # The ONLY per-machine file this ever writes, and only when the friend
-        # has not chosen for themselves. It is what saves everybody if the
-        # Elastic IP changes; Set-Server.cmd always wins over it.
+        # The ONLY per-machine files this ever writes, and there are two rules
+        # for them because there are two kinds of folder.
+        #
+        # A LAN folder can legitimately be pointed somewhere else, so its
+        # address is followed only while the player has not chosen for
+        # themselves: Set-Server.cmd always wins.
+        #
+        # A PINNED channel has one world and no Set-Server.cmd - so the address
+        # is not a preference to be respected, it is part of the payload, and
+        # an empty or edited one is damage to be repaired. That is the whole
+        # cure for "Cache\ip.txt is missing or empty", which cost a friend an
+        # evening. UPD-084.
         $ipFile = Join-Path $Root 'Cache\ip.txt'
-        $current = ''
-        if (Test-Path -LiteralPath $ipFile) {
-            $current = (Get-Content -LiteralPath $ipFile -Raw).Trim()
-        }
+        $portFile = Join-Path $Root 'Cache\port.txt'
+        $current = Read-Line $ipFile
         $managed = if ($state) { [string]$state.managed_host } else { '' }
-        if ($current -and $managed -and $current -eq $managed -and $current -ne $manifest.server.host) {
+        $pinned = [bool]$manifest.server.pinned
+
+        if ($pinned) {
+            if ($current -ne [string]$manifest.server.host) {
+                Clear-ReadOnly $ipFile
+                [System.IO.File]::WriteAllText(
+                    $ipFile, [string]$manifest.server.host + "`n")
+                Say $(if ($current) {
+                        "server address restored to $($manifest.server.host)"
+                      } else {
+                        "server address set to $($manifest.server.host)"
+                      })
+            }
+            if ($manifest.server.port) {
+                if ((Read-Line $portFile) -ne [string]$manifest.server.port) {
+                    Clear-ReadOnly $portFile
+                    [System.IO.File]::WriteAllText(
+                        $portFile, [string]$manifest.server.port + "`n")
+                }
+            }
+        }
+        elseif ($current -and $managed -and $current -eq $managed -and $current -ne $manifest.server.host) {
             Clear-ReadOnly $ipFile
             [System.IO.File]::WriteAllText($ipFile, [string]$manifest.server.host + "`n")
             Say "server address moved to $($manifest.server.host)"
