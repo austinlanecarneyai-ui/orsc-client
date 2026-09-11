@@ -124,6 +124,18 @@ function Get-Sha256($path) {
     return (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLower()
 }
 
+function Read-Line($path) {
+    # An EMPTY file is the case this exists for. Get-Content -Raw returns
+    # $null for one, and $null.Trim() is a terminating error - so a friend
+    # whose Cache\ip.txt had been emptied got "the updater hit a problem and
+    # stopped" INSTEAD of the repair that would have fixed it. Reading is
+    # allowed to find nothing. UPD-085.
+    if (-not (Test-Path -LiteralPath $path)) { return '' }
+    $raw = Get-Content -LiteralPath $path -Raw -ErrorAction SilentlyContinue
+    if (-not $raw) { return '' }
+    return $raw.Trim()
+}
+
 function Clear-ReadOnly($path) {
     # uid.dat is created read-only (mudclient.java:14251) and Windows will not
     # unlink a read-only file. Nothing on the never-touch list should reach
@@ -482,10 +494,7 @@ try {
         # evening. UPD-084.
         $ipFile = Join-Path $Root 'Cache\ip.txt'
         $portFile = Join-Path $Root 'Cache\port.txt'
-        $current = ''
-        if (Test-Path -LiteralPath $ipFile) {
-            $current = (Get-Content -LiteralPath $ipFile -Raw).Trim()
-        }
+        $current = Read-Line $ipFile
         $managed = if ($state) { [string]$state.managed_host } else { '' }
         $pinned = [bool]$manifest.server.pinned
 
@@ -501,11 +510,7 @@ try {
                       })
             }
             if ($manifest.server.port) {
-                $havePort = ''
-                if (Test-Path -LiteralPath $portFile) {
-                    $havePort = (Get-Content -LiteralPath $portFile -Raw).Trim()
-                }
-                if ($havePort -ne [string]$manifest.server.port) {
+                if ((Read-Line $portFile) -ne [string]$manifest.server.port) {
                     Clear-ReadOnly $portFile
                     [System.IO.File]::WriteAllText(
                         $portFile, [string]$manifest.server.port + "`n")

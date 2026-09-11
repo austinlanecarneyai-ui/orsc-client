@@ -1,8 +1,8 @@
 {
   "channel": "lan-xbox",
-  "client_version": 10018,
-  "content": "575651073579c082",
-  "label": "Gamepad: the pile chooser no longer toggles D-pad prayers",
-  "published": "2026-09-10T01:55:26Z",
-  "manifest": "10018/manifest.json"
+  "client_version": 10019,
+  "content": "68d740411c47ce03",
+  "label": "",
+  "published": "2026-09-11T12:53:15Z",
+  "manifest": "10019/manifest.json"
 }

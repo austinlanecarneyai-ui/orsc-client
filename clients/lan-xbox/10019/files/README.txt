@@ -10,7 +10,7 @@ It checks it can reach the server first and tells you what it finds. If the
 check fails it still offers to start the client, because the check is not the
 game and can be wrong.
 
-Nothing needs installing. A Java 8 runtime is bundled in jre\.
+Nothing needs installing. NOTE: this build has no bundled Java. The machine needs Java 8 on its PATH.
 
 Server
 ------
@@ -119,4 +119,4 @@ One thing the controller still cannot do, so you are not left guessing:
   * The bank's type-an-amount prompt needs the keyboard. The 1 / 5 / 10 / All
     chooser on Y covers most of what it was for.
 
-Built 2026-09-08 from C:\ORSC by mod\tools\build-lan-client.py.
+Built 2026-09-11 from C:\ORSC by mod\tools\build-lan-client.py.
