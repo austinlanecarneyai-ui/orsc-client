@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "lan",
-  "client_version": 10014,
+  "client_version": 10019,
   "label": "",
-  "published": "2026-09-08T00:09:00Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10014/files/",
+  "published": "2026-09-11T12:52:00Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10019/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -218,8 +218,8 @@
     },
     {
       "path": "Cache/video/Custom_Landscape.orsc",
-      "size": 931848,
-      "sha256": "8b35843ed9c1be2f0328295c726c44e507a4a038d4dec76417ede4ff4f291394"
+      "size": 972992,
+      "sha256": "aa1ab62821c513c980c0ead852730b34866635a878e93af8046aed8e003ed784"
     },
     {
       "path": "Cache/video/Custom_Sprites.osar",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3372992,
-      "sha256": "6deb7a94e9f7eac836f20433a6e1fc53287c906ab268f32cdcc2d7013e6c6de2"
+      "size": 3387112,
+      "sha256": "5716008791f20eb314ac8526ef56f3f65e8e1dbc1685395d20944100c59ad7d7"
     },
     {
       "path": "README.txt",
-      "size": 5003,
-      "sha256": "a52f3c45c89a9a1df21278b0bd3430161e36ecef16950f0530e68dc091129132"
+      "size": 5042,
+      "sha256": "ae0ca5464e6069240539db34d86b42a184b6caed1339881bd6dfdc0e224dea6e"
     },
     {
       "path": "Set-Server.cmd",
@@ -273,8 +273,8 @@
     },
     {
       "path": "update/Update-Client.ps1",
-      "size": 22485,
-      "sha256": "dcd9e3373b06553191f17489177294e2bb8da77f624c82d6757e29926b3a1c19"
+      "size": 22763,
+      "sha256": "e4b75853990068ad736b0f512b16aba55c57b9493864a898abc161fa7a225e81"
     }
   ],
   "pad_conf": {
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9502784,
-    "sha256": "adba33fadbecdaa4b4f8590646491a336c061996a6247862e088fff305de3234"
+    "size": 9529417,
+    "sha256": "2be01babc2b6e0218acc4e2f3d56d604a695da2ed29c0a6f72f24b00accba39f"
   },
-  "content": "e580ce840b5180a9"
+  "content": "e2a07cbf9bc93369"
 }
