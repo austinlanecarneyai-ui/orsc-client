@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "lan",
-  "client_version": 10017,
-  "label": "Gamepad: targeting lock holds in a crowd, and the bank equipment tab on RT",
-  "published": "2026-09-09T12:44:30Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10017/files/",
+  "client_version": 10022,
+  "label": "",
+  "published": "2026-09-12T11:29:14Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10022/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3385989,
-      "sha256": "49d4a20a47153e63180a4d2035a973d13138bb4cdd256c291601ea5b409bbdc3"
+      "size": 3393503,
+      "sha256": "e66350cadd39d8c1bd7ff4eb42efb9384010a498b67123b317d94a419a5477d0"
     },
     {
       "path": "README.txt",
       "size": 5042,
-      "sha256": "e95686c2d12daaf35c0dc5a6fa64ee753ad74d059e51f0f585697984eca7400a"
+      "sha256": "b5c86f1d802ad1824a9a3714e5aa430909ae472ec965ae2e0320b376da4401b4"
     },
     {
       "path": "Set-Server.cmd",
@@ -287,5 +287,10 @@
     "host": "192.168.1.98",
     "port": 43594
   },
-  "content": "e510fdf985cc5dfe"
+  "setup": {
+    "path": "setup.zip",
+    "size": 9535265,
+    "sha256": "3ad617320a81557c225323956b80869a9a918f29e21e6810fcbac3d8c7a5f8e4"
+  },
+  "content": "1186dba753073761"
 }
