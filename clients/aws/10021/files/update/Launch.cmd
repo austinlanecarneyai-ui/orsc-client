@@ -18,7 +18,7 @@ if exist "Cache\port.txt" set /p PORT=<"Cache\port.txt"
 if "%HOST%"=="" (
   :# This copy is locked to one world, so a missing address is repaired rather
   :# than reported. The updater writes the same two files from the manifest;
-  :# this is the offline path, and the value is built in at 2026-09-09.
+  :# this is the offline path, and the value is built in at 2026-09-12.
   if not exist "Cache" mkdir "Cache"
   >"Cache\ip.txt"   echo 15.134.172.152
   >"Cache\port.txt" echo 43594
