@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "lan",
-  "client_version": 10018,
-  "label": "Gamepad: the pile chooser no longer toggles D-pad prayers",
-  "published": "2026-09-10T01:54:16Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10018/files/",
+  "client_version": 10023,
+  "label": "",
+  "published": "2026-09-12T23:02:09Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10023/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3387112,
-      "sha256": "73ab1fa9065a42c1b00d6dfb4d60333f30329e288755c5be99a61ce4c1cd1f19"
+      "size": 3394393,
+      "sha256": "9693c1725e6de6fa60dcd380cb82eeae3432bcb4ced72213a769f847220b5504"
     },
     {
       "path": "README.txt",
       "size": 5042,
-      "sha256": "b9b3b0cfc91a283e59b820955a2641a454bc2cef72e8bd6572e3ca7e1a5fee99"
+      "sha256": "0cf2b0743bd8a42327f14a5bc2a67ebf9c581a49a2398683a5a6880493842a60"
     },
     {
       "path": "Set-Server.cmd",
@@ -287,5 +287,10 @@
     "host": "192.168.1.98",
     "port": 43594
   },
-  "content": "b0958684326a0c81"
+  "setup": {
+    "path": "setup.zip",
+    "size": 9536052,
+    "sha256": "79d220a05086993ffe5d5521fae64efe6bed1a0827fcde5f88ce28c1c083861f"
+  },
+  "content": "3b9e2fd24e9589b3"
 }

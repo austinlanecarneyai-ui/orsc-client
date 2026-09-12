@@ -119,4 +119,4 @@ One thing the controller still cannot do, so you are not left guessing:
   * The bank's type-an-amount prompt needs the keyboard. The 1 / 5 / 10 / All
     chooser on Y covers most of what it was for.
 
-Built 2026-09-10 from C:\ORSC by mod\tools\build-lan-client.py.
+Built 2026-09-13 from C:\ORSC by mod\tools\build-lan-client.py.
