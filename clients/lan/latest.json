@@ -2,7 +2,7 @@
   "channel": "lan",
   "client_version": 10023,
   "content": "3b9e2fd24e9589b3",
-  "label": "",
-  "published": "2026-09-12T23:02:09Z",
+  "label": "skills tab: the D-pad highlight no longer fights the mouse",
+  "published": "2026-09-12T23:03:04Z",
   "manifest": "10023/manifest.json"
 }
