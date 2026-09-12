@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "lan",
-  "client_version": 10015,
+  "client_version": 10020,
   "label": "",
-  "published": "2026-09-08T00:14:57Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10015/files/",
+  "published": "2026-09-12T05:48:55Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan/10020/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -218,8 +218,8 @@
     },
     {
       "path": "Cache/video/Custom_Landscape.orsc",
-      "size": 931848,
-      "sha256": "8b35843ed9c1be2f0328295c726c44e507a4a038d4dec76417ede4ff4f291394"
+      "size": 972992,
+      "sha256": "aa1ab62821c513c980c0ead852730b34866635a878e93af8046aed8e003ed784"
     },
     {
       "path": "Cache/video/Custom_Sprites.osar",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3372996,
-      "sha256": "41d24df77d2391bb05c8a899c681b63dbf2db191570720ed796746eaf122a2d8"
+      "size": 3388686,
+      "sha256": "02b3bda308df8c5a57cdf8a32d606a9aebaaab295751b592dad4fff4844d5aa1"
     },
     {
       "path": "README.txt",
-      "size": 5003,
-      "sha256": "a52f3c45c89a9a1df21278b0bd3430161e36ecef16950f0530e68dc091129132"
+      "size": 5042,
+      "sha256": "b5c86f1d802ad1824a9a3714e5aa430909ae472ec965ae2e0320b376da4401b4"
     },
     {
       "path": "Set-Server.cmd",
@@ -289,8 +289,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9502851,
-    "sha256": "612bdcdd08561d28f7fcb4cdf1e7c468b2683d40902cb35fb7d80dc03493bfa0"
+    "size": 9530942,
+    "sha256": "e2bdbf8e7ebcf1aef84732b1fdd547165526d2df2af1fc52d4192d436c33810f"
   },
-  "content": "37d9a7f7d5179e26"
+  "content": "f60a9f05c7e5ee27"
 }
