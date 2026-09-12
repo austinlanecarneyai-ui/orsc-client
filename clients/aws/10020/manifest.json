@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10015,
-  "label": "a player's folder, locked to the world",
-  "published": "2026-09-08T00:17:14Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10015/files/",
+  "client_version": 10020,
+  "label": "",
+  "published": "2026-09-12T05:51:38Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10020/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -218,8 +218,8 @@
     },
     {
       "path": "Cache/video/Custom_Landscape.orsc",
-      "size": 931848,
-      "sha256": "8b35843ed9c1be2f0328295c726c44e507a4a038d4dec76417ede4ff4f291394"
+      "size": 972992,
+      "sha256": "aa1ab62821c513c980c0ead852730b34866635a878e93af8046aed8e003ed784"
     },
     {
       "path": "Cache/video/Custom_Sprites.osar",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3372996,
-      "sha256": "41d24df77d2391bb05c8a899c681b63dbf2db191570720ed796746eaf122a2d8"
+      "size": 3388686,
+      "sha256": "02b3bda308df8c5a57cdf8a32d606a9aebaaab295751b592dad4fff4844d5aa1"
     },
     {
       "path": "README.txt",
       "size": 5578,
-      "sha256": "1836e6dd02eead614c64c7c40fb5bb47b28cc47252d34cb178ddaabb93d97bbc"
+      "sha256": "0ef56704ca22b1d7913650637c0cf5d636620b3540bfa1320166570dc59f157f"
     },
     {
       "path": "discord-rpc.jar",
@@ -264,7 +264,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "243050c6bd39f35bb3aa89fb9acd1e93ec38164193bf8cb938432c67c70ad1f9"
+      "sha256": "4726429f5ce6a27ce8fa91ea256355e23f8205dfa6cba53da57fff0af3a4f41c"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -286,8 +286,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9502489,
-    "sha256": "b6746725a46b77447000395b74a02d920093ee2aa57239bb118ce4ebc39f6c8a"
+    "size": 9530554,
+    "sha256": "bfeb8947d8fa5249af9260e5af0b54392f213b3e43bbdf3f1aaa01ba0ed800ff"
   },
-  "content": "639b25240dcd4c33"
+  "content": "325587359c29385d"
 }
