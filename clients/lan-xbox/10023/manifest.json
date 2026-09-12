@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "lan-xbox",
-  "client_version": 10018,
-  "label": "Gamepad: the pile chooser no longer toggles D-pad prayers",
-  "published": "2026-09-10T01:55:26Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan-xbox/10018/files/",
+  "client_version": 10023,
+  "label": "skills tab: the D-pad highlight no longer fights the mouse",
+  "published": "2026-09-12T23:03:29Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/lan-xbox/10023/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3387112,
-      "sha256": "73ab1fa9065a42c1b00d6dfb4d60333f30329e288755c5be99a61ce4c1cd1f19"
+      "size": 3394393,
+      "sha256": "9693c1725e6de6fa60dcd380cb82eeae3432bcb4ced72213a769f847220b5504"
     },
     {
       "path": "README.txt",
       "size": 5066,
-      "sha256": "8c4407ad54686a57236887f9bfcdf4b0b82d3713ed34e08887ce326547f177c3"
+      "sha256": "b2e73a676feb50b4d6f2da31b9d1e76afaed132c2d2ad325fde68a6ebeb636b4"
     },
     {
       "path": "Set-Server.cmd",
@@ -287,5 +287,10 @@
     "host": "192.168.1.98",
     "port": 43594
   },
-  "content": "575651073579c082"
+  "setup": {
+    "path": "setup.zip",
+    "size": 9536073,
+    "sha256": "b350cef15e6fbbb0f8cd49b6bb2b55c3c9472334d11e7166d9dcd8edf39804ec"
+  },
+  "content": "06b62c3aed86b0fc"
 }

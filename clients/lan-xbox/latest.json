@@ -1,8 +1,8 @@
 {
   "channel": "lan-xbox",
-  "client_version": 10022,
-  "content": "5ee65bafa3995574",
-  "label": "",
-  "published": "2026-09-12T11:30:26Z",
-  "manifest": "10022/manifest.json"
+  "client_version": 10023,
+  "content": "06b62c3aed86b0fc",
+  "label": "skills tab: the D-pad highlight no longer fights the mouse",
+  "published": "2026-09-12T23:03:29Z",
+  "manifest": "10023/manifest.json"
 }
