@@ -1,8 +1,8 @@
 {
   "channel": "lan-xbox",
-  "client_version": 10021,
-  "content": "f6ae5a31cdf9ccd5",
+  "client_version": 10022,
+  "content": "5ee65bafa3995574",
   "label": "",
-  "published": "2026-09-12T06:37:26Z",
-  "manifest": "10021/manifest.json"
+  "published": "2026-09-12T11:30:26Z",
+  "manifest": "10022/manifest.json"
 }
