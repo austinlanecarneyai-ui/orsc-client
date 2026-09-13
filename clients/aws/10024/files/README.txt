@@ -8,8 +8,7 @@ Double-click:
 That is the whole thing. It brings the folder up to date, checks it can reach
 the world, and starts the game.
 
-It needs Java 8 on this machine and nothing else. If Java is missing,
-the launcher says so, and where to get it.
+Java is bundled in jre\, so there is nothing to install.
 
 The world
 ---------
@@ -137,4 +136,4 @@ If you ever need a fresh copy
 
     https://austinlanecarneyai-ui.github.io/orsc-client/
 
-Build 10019.
+Build 10024.
