@@ -8,7 +8,8 @@ Double-click:
 That is the whole thing. It brings the folder up to date, checks it can reach
 the world, and starts the game.
 
-Java is bundled in jre\, so there is nothing to install.
+It needs Java 8 on this machine and nothing else. If Java is missing,
+the launcher says so, and where to get it.
 
 The world
 ---------
