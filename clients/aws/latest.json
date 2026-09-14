@@ -1,8 +1,8 @@
 {
   "channel": "aws",
-  "client_version": 10024,
-  "content": "7be969a185c79704",
+  "client_version": 10025,
+  "content": "b4ee532ed42ef4c7",
   "label": "",
-  "published": "2026-09-13T20:06:27Z",
-  "manifest": "10024/manifest.json"
+  "published": "2026-09-14T13:07:31Z",
+  "manifest": "10025/manifest.json"
 }
