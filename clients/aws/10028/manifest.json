@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10023,
-  "label": "skills tab: the D-pad highlight no longer fights the mouse",
-  "published": "2026-09-12T23:04:43Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10023/files/",
+  "client_version": 10028,
+  "label": "",
+  "published": "2026-09-16T03:01:31Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10028/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3394393,
-      "sha256": "9693c1725e6de6fa60dcd380cb82eeae3432bcb4ced72213a769f847220b5504"
+      "size": 3417570,
+      "sha256": "078d6c72da66d99705c4bc232bb780cb0937a33b3d94847931f4fdd6351baa2c"
     },
     {
       "path": "README.txt",
       "size": 5578,
-      "sha256": "88b6f5f2dfa59801ce1be034d89288fa691b5ca2e6b94af71d322d08a58b6640"
+      "sha256": "f6d666dcde63539dfa79f6463426bae8e6851d7b0009af43ead7208296eac450"
     },
     {
       "path": "discord-rpc.jar",
@@ -264,7 +264,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "25523eaf57a37679bdd0adeee923acbbdcc94e9f1536822d3ef692187d93f2f2"
+      "sha256": "b7b650b8dac5d6eaecd99c3fe7bb7bafed10f975c74e45a6082b0ab2f4c74264"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -286,8 +286,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9535669,
-    "sha256": "5269cf061ac271787821f0741692f5dded9c2d275e0a8b4f13a19909d80c1159"
+    "size": 9558789,
+    "sha256": "4174171bcbfe11942aca9fa714fd255ae7ffbdecc120dba0fadf0a62a87ad8f5"
   },
-  "content": "eb738e23c0d0bae2"
+  "content": "d63dde077b82a16c"
 }
