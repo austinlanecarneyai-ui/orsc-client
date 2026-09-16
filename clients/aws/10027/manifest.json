@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10022,
+  "client_version": 10027,
   "label": "",
-  "published": "2026-09-12T11:31:37Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10022/files/",
+  "published": "2026-09-16T00:19:37Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10027/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -248,13 +248,13 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3393503,
-      "sha256": "e66350cadd39d8c1bd7ff4eb42efb9384010a498b67123b317d94a419a5477d0"
+      "size": 3416803,
+      "sha256": "e14eb1aa7f876fa87fa44324bd18a93b0e7e489eb26e69582c176f094a4ef92f"
     },
     {
       "path": "README.txt",
       "size": 5578,
-      "sha256": "c8b6682ac9dba937f547c48f29afcc6a60c24885d2be6c3ac572a4a7371c1084"
+      "sha256": "51981c65bf074291444b5ac3b135b9921e8ba1aa3ef3e9d15e77c8d21edeb051"
     },
     {
       "path": "discord-rpc.jar",
@@ -264,7 +264,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "4726429f5ce6a27ce8fa91ea256355e23f8205dfa6cba53da57fff0af3a4f41c"
+      "sha256": "b7b650b8dac5d6eaecd99c3fe7bb7bafed10f975c74e45a6082b0ab2f4c74264"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -286,8 +286,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9534877,
-    "sha256": "4bf24386d27839570a535410cea109b4841b422febc59de94d82768870a5f98a"
+    "size": 9557890,
+    "sha256": "6ea47b90f693fd07c7d22657cb6f72293b199cf6f8135b66a5f2647c71e3c26b"
   },
-  "content": "8eebbfa547d7201a"
+  "content": "d6770bcd01b2bd3c"
 }
