@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10030,
+  "client_version": 10035,
   "label": "",
-  "published": "2026-09-19T02:40:30Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10030/files/",
+  "published": "2026-09-22T05:04:04Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10035/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -203,8 +203,8 @@
     },
     {
       "path": "Cache/config.txt",
-      "size": 9,
-      "sha256": "22e6e86519b3901d75b89eaa5bfda0927b840820d9364c7442627a1ec7c3e622"
+      "size": 36,
+      "sha256": "11cfcf7ea4a5dce65c3d3e720ebb60816cb95bac9fa7d48362684334ba8feb37"
     },
     {
       "path": "Cache/video/Authentic_Landscape.orsc",
@@ -237,9 +237,19 @@
       "sha256": "0041565749f14b211d6eabc5750b01d7ee168de148dae85d463356620d08c010"
     },
     {
+      "path": "Cache/video/spritepacks/DragonHilt.osar",
+      "size": 1160,
+      "sha256": "07c291c97db8a512c7d3959caa88ca7846a5b862ae1ab561c6c2b4b80c919d88"
+    },
+    {
       "path": "Cache/video/spritepacks/Menus.osar",
       "size": 3126,
       "sha256": "d74f281331be202af13972433d14209247ce89a2d7572c2b140f4afcde68bcac"
+    },
+    {
+      "path": "Cache/video/spritepacks/Sundering.osar",
+      "size": 14677,
+      "sha256": "09417f25bc8618753ba0fbcd5df8ee8d0149e6512b64606163212df521a5660e"
     },
     {
       "path": "Check-Controller.cmd",
@@ -248,13 +258,18 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3422174,
-      "sha256": "48c3b33a27a51785bb1f4f8966ea311dd17d686517b839247876dff29c075fc6"
+      "size": 3477065,
+      "sha256": "7065ca4aa18af52a78765dcbb069f288e14c101a2b02ab718a1e5177b03b0aa4"
+    },
+    {
+      "path": "Play-Dev.cmd",
+      "size": 564,
+      "sha256": "e443fd20f91c63fd82d8243b330627c8d665c8313aafaa4606ba0b1f21712be8"
     },
     {
       "path": "README.txt",
       "size": 5578,
-      "sha256": "1302a538c7a8f57bb71b5503e0fda32ccfd07f1bfe9e18483102cedcd10a8c7d"
+      "sha256": "dc4150504bf18c5fc459b51e44858c1aedcd22fb7227a90f27c9d5c2376c4f76"
     },
     {
       "path": "discord-rpc.jar",
@@ -264,7 +279,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "f828262f38b9a1e2c6862b6a8bff9545576c74954a61a96a6f7337882da7d3d8"
+      "sha256": "3abadb67defdf47b71d1102fbb5c4e39a8a780104b6cc4951f445059fe3eba95"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -286,8 +301,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9563515,
-    "sha256": "af44ccbdccafd78af1e06f262dd17db82232a7daba154dc7d11442ebbce00acb"
+    "size": 9634384,
+    "sha256": "01a0241973b266404e56f9e2946857401f60cbca6c3e6956466915421c294af5"
   },
-  "content": "1152d8ed8f5781ea"
+  "content": "83803a88359ce1ca"
 }
