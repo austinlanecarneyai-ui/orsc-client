@@ -3,7 +3,7 @@
   "channel": "aws",
   "client_version": 10040,
   "label": "",
-  "published": "2026-09-23T20:53:20Z",
+  "published": "2026-09-24T03:26:11Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10040/files/",
   "files": [
     {
@@ -317,7 +317,7 @@
   "setup": {
     "path": "setup.zip",
     "size": 9655609,
-    "sha256": "f4a9e411e9c01c6dbd1a2874db4792f5d28a60d3165c386cb32ddda1a2b37b59"
+    "sha256": "7ae221a163f121804c4978bd40e9fe2814343fc907be14eca4f300ceca958944"
   },
   "content": "18377460f5dc8533"
 }
