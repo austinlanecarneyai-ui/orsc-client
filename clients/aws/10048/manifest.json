@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10043,
+  "client_version": 10048,
   "label": "",
-  "published": "2026-09-25T03:55:54Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10043/files/",
+  "published": "2026-09-26T21:35:48Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10048/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -203,13 +203,13 @@
     },
     {
       "path": "Cache/config.txt",
-      "size": 89,
-      "sha256": "a1d574502367725ae2e0d2594b410be0a4a58a774302f93287d61bedd0f9c4c3"
+      "size": 110,
+      "sha256": "b1ffdf55498f63b6d512d551a81aaf166139b820951dfc03d429ef7fe9316666"
     },
     {
       "path": "Cache/video/Authentic_Landscape.orsc",
-      "size": 945225,
-      "sha256": "48ed0e1634b870888f96c0bc3e31cbaf152570b913140fdfd3596897a3eb29fa"
+      "size": 930744,
+      "sha256": "eb1ba01c405ccf491adcc71ae92efe01469cc4d819252ed86dc25625e4b3ba6c"
     },
     {
       "path": "Cache/video/Authentic_Sprites.orsc",
@@ -233,8 +233,8 @@
     },
     {
       "path": "Cache/video/models.orsc",
-      "size": 1127184,
-      "sha256": "0041565749f14b211d6eabc5750b01d7ee168de148dae85d463356620d08c010"
+      "size": 1288600,
+      "sha256": "5da9d516012d51609c95f4df1c70556e804959bca5e606f63558d191f1cf55f0"
     },
     {
       "path": "Cache/video/spritepacks/DragonHelm.osar",
@@ -248,8 +248,18 @@
     },
     {
       "path": "Cache/video/spritepacks/DragonPlate.osar",
-      "size": 6260,
-      "sha256": "d88d53c37e1788f5a1cc50faeee574d64a60ace9b4595c510406773a40ff686e"
+      "size": 6227,
+      "sha256": "6a10cf0381bb7b2b6381b94cc3179c4cbb638d8fb622d41dbfb555d31b6c3a04"
+    },
+    {
+      "path": "Cache/video/spritepacks/Dragonite.osar",
+      "size": 229,
+      "sha256": "26778fa5f906d2b8e976fa2464b33d02177b4421bf60040444d03dca01610f1f"
+    },
+    {
+      "path": "Cache/video/spritepacks/Hair.osar",
+      "size": 15558,
+      "sha256": "6e6877736e4c792983e6a8f9bd645ef9a2fe8a4e2ca485afeade055374796c4c"
     },
     {
       "path": "Cache/video/spritepacks/Magmacite.osar",
@@ -278,8 +288,8 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3500233,
-      "sha256": "3f137f3dce6b6de3636735414133ba590a7ac40b2082ad838d071bd8a7ab8f40"
+      "size": 3508094,
+      "sha256": "71abf03955f068ae9f87fd40c1003fbd98d7f2694e4a8eb35e3cf3af1f212659"
     },
     {
       "path": "Play-Dev.cmd",
@@ -289,7 +299,7 @@
     {
       "path": "README.txt",
       "size": 5578,
-      "sha256": "1695b465656dbb0fa4179c9a3f13f6d564d38d34578adaa4751c7cb42e8a49c1"
+      "sha256": "ac15761fc0ab31def025f60482e812b8364109c1713c8c73c95ce2f90c68c729"
     },
     {
       "path": "discord-rpc.jar",
@@ -299,7 +309,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "727e34cbbf6fee63ba4509b2b2c9264cd78ca02c7531291c68be3b93f1c13c79"
+      "sha256": "86eeefcbb8f1e9882616d41968713d33e04d9039d9e933688fdea2aed4907ef5"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -321,8 +331,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9671849,
-    "sha256": "22d9726e64912d1aeff587a67cf73ddabb13dd01fccfcaa313f359919b44722b"
+    "size": 9720296,
+    "sha256": "94f38b59233f7ddc080854a90ba8372fa46f0edbb4178efeaed6671392af8871"
   },
-  "content": "c54ceec46428ec70"
+  "content": "2c953dc4c43d3317"
 }
