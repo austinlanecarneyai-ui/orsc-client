@@ -5,3 +5,5 @@ DragonHelm:1
 Magmacite:1
 Warding:1
 DragonPlate:1
+Dragonite:1
+Hair:1
