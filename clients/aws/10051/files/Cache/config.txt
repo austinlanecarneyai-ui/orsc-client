@@ -6,3 +6,6 @@ Magmacite:1
 Warding:1
 DragonPlate:1
 Dragonite:1
+Hair:1
+Saradomin:1
+Summon:1
