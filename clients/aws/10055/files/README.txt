@@ -80,7 +80,7 @@ usable either way.
     Left stick        walk
     Right stick       camera
     LB / RB           cycle target
-    A                 act        Y  options       B  back, or hold to retreat
+    A                 act        Y  options       B  back, or retreat in a fight
     Select            open the bag; press again to close anything back to the
                       game
     Start             teleports
@@ -137,4 +137,4 @@ If you ever need a fresh copy
 
     https://austinlanecarneyai-ui.github.io/orsc-client/
 
-Build 10050.
+Build 10055.
