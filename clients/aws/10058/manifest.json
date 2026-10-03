@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10053,
+  "client_version": 10058,
   "label": "",
-  "published": "2026-09-29T23:29:01Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10053/files/",
+  "published": "2026-10-03T06:08:03Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10058/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -208,8 +208,8 @@
     },
     {
       "path": "Cache/video/Authentic_Landscape.orsc",
-      "size": 930744,
-      "sha256": "eb1ba01c405ccf491adcc71ae92efe01469cc4d819252ed86dc25625e4b3ba6c"
+      "size": 971923,
+      "sha256": "a5d30532e563be58c2a851fa6b02d53b69035769a582c95fd788ea797a54a613"
     },
     {
       "path": "Cache/video/Authentic_Sprites.orsc",
@@ -233,8 +233,8 @@
     },
     {
       "path": "Cache/video/models.orsc",
-      "size": 1288600,
-      "sha256": "5da9d516012d51609c95f4df1c70556e804959bca5e606f63558d191f1cf55f0"
+      "size": 1939343,
+      "sha256": "2519511706cdb6ab02833cb739553cb14bcc4c3b948cf78424650e4c0f7c06d8"
     },
     {
       "path": "Cache/video/spritepacks/DragonHelm.osar",
@@ -298,8 +298,8 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3531495,
-      "sha256": "624fb0b95b1e503ac0677caff2d7f95130d50846974be1e931d7e1f70d8c65da"
+      "size": 3575980,
+      "sha256": "000e9aef446ed9ff2614ddf353780e75a0588d993f54baf5a93597e9f73c85f3"
     },
     {
       "path": "Play-Dev.cmd",
@@ -309,7 +309,7 @@
     {
       "path": "README.txt",
       "size": 5581,
-      "sha256": "c369544b72c026bf0e4ab2d1eb8d7d65fc022dc7f2306441d97615c5dc451d08"
+      "sha256": "4bbdef15114fde0e032c1c5a3ac9311b0149062be8258d770a3264f747d06d0b"
     },
     {
       "path": "discord-rpc.jar",
@@ -319,7 +319,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "dec1b83df2389058099b3a331b80dd7b79e7a541a0df08bebc4959b8320d6482"
+      "sha256": "ce99a7fa87b7177ccf86e44f1c13c9c72fa6091d3f5ef9127baca28167e6d33c"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -341,8 +341,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 9749468,
-    "sha256": "32bc12a2e3ba3bc4c55d20532bd8015811747ad657f9db0d18bc3222e67617bb"
+    "size": 10014329,
+    "sha256": "2f44a8d4326a3153f029cd130e29dcfef3c71696bc87c787d0b8c0919ae32e2d"
   },
-  "content": "434a98f400c41c2d"
+  "content": "fab81e3484cccc3d"
 }
