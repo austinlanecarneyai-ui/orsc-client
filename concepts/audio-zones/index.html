@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Audio Zones</title>
+<style>
+:root{--bg:#f4f1ea;--fg:#1d1b18;--muted:#6b665d;--card:#fff;--line:#ddd6c8;--accent:#8a5a14}
+@media (prefers-color-scheme:dark){:root{--bg:#16150f;--fg:#ece7dc;--muted:#a39d90;--card:#211f19;--line:#3a362c;--accent:#e0a54a}}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,Segoe UI,sans-serif;margin:0;padding:24px 16px}
+main{max-width:1120px;margin:0 auto}h1{font-size:24px;margin:0 0 12px}h2{font-size:18px;margin:28px 0 8px;color:var(--accent)}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card);font-size:14px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--line)}
+img{max-width:100%;border:1px solid var(--line);border-radius:8px;image-rendering:pixelated}
+.sw{display:inline-block;width:12px;height:12px;margin-right:6px;border:1px solid #0006;vertical-align:-1px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;border:1px solid #000;vertical-align:-1px}
+</style></head><body><main>
+<h1>Audio zones</h1>
+<img src="audio-zones.png" alt="World map of the audio zones">
+<h2>Music regions</h2><div class="wrap"><table><tr><th>#</th><th>Region</th><th>Music</th><th>Ambient bed</th><th>Bounds from</th></tr>
+<tr><td><span class="sw" style="background:rgb(230, 25, 75)"></span>1</td><td>Ice Plateau</td><td>deep wilderness track (immediate_2)</td><td>snow wind</td><td>ice warrior / giant / spider spawns</td></tr>
+<tr><td><span class="sw" style="background:rgb(60, 180, 75)"></span>2</td><td>North-wild addition</td><td>deep wilderness track (immediate_2)</td><td>ash wind + lava bubbling</td><td>the volcano map (generator X0..X1, EDGE)</td></tr>
+<tr><td><span class="sw" style="background:rgb(255, 225, 25)"></span>3</td><td>Wilderness, deep (lvl 21+)</td><td>immediate_2</td><td>deep-wild wind and steps</td><td>Point.wildernessLevel</td></tr>
+<tr><td><span class="sw" style="background:rgb(0, 130, 200)"></span>4</td><td>Wilderness, low (lvl 1-20)</td><td>track 16</td><td>wild wind, insects</td><td>Point.wildernessLevel</td></tr>
+<tr><td><span class="sw" style="background:rgb(245, 130, 48)"></span>5</td><td>Varrock</td><td>track 4</td><td>town (grassland) + market crowd</td><td>Point.inVarrock</td></tr>
+<tr><td><span class="sw" style="background:rgb(145, 30, 180)"></span>6</td><td>Edgeville</td><td>track 7</td><td>grassland</td><td>Point.inEdgeville</td></tr>
+<tr><td><span class="sw" style="background:rgb(70, 240, 240)"></span>7</td><td>Barbarian Village</td><td>track 8</td><td>grassland</td><td>Point.inBarbVillage</td></tr>
+<tr><td><span class="sw" style="background:rgb(240, 50, 230)"></span>8</td><td>Draynor Manor</td><td>track 3</td><td>haunted (owl, dark reverb)</td><td>Veronica outside (208,561), Oddenstein upstairs (213,553); provisional</td></tr>
+<tr><td><span class="sw" style="background:rgb(210, 245, 60)"></span>9</td><td>Draynor</td><td>track 3</td><td>grassland</td><td>Point.inDraynor</td></tr>
+<tr><td><span class="sw" style="background:rgb(250, 190, 212)"></span>10</td><td>Lumbridge</td><td>track 1</td><td>grassland</td><td>Point.inLumbridge</td></tr>
+<tr><td><span class="sw" style="background:rgb(0, 128, 128)"></span>11</td><td>Al Kharid</td><td>track 9</td><td>desert wind</td><td>Point.inAlKharid</td></tr>
+<tr><td><span class="sw" style="background:rgb(220, 190, 255)"></span>12</td><td>Kharidian Desert</td><td>track 9</td><td>desert wind</td><td>desert wolf spawns</td></tr>
+<tr><td><span class="sw" style="background:rgb(170, 110, 40)"></span>13</td><td>Falador</td><td>track 6</td><td>grassland</td><td>Point.inFalador</td></tr>
+<tr><td><span class="sw" style="background:rgb(255, 250, 200)"></span>14</td><td>Port Sarim</td><td>track 15</td><td>port + gulls</td><td>Point.inPortSarim</td></tr>
+<tr><td><span class="sw" style="background:rgb(128, 0, 0)"></span>15</td><td>Taverley</td><td>track 14</td><td>grassland</td><td>Point.inTaverly</td></tr>
+<tr><td><span class="sw" style="background:rgb(170, 255, 195)"></span>16</td><td>White Wolf Mountain</td><td>track 14</td><td>snow wind</td><td>white wolf spawns</td></tr>
+<tr><td><span class="sw" style="background:rgb(128, 128, 0)"></span>17</td><td>Entrana</td><td>track 15</td><td>grassland + church bell</td><td>Point.inEntrana</td></tr>
+<tr><td><span class="sw" style="background:rgb(255, 215, 180)"></span>18</td><td>Catherby</td><td>track 11</td><td>coast + gulls</td><td>Point.inCatherby</td></tr>
+<tr><td><span class="sw" style="background:rgb(0, 0, 128)"></span>19</td><td>Seers</td><td>track 11</td><td>grassland</td><td>Point.inSeers</td></tr>
+<tr><td><span class="sw" style="background:rgb(255, 255, 255)"></span>20</td><td>Gnome Stronghold</td><td>unnamed 34</td><td>forest</td><td>Point.inGnomeStronghold</td></tr>
+<tr><td><span class="sw" style="background:rgb(230, 25, 75)"></span>21</td><td>Brimhaven</td><td>track 10</td><td>jungle + port</td><td>Point.inBrimhaven</td></tr>
+<tr><td><span class="sw" style="background:rgb(60, 180, 75)"></span>22</td><td>Shilo Village</td><td>track 10</td><td>jungle</td><td>Point.inShilo</td></tr>
+<tr><td><span class="sw" style="background:rgb(255, 225, 25)"></span>23</td><td>Karamja</td><td>track 10</td><td>jungle + monkeys</td><td>Point.inKaramja</td></tr>
+<tr><td><span class="sw" style="background:rgb(0, 130, 200)"></span>24</td><td>Ardougne</td><td>track 12</td><td>town + market crowd</td><td>Point.inArdougne</td></tr>
+<tr><td><span class="sw" style="background:rgb(245, 130, 48)"></span>25</td><td>Yanille</td><td>track 13</td><td>grassland</td><td>Point.inYanille</td></tr>
+<tr><td>-</td><td>Countryside (everywhere else)</td><td>tracks 2 and 5, shuffled</td><td>grassland day / night</td><td>everything no region claims</td></tr>
+<tr><td>-</td><td>Underground (floor 3)</td><td>track 17</td><td>cave wind; magic sparks near altars</td><td>floor 3 of the map</td></tr></table></div>
+<h2>Terrain beds</h2><div class="wrap"><table><tr><th>Bed</th><th>Where</th><th>Sound</th></tr><tr><td><span class="sw" style="background:rgb(60, 140, 255)"></span>Coast</td><td>water (overlay 2) within 6 tiles, outside towns too</td><td>sea waves; gulls one-shots</td></tr><tr><td><span class="sw" style="background:rgb(110, 160, 60)"></span>Swamp</td><td>swamp water (overlay 7) within 6 tiles, outside the Wilderness</td><td>swamp insects and birds</td></tr><tr><td><span class="sw" style="background:rgb(255, 110, 20)"></span>Lava</td><td>lava (overlay 11, 26) within 6 tiles</td><td>lava bubbling</td></tr><tr><td><span class="sw" style="background:rgb(150, 150, 150)"></span>Ash</td><td>the ash zones (ash-zones.py)</td><td>ash wind</td></tr></table></div>
+<h2>Emitters</h2><div class="wrap"><table><tr><th>Source</th><th>Sound</th><th>Carries</th><th>On map</th></tr><tr><td><span class="dot" style="background:rgb(255, 140, 0)"></span>Forge</td><td>forge hammering, metal</td><td>8 tiles</td><td>32</td></tr><tr><td><span class="dot" style="background:rgb(255, 80, 40)"></span>Fire / range</td><td>crackling fire</td><td>5 tiles</td><td>92</td></tr><tr><td><span class="dot" style="background:rgb(90, 200, 255)"></span>Fountain / well</td><td>trickling water</td><td>6 tiles</td><td>37</td></tr><tr><td><span class="dot" style="background:rgb(40, 120, 255)"></span>Waterfall</td><td>waterfall roar</td><td>18 tiles</td><td>1</td></tr><tr><td><span class="dot" style="background:rgb(255, 255, 255)"></span>Altar</td><td>church bell (rarely), dark reverb</td><td>8 tiles</td><td>14</td></tr><tr><td><span class="dot" style="background:rgb(255, 230, 120)"></span>Tavern</td><td>tavern crowd voices</td><td>7 tiles</td><td>10</td></tr><tr><td><span class="dot" style="background:rgb(200, 200, 200)"></span>Bank</td><td>quiet crowd murmur</td><td>5 tiles</td><td>48</td></tr></table></div>
+<h2>Easing</h2><div class="wrap"><table><tr><th>What</th><th>How it eases</th></tr><tr><td>Music: region change</td><td>Crossfade over 4 s; a 3-tile hysteresis at the border so walking along it never flips back and forth</td></tr><tr><td>Music: quiet gaps</td><td>Each track fades in over 3 s and out over 5 s; then 1-3 min of ambience only</td></tr><tr><td>Region and rule beds</td><td>Weighted mix, each bed&#x27;s weight easing to 0 over a 5-tile edge band (as the ash does); the total eases over 3 s</td></tr><tr><td>Emitters</td><td>Volume by distance (full within 1/3 of the reach, silent at the reach); a new emitter eases in over 1 s</td></tr><tr><td>Day / night beds</td><td>Crossfade across dusk and dawn (the ~5-minute transitions), in step with the light</td></tr><tr><td>Weather loops</td><td>Follow the weather envelope: in and out over ~3 s, like the particles</td></tr><tr><td>Thunder</td><td>One-shot after each flash: F1 quiet 3-5 s later, F3 loud within 0.5 s</td></tr><tr><td>Indoors</td><td>Ambience and weather 10 dB down and muffled, eased over 0.5 s at the roof line</td></tr><tr><td>Underground</td><td>Overworld beds and music out over 2 s, cave bed and dungeon music in</td></tr></table></div>
+</main></body></html>
