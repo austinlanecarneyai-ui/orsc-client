@@ -5,47 +5,43 @@
 body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,Segoe UI,sans-serif;margin:0;padding:24px 16px}
 main{max-width:1120px;margin:0 auto}h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:32px 0 10px;color:var(--accent)}
 p.lede{color:var(--muted);max-width:760px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.grid{margin-bottom:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
 figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 figure img{display:block;width:100%;image-rendering:pixelated}
 figcaption{padding:10px 12px}figcaption b{display:block}figcaption span{color:var(--muted);font-size:13.5px}
 </style></head><body><main>
-<h1>Atmosphere: how it should look</h1>
-<p class="lede">Painted over real frames from the dev client (ATM-001). Answer with the letters, e.g.
-<b>night B, dusk 1, rain R2, flash F2</b>, plus anything you want changed. Chat, tabs and the
-pad hint row stay bright on purpose: the real effect is drawn under the UI.</p>
 
-<h2>The scenes</h2><div class="grid">
-<figure><img src="day.png" alt="Day (stock)"><figcaption><b>Day (stock)</b><span>Lumbridge as the client draws it today.</span></figcaption></figure>
-<figure><img src="cycle.gif" alt="Full cycle (B + 1)"><figcaption><b>Full cycle (B + 1)</b><span>Day, dusk, night, dawn: the real hour squeezed into four seconds.</span></figcaption></figure>
-<figure><img src="snow.gif" alt="Snow"><figcaption><b>Snow</b><span>White Wolf Mountain: soft drifting flakes.</span></figcaption></figure>
-<figure><img src="blizzard.gif" alt="Blizzard"><figcaption><b>Blizzard</b><span>Storm in the snow biome: thick sideways snow and a white haze, no lightning.</span></figcaption></figure>
-<figure><img src="ash.gif" alt="Wilderness ash"><figcaption><b>Wilderness ash</b><span>Grey ash drifting down, a few rising embers, a dull red-grey cast.</span></figcaption></figure>
-<figure><img src="sandstorm.gif" alt="Sandstorm"><figcaption><b>Sandstorm</b><span>Al Kharid: yellow haze and sand blowing sideways.</span></figcaption></figure>
-<figure><img src="downpour.gif" alt="Karamja downpour"><figcaption><b>Karamja downpour</b><span>Short tropical burst: dense near-vertical rain, misty green.</span></figcaption></figure>
-<figure><img src="underground.png" alt="Underground"><figcaption><b>Underground</b><span>The Dwarven Mine stays exactly as it is: no weather, no night.</span></figcaption></figure>
+<div class="grid">
+<figure><img src="day.png" alt="Day"><figcaption><b>Day</b></figcaption></figure>
+<figure><img src="cycle.gif" alt="Full cycle"><figcaption><b>Full cycle</b></figcaption></figure>
+<figure><img src="snow.gif" alt="Snow"><figcaption><b>Snow</b></figcaption></figure>
+<figure><img src="blizzard.gif" alt="Blizzard"><figcaption><b>Blizzard</b></figcaption></figure>
+<figure><img src="ash.gif" alt="Wilderness ash"><figcaption><b>Wilderness ash</b></figcaption></figure>
+<figure><img src="sandstorm.gif" alt="Sandstorm"><figcaption><b>Sandstorm</b></figcaption></figure>
+<figure><img src="downpour.gif" alt="Karamja downpour"><figcaption><b>Karamja downpour</b></figcaption></figure>
+<figure><img src="underground.png" alt="Underground"><figcaption><b>Underground</b></figcaption></figure>
 </div>
-<h2>Pick one: night darkness</h2><div class="grid">
-<figure><img src="night-A.png" alt="Night A"><figcaption><b>Night A</b><span>Light night - a moonlit evening; everything readable</span></figcaption></figure>
-<figure><img src="night-B.png" alt="Night B"><figcaption><b>Night B</b><span>Medium night - clearly night, a light is welcome</span></figcaption></figure>
-<figure><img src="night-C.png" alt="Night C"><figcaption><b>Night C</b><span>Dark night - a light really matters; still playable</span></figcaption></figure>
+<div class="grid">
+<figure><img src="night-A.png" alt="Night A"><figcaption><b>Night A</b></figcaption></figure>
+<figure><img src="night-B.png" alt="Night B"><figcaption><b>Night B</b></figcaption></figure>
+<figure><img src="night-C.png" alt="Night C"><figcaption><b>Night C</b></figcaption></figure>
 </div>
-<h2>Pick one: dusk colour</h2><div class="grid">
-<figure><img src="dusk-1.png" alt="Dusk 1"><figcaption><b>Dusk 1</b><span>Warm orange sunset</span></figcaption></figure>
-<figure><img src="dusk-2.png" alt="Dusk 2"><figcaption><b>Dusk 2</b><span>Pink-purple sunset</span></figcaption></figure>
-<figure><img src="dusk-3.png" alt="Dusk 3"><figcaption><b>Dusk 3</b><span>Muted grey dusk</span></figcaption></figure>
+<div class="grid">
+<figure><img src="dusk-1.png" alt="Dusk 1"><figcaption><b>Dusk 1</b></figcaption></figure>
+<figure><img src="dusk-2.png" alt="Dusk 2"><figcaption><b>Dusk 2</b></figcaption></figure>
+<figure><img src="dusk-3.png" alt="Dusk 3"><figcaption><b>Dusk 3</b></figcaption></figure>
 </div>
-<h2>Pick one: rain style</h2><div class="grid">
-<figure><img src="rain-R1.gif" alt="Rain R1"><figcaption><b>Rain R1</b><span>Fine light rain, nearly straight, sky dulled a little.</span></figcaption></figure>
-<figure><img src="rain-R2.gif" alt="Rain R2"><figcaption><b>Rain R2</b><span>Heavier slanted rain, sky dulled a little.</span></figcaption></figure>
+<div class="grid">
+<figure><img src="rain-R1.gif" alt="Rain R1"><figcaption><b>Rain R1</b></figcaption></figure>
+<figure><img src="rain-R2.gif" alt="Rain R2"><figcaption><b>Rain R2</b></figcaption></figure>
 </div>
-<h2>Pick one: lightning strength</h2><div class="grid">
-<figure><img src="storm-F1.gif" alt="Thunderstorm F1"><figcaption><b>Thunderstorm F1</b><span>Lightning flash at 35% strength: two quick pulses.</span></figcaption></figure>
-<figure><img src="storm-F2.gif" alt="Thunderstorm F2"><figcaption><b>Thunderstorm F2</b><span>Lightning flash at 60% strength: two quick pulses.</span></figcaption></figure>
-<figure><img src="storm-F3.gif" alt="Thunderstorm F3"><figcaption><b>Thunderstorm F3</b><span>Lightning flash at 85% strength: two quick pulses.</span></figcaption></figure>
+<div class="grid">
+<figure><img src="storm-F1.gif" alt="Thunderstorm F1"><figcaption><b>Thunderstorm F1</b></figcaption></figure>
+<figure><img src="storm-F2.gif" alt="Thunderstorm F2"><figcaption><b>Thunderstorm F2</b></figcaption></figure>
+<figure><img src="storm-F3.gif" alt="Thunderstorm F3"><figcaption><b>Thunderstorm F3</b></figcaption></figure>
 </div>
-<h2>Your light at night</h2><div class="grid">
-<figure><img src="torch.gif" alt="Torch (night B)"><figcaption><b>Torch (night B)</b><span>Warm flickering pool around you, about 4 tiles.</span></figcaption></figure>
-<figure><img src="lux.gif" alt="Utevo Lux, fading"><figcaption><b>Utevo Lux, fading</b><span>Cool white light; seven minutes squeezed into two seconds, shrinking as it weakens.</span></figcaption></figure>
+<div class="grid">
+<figure><img src="torch.gif" alt="Torch"><figcaption><b>Torch</b></figcaption></figure>
+<figure><img src="lux.gif" alt="Utevo Lux"><figcaption><b>Utevo Lux</b></figcaption></figure>
 </div>
 </main></body></html>
