@@ -8,7 +8,13 @@ p{margin:6px 0 10px}.muted{color:var(--muted);font-size:14px}
 img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px}
 ul{padding-left:20px;margin:6px 0}details{margin-top:24px}summary{cursor:pointer;color:var(--accent);font-weight:600}
 </style></head><body><main>
-<h1>Pad movement indicator - pass 6</h1>
+<h1>Pad movement indicator</h1>
+<h2>In the game (built, 2026-10-09)</h2>
+<p class="muted">The real client on the dev server, a scripted controller walk near Lumbridge castle. Crop around the character, 2x. One shot every 0.2 s.</p>
+<img src="ingame-pass1.gif" alt="In-game animation of the move indicator">
+<h2>In the game - key moments</h2>
+<img src="ingame-pass1-keyframes.png" alt="Six in-game key moments">
+<h2>The agreed mockup (pass 6)</h2>
 <p class="muted">Mockup for review, not in the game yet. Stand-in scene at the game's own camera angle (pitch 912), simulating how the pad really walks: stick snapped to 8 directions, one walk per server tick (492 ms).</p>
 <ul>
 <li><b>Arc</b>: thin, ±30° around the stick direction, fading over its last 10° each side.</li>
