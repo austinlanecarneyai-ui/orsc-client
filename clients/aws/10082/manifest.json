@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10077,
+  "client_version": 10082,
   "label": "",
-  "published": "2026-10-10T13:32:15Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10077/files/",
+  "published": "2026-10-11T22:36:56Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10082/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -1498,8 +1498,8 @@
     },
     {
       "path": "Cache/video/spritepacks/DragonHelm.osar",
-      "size": 1709,
-      "sha256": "8542a7f03027a0216ceec5bca453df1a835d9e7e4a376a747b1aae088b8e0500"
+      "size": 1816,
+      "sha256": "5a6259c6a9dbc3438844773a17199c36a83221c96127a948c2156025250bfc91"
     },
     {
       "path": "Cache/video/spritepacks/DragonHilt.osar",
@@ -1563,8 +1563,8 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3894995,
-      "sha256": "90e63909fac07f818a41edd6cc293730aeabfb4528122d83af5211601f1463a1"
+      "size": 3930080,
+      "sha256": "85582c31c9793fd9f451b80517d959b6e9b681c38e37fc62087af537ee60cd0e"
     },
     {
       "path": "Play-Dev.cmd",
@@ -1574,7 +1574,7 @@
     {
       "path": "README.txt",
       "size": 5581,
-      "sha256": "42ffe2d0823b8703b28258b42a04433bf66c995867a48a709df9750adf16e221"
+      "sha256": "efcb38da48750da44a92b03e31da7dd6fb19a1e6c3596044d0387d58e7ec74f8"
     },
     {
       "path": "discord-rpc.jar",
@@ -1584,7 +1584,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "375b984a92fe0ee6c5008ed53733bf02176570b60055138eeaf27e45e201bb59"
+      "sha256": "a97d848bea6ab238c3ebd3689e9318d37e4b9782cf2d290f849ee05a0b7ec863"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -1606,8 +1606,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 49733725,
-    "sha256": "48613775496e37eb4836b4a3703847c2c1efde3d296c3313e1e5776d4cdf89ca"
+    "size": 49768729,
+    "sha256": "373ded6a2c2f418969d6afc06ec55c156bdd0507a2a8a97e68b57f94459e5de0"
   },
-  "content": "7f20f77b53fef120"
+  "content": "77223886871b6f6c"
 }
