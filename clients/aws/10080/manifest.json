@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10075,
+  "client_version": 10080,
   "label": "",
-  "published": "2026-10-09T23:51:16Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10075/files/",
+  "published": "2026-10-11T12:15:21Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10080/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -1498,8 +1498,8 @@
     },
     {
       "path": "Cache/video/spritepacks/DragonHelm.osar",
-      "size": 1709,
-      "sha256": "8542a7f03027a0216ceec5bca453df1a835d9e7e4a376a747b1aae088b8e0500"
+      "size": 1816,
+      "sha256": "5a6259c6a9dbc3438844773a17199c36a83221c96127a948c2156025250bfc91"
     },
     {
       "path": "Cache/video/spritepacks/DragonHilt.osar",
@@ -1563,8 +1563,8 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3868410,
-      "sha256": "c24862518fd7c9889eb85d66f9e9f704f7af5f9c4ae12d5b1fc8800f2c97b7cd"
+      "size": 3919346,
+      "sha256": "ea95524ee2f503649487beaab6fa1f67899388f91012b04a7a94acb5f42c8236"
     },
     {
       "path": "Play-Dev.cmd",
@@ -1574,7 +1574,7 @@
     {
       "path": "README.txt",
       "size": 5581,
-      "sha256": "0f74007400d9a4d4e78684af01fea1ad11a67468265ead62170e6c9433245889"
+      "sha256": "668fd290b92115fa1370adc57257d54c8924fcf18a9f2243a6f7ec4acdec1f23"
     },
     {
       "path": "discord-rpc.jar",
@@ -1584,7 +1584,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "375b984a92fe0ee6c5008ed53733bf02176570b60055138eeaf27e45e201bb59"
+      "sha256": "49d834f723a708ac86baaf31cb3ccdf1683d8b00d76377a6e740d8eae763748e"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -1606,8 +1606,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 49707381,
-    "sha256": "f32f0d9e603210363d727b6d5aea42fe8b3764a33e80c4897d7793b2b45465d4"
+    "size": 49757697,
+    "sha256": "96dbe30e8eab0100a13c81f99c63c4ab8185af5b6880a77449cae72c0830a0bc"
   },
-  "content": "12c20b6d3b3f3ac6"
+  "content": "3328a28b609ba647"
 }
