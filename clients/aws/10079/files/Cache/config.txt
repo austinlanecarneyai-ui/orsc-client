@@ -9,3 +9,4 @@ Dragonite:1
 Hair:1
 Saradomin:1
 Summon:1
+DragonLegs:1
