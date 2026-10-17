@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10081,
+  "client_version": 10086,
   "label": "",
-  "published": "2026-10-11T14:49:03Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10081/files/",
+  "published": "2026-10-17T13:29:27Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10086/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -203,8 +203,8 @@
     },
     {
       "path": "Cache/config.txt",
-      "size": 147,
-      "sha256": "d6d9c2fe79b08ef2bb5a6c7a6356b2f658964ca3e006fde1c3c25a9456f64111"
+      "size": 181,
+      "sha256": "cb566bbd924b254b1ffec11c161185d33d6b4d9df85dbf9f7679af24fb9c6032"
     },
     {
       "path": "Cache/enhanced/ambience/ambient_bubbling_noises__0832.ogg",
@@ -1493,8 +1493,13 @@
     },
     {
       "path": "Cache/video/models.orsc",
-      "size": 1946591,
-      "sha256": "4fb9d44c716b041a8b2f82337d3267dde7b602472ac19d5fef1cfe492ec0e998"
+      "size": 2042345,
+      "sha256": "a69dc1844753d499099de52ae5424e43f26559543d36a2f32a5c1fa0a9f7bb01"
+    },
+    {
+      "path": "Cache/video/spritepacks/DeadBranch.osar",
+      "size": 1119,
+      "sha256": "8728dacc29b53ec95a2eee88e781917b1cd791a0f263ecb3e8cc43393b3abbfa"
     },
     {
       "path": "Cache/video/spritepacks/DragonHelm.osar",
@@ -1513,13 +1518,18 @@
     },
     {
       "path": "Cache/video/spritepacks/DragonPlate.osar",
-      "size": 6227,
-      "sha256": "6a10cf0381bb7b2b6381b94cc3179c4cbb638d8fb622d41dbfb555d31b6c3a04"
+      "size": 6210,
+      "sha256": "1bfd0accfecd27e6e16f3bf852e34607ef821399b85b10668e84c0068d5a6d3b"
     },
     {
       "path": "Cache/video/spritepacks/Dragonite.osar",
       "size": 229,
       "sha256": "26778fa5f906d2b8e976fa2464b33d02177b4421bf60040444d03dca01610f1f"
+    },
+    {
+      "path": "Cache/video/spritepacks/Estate.osar",
+      "size": 14854,
+      "sha256": "afd46e25d55f6343f7ea38a64bba14f59fa5d2621b9ebb1d217fefb94df9768e"
     },
     {
       "path": "Cache/video/spritepacks/Hair.osar",
@@ -1535,6 +1545,11 @@
       "path": "Cache/video/spritepacks/Menus.osar",
       "size": 3126,
       "sha256": "d74f281331be202af13972433d14209247ce89a2d7572c2b140f4afcde68bcac"
+    },
+    {
+      "path": "Cache/video/spritepacks/Portal.osar",
+      "size": 1278,
+      "sha256": "17bb7584da391a53af3d064e1b224a10b6749e1e2ce49c47993a000bf12e940e"
     },
     {
       "path": "Cache/video/spritepacks/Saradomin.osar",
@@ -1563,8 +1578,8 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3929002,
-      "sha256": "7fd7babad153ee2955dae3f182d9bddc4daecf386f7f0c18ac055b95eb4f439d"
+      "size": 3951430,
+      "sha256": "dba2f0a96f2cdb497b57f4bfd4983c610fb15bfbd0008513a97c558625cfa452"
     },
     {
       "path": "Play-Dev.cmd",
@@ -1574,7 +1589,7 @@
     {
       "path": "README.txt",
       "size": 5581,
-      "sha256": "c2e2e26eb01d63be3abc821e2171b4e37a3d0b504ebd5f26487ec7d959a69c73"
+      "sha256": "df90e5f81fd4c5c0cf4e3e71fc6d10464fe696f7355bb4495cf11a8f03b5758e"
     },
     {
       "path": "discord-rpc.jar",
@@ -1584,7 +1599,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "a97d848bea6ab238c3ebd3689e9318d37e4b9782cf2d290f849ee05a0b7ec863"
+      "sha256": "23a146444546c09d64257347252e1793360f77e7ba3a15178d3fe6f7cf05e502"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -1606,8 +1621,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 49767605,
-    "sha256": "b0b173551b58e2eeeda5a73892c35d6df7543b6d871c099645a9edbccad011ca"
+    "size": 49827598,
+    "sha256": "f3b9ba64842276d7c0a40a3cbd61a517aedf26690ada1b7be07b872cb26d4ecd"
   },
-  "content": "e90ff85efc6ccc91"
+  "content": "f1e9611a5404ceb5"
 }
