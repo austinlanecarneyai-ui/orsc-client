@@ -10,3 +10,6 @@ Hair:1
 Saradomin:1
 Summon:1
 DragonLegs:1
+Estate:1
+Portal:1
+DeadBranch:1

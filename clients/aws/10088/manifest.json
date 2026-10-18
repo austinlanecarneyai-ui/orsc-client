@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10083,
+  "client_version": 10088,
   "label": "",
-  "published": "2026-10-12T01:43:45Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10083/files/",
+  "published": "2026-10-18T11:30:13Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10088/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -203,8 +203,8 @@
     },
     {
       "path": "Cache/config.txt",
-      "size": 147,
-      "sha256": "d6d9c2fe79b08ef2bb5a6c7a6356b2f658964ca3e006fde1c3c25a9456f64111"
+      "size": 181,
+      "sha256": "cb566bbd924b254b1ffec11c161185d33d6b4d9df85dbf9f7679af24fb9c6032"
     },
     {
       "path": "Cache/enhanced/ambience/ambient_bubbling_noises__0832.ogg",
@@ -1468,8 +1468,8 @@
     },
     {
       "path": "Cache/video/Authentic_Landscape.orsc",
-      "size": 971938,
-      "sha256": "16e212f087be33128ab1590f1bb609541e3ac9078b34f5e0c5b2bde805ce9871"
+      "size": 971976,
+      "sha256": "24a69d8a49e83545a8aba8e2218b53b056af6940684056b4d214751de28d1ea9"
     },
     {
       "path": "Cache/video/Authentic_Sprites.orsc",
@@ -1493,8 +1493,13 @@
     },
     {
       "path": "Cache/video/models.orsc",
-      "size": 1946591,
-      "sha256": "4fb9d44c716b041a8b2f82337d3267dde7b602472ac19d5fef1cfe492ec0e998"
+      "size": 2098827,
+      "sha256": "62b2bb8cc7036bdaa3565ac0b073b81da5a06e0c3d1e3b7f44614151e8e90c65"
+    },
+    {
+      "path": "Cache/video/spritepacks/DeadBranch.osar",
+      "size": 1119,
+      "sha256": "8728dacc29b53ec95a2eee88e781917b1cd791a0f263ecb3e8cc43393b3abbfa"
     },
     {
       "path": "Cache/video/spritepacks/DragonHelm.osar",
@@ -1513,13 +1518,18 @@
     },
     {
       "path": "Cache/video/spritepacks/DragonPlate.osar",
-      "size": 6227,
-      "sha256": "6a10cf0381bb7b2b6381b94cc3179c4cbb638d8fb622d41dbfb555d31b6c3a04"
+      "size": 6210,
+      "sha256": "1bfd0accfecd27e6e16f3bf852e34607ef821399b85b10668e84c0068d5a6d3b"
     },
     {
       "path": "Cache/video/spritepacks/Dragonite.osar",
       "size": 229,
       "sha256": "26778fa5f906d2b8e976fa2464b33d02177b4421bf60040444d03dca01610f1f"
+    },
+    {
+      "path": "Cache/video/spritepacks/Estate.osar",
+      "size": 14854,
+      "sha256": "afd46e25d55f6343f7ea38a64bba14f59fa5d2621b9ebb1d217fefb94df9768e"
     },
     {
       "path": "Cache/video/spritepacks/Hair.osar",
@@ -1535,6 +1545,11 @@
       "path": "Cache/video/spritepacks/Menus.osar",
       "size": 3126,
       "sha256": "d74f281331be202af13972433d14209247ce89a2d7572c2b140f4afcde68bcac"
+    },
+    {
+      "path": "Cache/video/spritepacks/Portal.osar",
+      "size": 1278,
+      "sha256": "17bb7584da391a53af3d064e1b224a10b6749e1e2ce49c47993a000bf12e940e"
     },
     {
       "path": "Cache/video/spritepacks/Saradomin.osar",
@@ -1563,8 +1578,8 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3930924,
-      "sha256": "55e212b5b36c872f7bd22c24c38bc6537aea4638311ffeb3a338da9e38d1b74f"
+      "size": 3956466,
+      "sha256": "029cfa4d58e13f66b6e2a01356775eee1775043b20ebee038696fd9c254e10dc"
     },
     {
       "path": "Play-Dev.cmd",
@@ -1574,7 +1589,7 @@
     {
       "path": "README.txt",
       "size": 5581,
-      "sha256": "09ed5c6e7de3d0df456763ddf95eb1bc6afd6fde776e79c73f63d6294767015e"
+      "sha256": "4c560a4316797475ea04f09a471e013fb33960d8082760637e901066a1fcf0bc"
     },
     {
       "path": "discord-rpc.jar",
@@ -1584,7 +1599,7 @@
     {
       "path": "update/Launch.cmd",
       "size": 3534,
-      "sha256": "a97d848bea6ab238c3ebd3689e9318d37e4b9782cf2d290f849ee05a0b7ec863"
+      "sha256": "a83279d5b43e72cad39306182f24e235d2b0d18fa624a16d19937976a3d18de5"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -1606,8 +1621,8 @@
   },
   "setup": {
     "path": "setup.zip",
-    "size": 49769620,
-    "sha256": "6e4fdf6b6d1b2327aebf8ba6fa802f1c01f9f81559c6b46216df62ea77be628f"
+    "size": 49848979,
+    "sha256": "6803eda18d131506455cb708e0db5e5ee3c657b185fca2c20b50e2ec018ed829"
   },
-  "content": "2e74c8203a039c37"
+  "content": "7ae4e5a3d81545bf"
 }
