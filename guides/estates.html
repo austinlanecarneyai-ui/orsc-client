@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How player estates work on this server: buying a plot, the Carpentry skill, planks, the herb garden, the three houses and their furniture - who sells what, where, and at what level.">
+<meta name="color-scheme" content="dark">
+</head>
+<body>
+<title>Carpentry &amp; Estates</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Pixelify+Sans:wght@400;500;700&display=swap">
+
+<style>
+/* ------------------------------------------------------------------ tokens
+   Dark by commitment, not by default. This is a wilderness at night: a warm
+   near-black ground, parchment text, and one bold colour — oxblood — spent
+   only on danger. Every colour is painted explicitly so the page holds on any
+   host background.                                                          */
+:root{
+  --ink:      #0c0a09;   /* page ground, near-black warmed toward red-brown */
+  --ink-2:    #131010;   /* raised ground */
+  --panel:    #17130f;   /* panels */
+  --line:     #2b231d;   /* hairlines */
+  --line-2:   #3c322a;   /* hairlines, emphasised */
+  --bone:     #ece3d2;   /* primary text — the RSC login parchment */
+  --bone-2:   #b3a695;   /* secondary text */
+  --bone-3:   #7d7266;   /* tertiary, captions */
+  --blood:    #c03127;   /* THE accent. Wilderness, skulls, danger. */
+  --blood-2:  #7d1c16;   /* accent, receded */
+  --ember:    #e3a544;   /* numerals, levels, coin */
+  --moss:     #7c9c58;   /* semantic: shipped / on / safe */
+  --slate:    #6d8fa3;   /* semantic: building */
+
+  --f-disp: "Big Shoulders Display", "Haettenschweiler", "Arial Narrow", sans-serif;
+  --f-body: "Newsreader", Georgia, "Times New Roman", serif;
+  --f-px:   "Pixelify Sans", "Courier New", monospace;
+
+  --col: 1120px;
+  --pad: 28px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--bone);
+  font:400 17px/1.62 var(--f-body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+a{color:var(--bone);text-decoration-color:var(--blood);text-underline-offset:3px}
+a:hover{color:#fff}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+
+h1,h2,h3{font-family:var(--f-disp);font-weight:800;text-transform:uppercase;
+  letter-spacing:.008em;line-height:.94;text-wrap:balance;margin:0}
+p{margin:0}
+
+.wrap{max-width:var(--col);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ember);color:#000;
+  padding:10px 16px;font-family:var(--f-px);font-size:13px;z-index:99}
+.skip:focus{left:12px;top:12px}
+
+/* ---------------------------------------------------------------- fixtures */
+.eyebrow{font-family:var(--f-px);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bone-3);margin:0}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+.tag{font-family:var(--f-px);font-size:11px;letter-spacing:.07em;padding:3px 6px 2px;
+  border:1px solid var(--line-2);color:var(--bone-2);white-space:nowrap;
+  display:inline-block;line-height:1.35}
+.tag.t-border-mage{color:#c69ad8;border-color:#4a3552}
+.tag.t-pure-1d,.tag.t-pure-10d,.tag.t-pure-30d{color:var(--ember);border-color:#5b4423}
+.tag.t-prayer-beast{color:#8fb8cf;border-color:#33505f}
+.tag.t-impure{color:#cf8b6e;border-color:#5c3a2c}
+
+.chip{font-family:var(--f-px);font-size:11px;letter-spacing:.07em;padding:4px 7px 3px;
+  border:1px solid var(--line-2);color:var(--bone-2);display:inline-flex;gap:6px;
+  align-items:center;line-height:1.35}
+.chip::before{content:"";width:5px;height:5px;background:var(--bone-3)}
+.chip.ok{color:var(--moss);border-color:#3a4a2c}
+.chip.ok::before{background:var(--moss)}
+.chip.wip{color:var(--slate);border-color:#2f4450}
+.chip.wip::before{background:var(--slate)}
+.chip.off{color:var(--bone-3)}
+.src{font-family:var(--f-px);font-size:11px;color:var(--bone-3);letter-spacing:.04em}
+
+/* ------------------------------------------------------------------- topbar */
+.top{position:sticky;top:0;z-index:40;background:rgba(12,10,9,.94);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.top-in{display:flex;align-items:center;gap:22px;height:56px;
+  max-width:var(--col);margin:0 auto;padding:0 var(--pad)}
+.mark{font-family:var(--f-disp);font-weight:800;font-size:23px;letter-spacing:.02em;
+  text-transform:uppercase;text-decoration:none;color:var(--bone);white-space:nowrap}
+.mark b{color:var(--blood);font-weight:800}
+.nav{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-family:var(--f-px);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bone-3);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
+.nav a:hover{color:var(--bone)}
+.nav a.here{color:var(--ember);border-bottom-color:var(--blood)}
+@media (max-width:860px){
+  .top-in{height:auto;padding-top:10px;padding-bottom:10px;flex-wrap:wrap;gap:10px 16px}
+  .nav{margin-left:0;width:100%;gap:14px}
+}
+
+/* --------------------------------------------------------------- the gauge
+   A vertical wilderness scale pinned to the left on wide screens. The page is
+   a climb north, and this says how deep the section you are reading sits.    */
+.gauge{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:30;
+  display:none;width:96px}
+@media (min-width:1400px){.gauge{display:block}}
+.gauge ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line-2)}
+.gauge li{position:relative;padding:0 0 0 14px;min-height:46px}
+.gauge li::before{content:"";position:absolute;left:-3px;top:7px;width:5px;height:5px;
+  background:var(--line-2)}
+.gauge b{display:block;font-family:var(--f-px);font-size:12px;color:var(--bone-3);
+  letter-spacing:.05em;font-weight:400}
+.gauge span{display:block;font-family:var(--f-px);font-size:10px;color:#4e463d;
+  letter-spacing:.05em;margin-top:3px}
+.gauge li.here::before{background:var(--blood);box-shadow:0 0 0 3px rgba(192,49,39,.18)}
+.gauge li.here b{color:var(--ember)}
+.gauge li.here span{color:var(--bone-3)}
+
+/* --------------------------------------------------------------------- hero */
+.hero{padding:74px 0 0;position:relative}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(52px,9.2vw,124px);margin:16px 0 0;letter-spacing:-.005em}
+.hero h1 em{font-style:normal;color:var(--blood);
+  text-shadow:0 0 32px rgba(192,49,39,.28)}
+.lede{font-size:clamp(18px,2.1vw,21px);line-height:1.55;color:var(--bone-2);
+  max-width:56ch;margin-top:26px}
+.lede strong{color:var(--bone);font-weight:500}
+
+.figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin:44px 0 0}
+.figures div{background:var(--ink-2);padding:16px 18px}
+.figures b{display:block;font-family:var(--f-disp);font-weight:700;font-size:40px;
+  line-height:1;color:var(--ember);font-variant-numeric:tabular-nums}
+.figures small{display:block;font-family:var(--f-px);font-size:11px;letter-spacing:.08em;
+  color:var(--bone-3);text-transform:uppercase;margin-top:9px;line-height:1.5}
+@media (max-width:720px){.figures{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Below the headline the hero splits: the pitch on the left, and on the right
+   a board of five real characters spanning the road's combat range. It is the
+   dead space the poster headline leaves, spent on the thing being sold. */
+.hero-body{display:grid;grid-template-columns:minmax(0,1fr);gap:34px;align-items:start}
+@media (min-width:1000px){
+  .hero-body{grid-template-columns:minmax(0,1fr) 330px;gap:52px}
+}
+
+.board{border:1px solid var(--line);background:var(--ink-2);margin-top:26px}
+@media (min-width:1000px){.board{margin-top:8px}}
+.board h2{font-family:var(--f-px);font-size:11px;font-weight:400;letter-spacing:.09em;
+  color:var(--bone-3);text-transform:uppercase;padding:13px 16px 11px;
+  border-bottom:1px solid var(--line);line-height:1.5}
+.board ul{list-style:none;margin:0;padding:0}
+.board li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;
+  align-items:center;padding:11px 16px;border-bottom:1px solid #1e1916}
+.board li:last-child{border-bottom:0}
+.board .bd-cb{font-family:var(--f-disp);font-weight:800;font-size:26px;line-height:1;
+  color:var(--ember);text-align:right;font-variant-numeric:tabular-nums}
+.board .bd-name{font-family:var(--f-disp);font-weight:700;font-size:20px;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--bone);line-height:1.1}
+.board .bd-kit{grid-column:2;line-height:1;margin-top:3px}
+.board .bd-kit .sp{margin-right:2px}
+.board .foot{padding:11px 16px 12px;border-top:1px solid var(--line);
+  font-family:var(--f-px);font-size:11px;color:#4e463d;letter-spacing:.04em;
+  line-height:1.6}
+
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{font-family:var(--f-px);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  padding:14px 22px 12px;text-decoration:none;border:1px solid var(--blood);
+  color:var(--bone);background:var(--blood-2);transition:background .15s,border-color .15s}
+.btn:hover{background:var(--blood);color:#fff}
+.btn.ghost{background:transparent;border-color:var(--line-2);color:var(--bone-2)}
+.btn.ghost:hover{border-color:var(--bone-3);color:var(--bone);background:transparent}
+
+/* -------------------------------------------------------------- conf strip */
+.strip{margin-top:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--ink-2)}
+.strip .wrap{display:flex;flex-wrap:wrap;gap:0;align-items:stretch}
+.strip dl{margin:0;padding:14px 26px 12px 0;flex:1 1 auto;min-width:132px;
+  border-right:1px solid var(--line)}
+.strip dl:last-of-type{border-right:0}
+.strip dt{font-family:var(--f-px);font-size:11px;letter-spacing:.08em;color:var(--bone-3);
+  text-transform:uppercase}
+.strip dd{margin:5px 0 0;font-family:var(--f-disp);font-weight:700;font-size:19px;
+  text-transform:uppercase;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.strip dd.on{color:var(--moss)}
+.strip dd.no{color:var(--bone-3)}
+.strip dd.hot{color:var(--ember)}
+.strip .from{flex:0 0 100%;padding:0 0 13px;font-family:var(--f-px);font-size:11px;
+  color:#4e463d;letter-spacing:.04em}
+
+/* ------------------------------------------------------------------ section */
+section{padding:78px 0;border-bottom:1px solid var(--line)}
+.s-head{display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:34px}
+.s-head .depth{font-family:var(--f-px);font-size:12px;letter-spacing:.06em;
+  color:var(--bone-3);border:1px solid var(--line-2);padding:7px 9px 5px;white-space:nowrap;
+  line-height:1.5}
+.s-head .depth b{display:block;color:var(--blood);font-weight:400}
+.s-head h2{font-size:clamp(32px,4.6vw,52px);flex:1 1 320px}
+.s-head p{color:var(--bone-2);max-width:60ch;flex:1 1 100%;margin-top:2px}
+
+/* ------------------------------------------------------------- classic core */
+.core{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.core > div{background:var(--panel);padding:24px 26px 26px}
+.core h3{font-size:23px;color:var(--bone);margin-bottom:10px}
+.core p{color:var(--bone-2);font-size:16px}
+.core code{font-family:var(--f-px);font-size:12px;color:var(--ember);
+  background:#0d0b09;padding:2px 5px;display:inline-block;line-height:1.7}
+@media (max-width:720px){.core{grid-template-columns:1fr}}
+
+/* ------------------------------------------------------------- the ledger
+   Two columns: what RuneScape Classic does, and what this world does instead.
+   A ledger, not a card grid — the pairing is the content.                    */
+.ledger{border-top:1px solid var(--line-2)}
+.led{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1.25fr);
+  gap:0;border-bottom:1px solid var(--line);align-items:start}
+.led > *{padding:20px 0}
+.led .was{color:var(--bone-3);padding-right:24px}
+.led .was b{display:block;font-family:var(--f-disp);font-weight:500;font-size:21px;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--bone-2);margin-bottom:5px}
+.led .arrow{color:var(--blood);font-family:var(--f-px);font-size:14px;padding-top:24px;
+  text-align:center;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.led .now{padding-left:24px}
+.led .now b{display:block;font-family:var(--f-disp);font-weight:800;font-size:25px;
+  text-transform:uppercase;letter-spacing:.015em;color:var(--bone);margin-bottom:6px}
+.led .now p{color:var(--bone-2);font-size:16px}
+.led .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:11px}
+.led:hover .now b{color:#fff}
+@media (max-width:800px){
+  .led{grid-template-columns:1fr;gap:0}
+  .led > *{padding:14px 0}
+  .led .was{padding-right:0;padding-bottom:0}
+  .led .arrow{display:none}
+  .led .now{padding-left:14px;border-left:2px solid var(--blood-2);padding-top:10px}
+}
+
+/* ------------------------------------------------------------------- tiers */
+.tiers{display:flex;flex-direction:column;gap:14px}
+.tier{background:var(--panel);border:1px solid var(--line);
+  border-left:3px solid var(--edge,var(--line-2));display:grid;
+  grid-template-columns:132px minmax(0,1fr);gap:0}
+.tier.t1{--edge:var(--ember)}
+.tier.t2{--edge:var(--slate)}
+.tier.t3{--edge:var(--blood)}
+.tier .lvl{padding:22px 18px;border-right:1px solid var(--line);background:#110e0c}
+.tier .lvl b{display:block;font-family:var(--f-disp);font-weight:800;font-size:34px;
+  line-height:.9;color:var(--edge);font-variant-numeric:tabular-nums}
+.tier .lvl small{display:block;font-family:var(--f-px);font-size:10px;letter-spacing:.08em;
+  color:var(--bone-3);text-transform:uppercase;margin-top:8px;line-height:1.6}
+.tier .body{padding:22px 26px 24px}
+.tier h3{font-size:26px;margin-bottom:8px}
+.tier h3 small{font-family:var(--f-px);font-size:12px;letter-spacing:.06em;color:var(--bone-3);
+  text-transform:none;display:block;margin-top:7px;font-weight:400}
+.tier p{color:var(--bone-2);font-size:16px;margin-top:10px;max-width:64ch}
+.tier .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+@media (max-width:640px){
+  .tier{grid-template-columns:1fr}
+  .tier .lvl{border-right:0;border-bottom:1px solid var(--line);padding:16px 18px 14px}
+  .tier .lvl b{font-size:28px}
+}
+
+/* --------------------------------------------------------------- the rule */
+.note{border:1px solid var(--line-2);background:#110e0c;padding:24px 26px;margin-top:26px}
+.note h3{font-size:21px;margin-bottom:12px;color:var(--ember)}
+.note p{color:var(--bone-2);font-size:16px;max-width:66ch}
+.note p + p{margin-top:11px}
+.formula{font-family:var(--f-px);font-size:13px;color:var(--bone);background:var(--ink);
+  border:1px solid var(--line);padding:14px 16px;margin:14px 0;overflow-x:auto;
+  line-height:1.9;white-space:nowrap;max-width:100%}
+@media (max-width:520px){.formula{font-size:11px;white-space:normal;line-height:2.1}}
+.formula i{color:var(--blood);font-style:normal}
+
+/* ------------------------------------------------------------------ roster */
+.bsum{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.bsum li{display:flex;align-items:center;gap:9px;border:1px solid var(--line);
+  background:var(--panel);padding:8px 12px 7px}
+.bsum .bs-n{font-family:var(--f-disp);font-weight:800;font-size:22px;color:var(--bone);
+  line-height:1;font-variant-numeric:tabular-nums}
+.bsum .bs-cb{font-family:var(--f-px);font-size:11px;color:var(--bone-3);letter-spacing:.05em}
+
+/* ---------------------------------------------------------- item sprites
+   One CSS class per icon, embedded once and referenced anywhere on the page.
+   An icon used forty times costs its bytes once. Every size is an integer
+   fraction of the client's own 48x32 inventory box, so nearest-neighbour
+   scaling lands on whole pixels and the art stays art.                       */
+.sp{display:inline-block;width:48px;height:32px;background-repeat:no-repeat;
+  background-position:center;background-size:48px 32px;vertical-align:middle;
+  image-rendering:pixelated;image-rendering:crisp-edges;flex:none}
+.sp-sm{width:24px;height:16px;background-size:24px 16px}
+.sp-lg{width:96px;height:64px;background-size:96px 64px}
+/* Not every level requirement is an item - a spell, a prayer, an agility
+   obstacle. They get a placeholder that reads as "no icon", not as a broken
+   one. */
+.sp-none{background-image:none;border:1px dashed var(--line-2);box-sizing:border-box;
+  opacity:.5}
+.kits{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.kits li{background:var(--panel);padding:13px 12px 9px;display:flex;flex-direction:column;
+  align-items:center;gap:7px;width:104px}
+.kits span{font-family:var(--f-px);font-size:10px;color:var(--bone-3);letter-spacing:.03em;
+  text-align:center;line-height:1.5;word-break:break-word}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tools button{font-family:var(--f-px);font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--line-2);color:var(--bone-3);
+  padding:8px 11px 6px;cursor:pointer}
+.tools button:hover{color:var(--bone);border-color:var(--bone-3)}
+.tools button[aria-pressed="true"]{color:var(--ink);background:var(--ember);border-color:var(--ember)}
+.tools .count{font-family:var(--f-px);font-size:11px;color:var(--bone-3);letter-spacing:.05em;
+  margin-left:auto}
+
+.tbl-wrap{border:1px solid var(--line);background:var(--panel);max-height:520px;
+  overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+thead th{position:sticky;top:0;background:#110e0c;font-family:var(--f-px);font-size:11px;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--bone-3);font-weight:400;
+  text-align:left;padding:11px 12px 9px;border-bottom:1px solid var(--line-2);z-index:2;
+  white-space:nowrap}
+thead th.sortable{cursor:pointer;user-select:none}
+thead th.sortable:hover{color:var(--bone)}
+thead th[aria-sort]{color:var(--ember)}
+tbody td{padding:9px 12px;border-bottom:1px solid #1e1916;vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:#1b1613}
+td.num{font-variant-numeric:tabular-nums;text-align:right;font-family:var(--f-px);
+  font-size:13px;color:var(--bone-2);white-space:nowrap}
+td.num.skull{color:var(--bone-3)}
+td.num.skull.on{color:var(--blood)}
+td.c-name{font-family:var(--f-disp);font-weight:700;font-size:19px;text-transform:uppercase;
+  letter-spacing:.02em;white-space:nowrap}
+td.c-group,td.c-note{font-family:var(--f-px);font-size:11px;color:var(--bone-3);
+  letter-spacing:.04em;line-height:1.7}
+td.c-kit{white-space:nowrap;line-height:1}
+td.c-kit .sp{margin-right:2px}
+.hint{font-family:var(--f-px);font-size:11px;color:#4e463d;letter-spacing:.04em;margin-top:10px}
+
+.sub{font-family:var(--f-disp);font-weight:700;font-size:26px;text-transform:uppercase;
+  letter-spacing:.02em;margin:44px 0 6px}
+.sub + p{color:var(--bone-2);max-width:62ch;margin-bottom:18px;font-size:16px}
+
+/* ------------------------------------------------------------------- rates */
+.rates{width:100%;border:1px solid var(--line);background:var(--panel);
+  border-collapse:collapse}
+.rates th,.rates td{padding:15px 18px;border:1px solid var(--line);text-align:left}
+.rates thead th{background:#110e0c;font-family:var(--f-px);font-size:11px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--bone-3);font-weight:400;position:static}
+.rates tbody th{font-family:var(--f-px);font-size:12px;letter-spacing:.06em;color:var(--bone-2);
+  font-weight:400;text-transform:uppercase;white-space:nowrap}
+.rates td{font-family:var(--f-disp);font-weight:800;font-size:30px;color:var(--bone-2);
+  font-variant-numeric:tabular-nums}
+.rates td.peak{color:var(--blood)}
+.rates td.high{color:var(--ember)}
+.scroll-x{overflow-x:auto}
+
+/* ------------------------------------------------------------------ speech */
+.speech{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.speech li{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);
+  gap:0;border-bottom:1px solid var(--line);align-items:baseline}
+.speech .sp-when{font-family:var(--f-px);font-size:12px;letter-spacing:.06em;
+  color:var(--bone-3);text-transform:uppercase;padding:16px 18px 16px 0}
+.speech .sp-lines{padding:16px 0;color:var(--ember);font-size:16px}
+@media (max-width:640px){
+  .speech li{grid-template-columns:1fr}
+  .speech .sp-when{padding-bottom:0}
+  .speech .sp-lines{padding-top:6px}
+}
+
+/* -------------------------------------------------------------------- play */
+.play{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.play > div{background:var(--panel);padding:26px 28px 28px}
+.play h3{font-size:24px;margin-bottom:6px}
+.play .where{font-family:var(--f-px);font-size:11px;color:var(--bone-3);letter-spacing:.05em;
+  margin-bottom:16px;display:block}
+.play ol{margin:0;padding-left:20px;color:var(--bone-2);font-size:16px}
+.play li{margin-bottom:9px}
+.play li:last-child{margin-bottom:0}
+.play code{font-family:var(--f-px);font-size:12px;color:var(--ember);background:#0d0b09;
+  padding:2px 5px;display:inline-block;line-height:1.7;word-break:break-all}
+@media (max-width:720px){.play{grid-template-columns:1fr}}
+
+/* ------------------------------------------------------------------ footer */
+footer{padding:52px 0 64px;color:var(--bone-3);font-size:15px}
+footer .cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);
+  gap:32px;align-items:start}
+footer h4{font-family:var(--f-px);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bone-2);margin:0 0 12px;font-weight:400}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin-bottom:7px;font-family:var(--f-px);font-size:12px;letter-spacing:.03em;
+  line-height:1.7}
+footer a{color:var(--bone-3)}
+footer a:hover{color:var(--bone)}
+footer .fine{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);
+  font-family:var(--f-px);font-size:11px;color:#4e463d;letter-spacing:.04em;line-height:2}
+@media (max-width:720px){footer .cols{grid-template-columns:1fr;gap:26px}}
+
+/* ------------------------------------------------------------------ subnav
+   The home page is long, so it carries its own section bar under the site
+   nav. Other pages do not need one and do not get one.                      */
+.subnav{position:sticky;top:56px;z-index:35;background:rgba(12,10,9,.94);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.subnav .wrap{display:flex;gap:20px;flex-wrap:wrap;padding-top:11px;padding-bottom:9px}
+.subnav a{font-family:var(--f-px);font-size:11px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--bone-3);text-decoration:none;
+  border-bottom:1px solid transparent;padding-bottom:3px}
+.subnav a:hover{color:var(--bone)}
+.subnav a.here{color:var(--ember);border-bottom-color:var(--blood)}
+@media (max-width:860px){.subnav{top:auto;position:static}}
+
+/* ------------------------------------------------------------ page opener
+   Every page but the home page opens with the same block: what this page is,
+   in one line, and the numbers that make it worth scrolling.                */
+.opener{padding:56px 0 40px;border-bottom:1px solid var(--line)}
+.opener h1{font-size:clamp(40px,6.4vw,76px);margin:14px 0 0}
+.opener .lede{margin-top:20px;font-size:clamp(17px,1.9vw,20px)}
+.opener .figures{margin-top:36px}
+
+/* --------------------------------------------------------------- controls
+   The filter bar every long table on this site carries.                     */
+.bar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:0 0 14px;
+  padding:14px 0 0}
+.bar input[type="search"]{font-family:var(--f-body);font-size:15px;color:var(--bone);
+  background:var(--ink-2);border:1px solid var(--line-2);padding:9px 12px;min-width:210px;
+  flex:1 1 210px;max-width:340px}
+.bar input[type="search"]::placeholder{color:var(--bone-3)}
+.bar input[type="range"]{accent-color:var(--blood);flex:1 1 180px;max-width:280px}
+.bar .lvl-out{font-family:var(--f-disp);font-weight:800;font-size:26px;color:var(--ember);
+  min-width:2.2ch;text-align:right;font-variant-numeric:tabular-nums;line-height:1}
+.bar label{font-family:var(--f-px);font-size:11px;letter-spacing:.06em;color:var(--bone-3);
+  text-transform:uppercase}
+.empty{padding:34px 0;text-align:center;color:var(--bone-3);font-family:var(--f-px);
+  font-size:12px;letter-spacing:.05em}
+
+/* ------------------------------------------------------------- disclosure */
+tr[data-opens]{cursor:pointer}
+tr[data-opens]:focus-visible{outline:2px solid var(--ember);outline-offset:-2px}
+td.c-open{width:26px;color:var(--bone-3);font-family:var(--f-px);font-size:13px;
+  text-align:center;user-select:none}
+tr[data-opens].open td.c-open{color:var(--ember)}
+tr.detail > td{background:#100d0b;padding:0}
+tr.detail[hidden]{display:none}
+
+/* --------------------------------------------------------------- lockable
+   The skills page dims what your level cannot reach yet.                     */
+.locked{opacity:.34}
+.locked .sp{filter:grayscale(1)}
+
+/* ----------------------------------------------------------- the PvP rule
+   The most useful block on the site: the sentence on the left, the four
+   consequences on the right. Not cards - one panel, split.                  */
+.rule{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0;
+  border:1px solid var(--line-2);background:var(--panel)}
+/* min-width:0 or the nowrap formula inside sets this column's minimum width and
+   pushes the whole page sideways on a phone. */
+.rule-say{padding:28px 30px 30px;border-right:1px solid var(--line);min-width:0}
+.rule-lead{font-size:20px;line-height:1.5;color:var(--bone)}
+.rule-say p + p{margin-top:13px;color:var(--bone-2);font-size:16px}
+.rule-facts{list-style:none;margin:0;padding:0}
+.rule-facts li{padding:19px 26px;border-bottom:1px solid var(--line)}
+.rule-facts li:last-child{border-bottom:0}
+.rule-facts b{display:block;font-family:var(--f-disp);font-weight:800;font-size:20px;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--ember);margin-bottom:4px}
+.rule-facts span{color:var(--bone-2);font-size:15.5px;line-height:1.55}
+.rule-facts code{font-family:var(--f-px);font-size:12px;color:var(--ember);
+  background:#0d0b09;padding:1px 5px;display:inline-block}
+@media (max-width:820px){
+  .rule{grid-template-columns:1fr}
+  .rule-say{border-right:0;border-bottom:1px solid var(--line);padding:24px 22px 26px}
+  .rule-facts li{padding:17px 22px}
+}
+
+/* -------------------------------------------------------- the depth scale
+   A true scale: every mark sits at the wilderness level it names, positioned
+   by --at out of 48. Nothing on it is decoration.                            */
+.climb{display:grid;grid-template-columns:118px minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.climb{grid-template-columns:1fr;gap:0}}
+
+.depthscale{list-style:none;margin:0;padding:0;position:relative;height:560px;
+  border-left:1px solid var(--line-2)}
+@media (max-width:900px){.depthscale{display:none}}
+.depthscale li{position:absolute;left:0;top:calc(var(--at) / 48 * 100%);
+  transform:translateY(-50%);padding-left:13px;white-space:nowrap}
+.depthscale li::before{content:"";position:absolute;left:-3px;top:calc(50% - 2px);
+  width:5px;height:5px;background:var(--line-2)}
+.depthscale b{display:block;font-family:var(--f-disp);font-weight:800;font-size:21px;
+  line-height:1;color:var(--bone-3);font-variant-numeric:tabular-nums}
+.depthscale span{display:block;font-family:var(--f-px);font-size:10px;color:#4e463d;
+  letter-spacing:.04em;margin-top:4px}
+.depthscale .tier-1::before{background:var(--ember)}
+.depthscale .tier-1 b{color:var(--ember)}
+.depthscale .tier-2::before{background:var(--slate)}
+.depthscale .tier-2 b{color:var(--slate)}
+.depthscale .tier-3::before{background:var(--blood)}
+.depthscale .tier-3 b{color:var(--blood)}
+.depthscale .tier-1 span,.depthscale .tier-2 span,.depthscale .tier-3 span{color:var(--bone-3)}
+
+/* ------------------------------------------------------ bracket slider row */
+.bar-bracket{border-top:1px solid var(--line);margin-top:2px;padding-top:16px;
+  padding-bottom:4px}
+.bracket-note{font-family:var(--f-px);font-size:11px;letter-spacing:.05em;
+  color:var(--bone-3);flex:1 1 100%}
+tr.out{opacity:.3}
+tr.out td.c-name{color:var(--bone-3)}
+tr.in td.num:nth-child(3){color:var(--ember)}
+
+/* --------------------------------------------------- first character block */
+.first{border:1px solid var(--line-2);background:#110e0c;padding:26px 30px 28px;
+  margin-bottom:14px}
+.first h3{font-size:23px;color:var(--ember);margin-bottom:14px}
+.first ol{margin:0;padding-left:20px;color:var(--bone-2);font-size:16.5px;
+  counter-reset:none}
+.first li{margin-bottom:10px}
+.first li:last-child{margin-bottom:0}
+.first b{color:var(--bone);font-weight:500}
+.first code{font-family:var(--f-px);font-size:12px;color:var(--ember);
+  background:var(--ink);padding:1px 5px;display:inline-block}
+
+.lede-2{margin-top:16px;font-size:17.5px;color:var(--bone-3)}
+
+/* Estates guide - the RuneScape Classic wiki's article layout, in this site's colours
+   (the same reading frame as heros-quest.css, plus the guide's own tables and timeline). */
+
+.wiki { max-width: var(--col); margin: 0 auto; padding: 32px var(--pad) 64px; }
+.wiki-src { color: var(--bone-3); font-size: 14px; margin: 0 0 18px; }
+.wiki h1 { font-family: var(--f-disp); font-size: 44px; letter-spacing: .01em; margin: 0 0 4px; color: var(--bone); }
+.wiki .hatnote { color: var(--bone-2); font-style: italic; margin: 0 0 22px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.wiki h2 { font-family: var(--f-disp); font-size: 30px; color: var(--bone); margin: 38px 0 10px; padding-bottom: 4px; border-bottom: 1px solid var(--line-2); clear: both; }
+.wiki h3 { font-family: var(--f-disp); font-size: 22px; color: var(--ember); margin: 26px 0 8px; }
+.wiki p, .wiki li { line-height: 1.6; color: var(--bone); }
+.wiki a { color: var(--ember); text-decoration: none; border-bottom: 1px dotted var(--blood-2); }
+.wiki a:hover { color: var(--bone); }
+.wiki ul, .wiki ol { padding-left: 22px; }
+.wiki ol.steps > li { margin-bottom: 6px; }
+.wiki code { font-family: var(--f-px); font-size: 14px; color: var(--ember); }
+/* game messages and levels stay in the body face: the pixel face draws 5 like 3 */
+.wiki .msg { font-style: italic; color: var(--ember); }
+.wiki .msg::before { content: "\201C"; } .wiki .msg::after { content: "\201D"; }
+.wiki .dim { color: var(--bone-3); }
+.wiki .sp { vertical-align: middle; }
+
+/* infobox, floated right as on the wiki */
+.infobox { float: right; width: 300px; margin: 4px 0 18px 24px; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line-2); font-size: 15px; }
+.infobox caption { font-family: var(--f-disp); font-weight: 800; font-size: 20px; text-transform: uppercase; color: var(--bone); background: var(--ink-2); border: 1px solid var(--line-2); border-bottom: 0; padding: 8px; }
+.infobox th, .infobox td { border: 1px solid var(--line); padding: 6px 9px; vertical-align: top; text-align: left; line-height: 1.45; }
+.infobox th { width: 92px; background: var(--ink-2); color: var(--bone-2); font-weight: 600; }
+.infobox .ib-icons { text-align: center; padding: 10px 4px; }
+
+/* contents box */
+.toc { display: inline-block; background: var(--ink-2); border: 1px solid var(--line-2); padding: 10px 18px 10px 14px; margin: 6px 0 10px; font-size: 15px; }
+.toc b { font-family: var(--f-px); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--bone-3); }
+.toc ol { margin: 6px 0 0; padding-left: 20px; }
+.toc li { line-height: 1.5; }
+.toc ol ol { margin: 0; }
+
+/* wikitable */
+.wt { border-collapse: collapse; background: var(--panel); border: 1px solid var(--line-2); margin: 8px 0 18px; font-size: 15px; }
+.wt th, .wt td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: middle; }
+.wt thead th { background: var(--ink-2); color: var(--bone-2); font-weight: 600; }
+.wt td.n, .wt th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.wt td.lv { color: var(--ember); font-weight: 600; text-align: center; font-variant-numeric: tabular-nums; }
+.wt tr.sum td { background: var(--ink-2); font-weight: 600; }
+.wt-wrap { overflow-x: auto; max-width: 100%; }
+
+/* callouts */
+.note { border-left: 3px solid var(--slate); background: var(--ink-2); padding: 8px 14px; margin: 12px 0 16px; }
+.note.warn { border-left-color: var(--blood); }
+.note.tip { border-left-color: var(--moss); }
+.note p { margin: 0; max-width: none; }
+.note b:first-child { font-family: var(--f-px); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--bone-2); margin-right: 6px; }
+
+/* the herb's half hour, drawn to scale */
+.timeline { margin: 10px 0 6px; max-width: 760px; }
+.tl-bar { display: flex; height: 34px; border: 1px solid var(--line-2); }
+.tl-bar > div { display: flex; align-items: center; justify-content: center; font-family: var(--f-px); font-size: 12px; color: #000; overflow: hidden; white-space: nowrap; }
+.tl-seed { flex: 7.5; background: #8c9a5b; }
+.tl-grow { flex: 7.5; background: #a6b46a; }
+.tl-flow { flex: 15; background: var(--ember); }
+.tl-wins { display: flex; margin-top: 4px; }
+.tl-wins > div { flex: 1; font-size: 13px; color: var(--bone-2); padding: 3px 6px; border: 1px dashed var(--line-2); }
+.tl-wins > div + div { border-left: 0; }
+.tl-ticks { display: flex; justify-content: space-between; font-family: var(--f-px); font-size: 11px; color: var(--bone-3); margin-top: 3px; }
+
+/* plot sketch */
+.plotmap { display: grid; grid-template-columns: repeat(14, 22px); grid-auto-rows: 22px; gap: 1px; background: var(--line); border: 1px solid var(--line-2); width: max-content; margin: 8px 0 6px; }
+.plotmap span { background: #33452a; font-weight: 700; font-size: 12px; color: #000; display: flex; align-items: center; justify-content: center; }
+.plotmap .r { background: #26331f; }
+.plotmap .h { background: #8a8378; }
+.plotmap .p { background: #6e6a62; }
+.plotmap .b { background: #6b4a2a; }
+.plotmap .g { background: var(--ember); }
+.plotmap .x { background: var(--slate); }
+.legend { font-size: 14px; color: var(--bone-2); margin: 0 0 16px; }
+.legend i { display: inline-block; width: 12px; height: 12px; vertical-align: -1px; margin: 0 4px 0 10px; border: 1px solid var(--line-2); }
+
+@media (max-width: 760px) {
+  .wt { display: block; overflow-x: auto; max-width: 100%; }
+  .infobox { float: none; width: 100%; margin: 10px 0 18px; }
+  .wiki h1 { font-size: 34px; }
+  .plotmap { grid-template-columns: repeat(14, 17px); grid-auto-rows: 17px; }
+}
+
+.sp-i14{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAABJklEQVR42u2XQQrCMBBFsxM3nsGVC5cewYXgynN4C2/gkSMpBMKQ1MzP/CRFA4OiTPtmmvZNnfuvtvV+XHyI1/W4xObAZQHTFyLBc/DP826J6cFz8LGA+2nvbwfnNwceIoDHmH67pOCx68ML0ILLrg8roBa8tF2GFYCA57ZLd3gWeISnSa4E+W2f13adKrlwAI2MNF2nSy6FTw8qf0vBa+C7SE6CyhOl32u73lVyEbJUSPo/Ck+VnCxg7dMS3ExymivABoccobkHEHCNK2BZ1TyFWm5QU/A1OZXAwklYkqPISsIwJNdNVkie+TCHyspacs1zjlZWrY9YsxEalZWF5MzGZKSTrVfAdM5HZIXmUd6yNLKyyKMXkZNVCQLNoxWRExAr72fXBxkTcJmLkiTZAAAAAElFTkSuQmCC)}
+.sp-i50{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAB8klEQVR42s2YMU4DMRBFt0NpUnEAKiJRIaWipUCiJS0NiIaSGyBOQM0VKLkCJSUlR+AOi8bw0edrxl5EGO9Ko/UmTvKfZ749yjD8w/Xy+jY+Pj3/iPX6vsQw58uEW6xWN80wqNkI51WGwMvzq2rwnO7iPcGtz+lnZiO+vH5xONYiAukqngXeHQ3jw9livD7YKWM8Y6xAXSC41k3UyXIogiEaIBDPAHjGawyRIl7NaiJ4tVsZYABEahZYvIlUsQqgdw8kHQDiIcpK6HR/UcLG32X1NbZ5KDOGYF+kA0CQ3Ze7n4ItNpv3ajA4ZyPNBzDoVMFTgOARy2AKgP3gNsR7EGkAiL+KV+OnASgI7+0tsTA25tvYvi+1hBSAn6MDLALA+ykAnmC0BXrCekDeoWbj2+O9PABeUQ/CA9CM8XfYhoCzpStAKwN857PAVr5LCUW9jZaH1jtWnQHSS6gGoIK9FsLEqqENKi0Dnjl1xb0SQiuBVef5XT0QAUQZwBw0gGkm5nPgtyWE1UcTiFKCiVNKKAKIdp0pB5kJTwXwTMxngJaMlxGYGOO0bTQC4NWHOK+VYBMDNBUARq4BeK2DlpBuoymtNC6vNWgJ9jyg5ZT631BtG1XB3knM5ZNi3lo2vHNATa0ewDY6q3+oo94HJsXztn7vA5kqE7VyEZ6vAAAAAElFTkSuQmCC)}
+.sp-i168{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAqUlEQVR42u2Y3QmAMAyEg4s4gLM4hw+dpFt0jG5XiRA4pfjz1BzmoO/fd6YpKBL5WUopjV4i59zoRVJKh0SttdEKoASliEnYSIXEiGzLdBKgutwKbwJUEgauZ53lOCbgepQQHAXwPrj9Cj1whMdHzpXEU+u9rYQS7lp/u1pVwP243AnQte5yNVLDU4Fj4xTwtOAGfwWP1kfAx2qM1fhRgPLPgcJLJBJxnR23axhab6SkFwAAAABJRU5ErkJggg==)}
+.sp-i169{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAfUlEQVR42u3UsQmAQAxGYUtBBMEpHMDW2gHcwkncwjGcxHVOUhwc1iHnL+9B2iMfhGsaIiKiV+fSp6hxX/5ahxQJcIcYQBpxb2OSRhhAGpEBIGoiSgCILyKOuQsfV0QNgCvCHtunNnzcfia7SzlAiZAFZIQ0ICe9PBER/aYHvL66/PdAOEoAAAAASUVORK5CYII=)}
+.sp-i211{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAArElEQVR42u2X0QmAMAwFu5BruJDQKfzoJh1ReUihSNX60+YggSD+3cU0sSFMjH0NhzIQo8AjJQS8LVfqXU+URBHAttOTQP1VMGegtBASvq46Er6uPgI+53woMcAt+JQSF17plR8NL/AYo8MPDYF75R2+Y7Kg4e+zHTEqW/CYJfUEraqbX1Y98GYFeuFNSnz1/Jucw88QMHcG0PB/JNALDHNRQcO3JJBXRIs/bSfgoCzl3X7FUwAAAABJRU5ErkJggg==)}
+.sp-i243{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAhklEQVR42u2XOwqAMBBEc1wbe2vP40U8lfZ+IMmOsxOZB9sJ+x4YoqUYY4wx5ufs63xcZ1hx+ZAa6W2ZbiMt/iT8NlLyLeKpEUh5egRanBKBfmWoAQzxzyLY8tCIDHFYQKY8JCJTHBKRLR6OGD5AKSJ0Fhygcqn1Lq15jv5d1LpM8mfGBDgBKtr3NnFOa6EAAAAASUVORK5CYII=)}
+.sp-i410{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAA2ElEQVR42u2WsQ3CMBREfxgkE0BJHykLUNNmA1o2oaZipuwS9C2d9GUZnILiDv2TTnFSPX+fTzET0ms5baYoB4dlwW/zsVgOHPD+XCfjPolv4IDHSfg7Nfwn8Of1UPy4jMV0Od8Dfj8PG+UFlQXH1BELmDYqdVwA6t98ylQ57zULokEH3msWQEZ4rKmmns2SzfKPzdLLuUyz1DmXaZb4O4sLGuExdcDTgmPqdc4pwffUIsCp4FvgMGqRBryl1sQBLgEfT0IGPCrWnxR4ayOy8HEDlkqlUr/UG0TobMjFyYtvAAAAAElFTkSuQmCC)}
+.sp-i419{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAs0lEQVR42u2ViwnAIAxEncRZHMZ1nNmS0oANaiP+sNyDgAiNd7lAjQEAAAAAAAAA8BOcc5HrSNFbhYcQovf+Vbsm3dybxFPJaT5NuNF9niG8O0WeuLW2ZCA1Uvw+rZqQwqD63VMK0sSXeDaQE8XC0p505hoSn3xcmtCKz6XH95oUh+2fNKE1kEtPm+A0E5rdTBOsrKBZbkD7eC29obve+BdVT66W3jLxMxJcOv0ZJo4Sv4sLDNgqvRL0FhUAAAAASUVORK5CYII=)}
+.sp-i444{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i445{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i446{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i447{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i448{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i449{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i450{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i451{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i452{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i453{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i632{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAABM0lEQVR42u2XMQ7CMAxFeyHEwMRUMTF2ZURiYIILMLByFu7A2YpcKSgyCcQ/dpIKIlllaNr33bQvdN1/5I3brh+pLsN6qtmB8wDNB+HgIfjzdjVV8+AheBfguFmOh34xzg6cisBdNb9cfHDX9eoBpOC869UCpILHlku1AAh4aLkUh7cCd/BmkotBflvnqV03lRxd4HHdv1UuOJW55Hz4+2l4FQ/hg6fAF5Ech/e7z0Okdr2o5FwAHzb0m85D4U0lxwPEjnSeJria5CRPwBoccoTkHUDAJa6AZZXyFcp5QVXBP8kp5gG6iZXkTGTFYSwkV0xWyDz1zRwqK23JZe9zpLLK/cSqbaFRWWlITm2bjHQy9wmo7vMRWaHzTP5lSWSlMc88REhWMQh0nlkIXikA6LyfHU98KHsbGeG+1AAAAABJRU5ErkJggg==)}
+.sp-i633{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAABMklEQVR42u2XsQrCMBCG+0a6ODk5FdxEcNBNcNXd0cGn8F0rV4iEM9HLn7skRQNHHZr2+69pv9h1/5E3rqfVQHU+LMeaHDgP0HwQDh6CP24WYzUPHoJ3Afbr+bDrZ8PkwKkI3FXzy8UHd12vHiAVnHe9WgApeGy5VAuAgIeWS3F4K3AHbya5GOS3dS7tuqnk6AKP2/atcsGpzCXnw98v/at4CB9cAl9Echze7z4PIe16Ucm5AD5s6Dedh8KbSo4HiB3pPE1wNcmlPAFrcMgRKe8AAp7iClhWkq9QzguqCv5JTjEP0E2sJGciKw5jIbliskLmqW/mUFlpSy57n5Mqq9xPrNoWGpWVhuTUtslIJ3OfgOo+H5EVOs/kX1aKrDTmmYcIySoGgc4zC8FLAoDO+9nxBHjIVxParsR4AAAAAElFTkSuQmCC)}
+.sp-i634{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAABOklEQVR42u2XSwrCMBCGs3Nr0VO4cek53ASyF0Q8iYfwrNXQRsYx0cyLRDQw1EXTfn8e/aJz/yZr57UbYx1WU30dOA7QfRAMnoMPw1Tdg+fgUwB/r/2ygxBU8DCDp+p+uUBwj+CbBaCChwx4kwC14KXl0iwAB9z3AG8FnuDNJFeC/LTOa0fdVHLxAdfj7qWk4LFqZtTPzxPDX8L2UTgEBK+Bp7jCcyWH4eHo4xDBAFwsuRQAwuZ+p1HSWC6qksMBStd4nya4muQoM2ANznIEZQ9wwCmuYMuq5isk2aCq4O/kVPJAfImV5ExkBeu0WYwWkjOTlR+eiyM59cMcZaNCI2pLTnzOocpK+olVO0JzZaUhObVjMmckpTOges7nyIrbz+RfFkVWGv3MQ+RkVYLg9jMLgasGgNvvZ9sNndsF6Z9FyQ4AAAAASUVORK5CYII=)}
+.sp-i635{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAABN0lEQVR42u2XPQ7CMAxGsyAGxA2YGFnYewAWNgZGdkbuwC24A1csClKEZZw2/ktaQSQLFov3uWleCOG/dOt+3Pexbt3mXbMDxwEmHwSDU/Dn7eJdkwen4FOAwzr03Sr0swOPFcFTTX67QPA09eYBuOB46s0ClILntkuzABJwartUh/cCT/BukoN7N9UYOGfqrpKLIM9L+Cocggsey11yEP5x+hQOAcFL4KtIDsPD6eMQpVOvKrkUAMJS3zXwrpLDAXKfY2d7M8lxnoA3uMgRnHdAAs5xhVhWJaeQ5gU1Bc/JasgD8Ue8JGcqKwryulsOhoNB3MA1sirpk1wrqsjKWnLqew5XVtoj1uwKLZWVheTMrsmSSWqfgOk9XyIraZ/LvyyOrCz63ENQsspBSPvcQlCy8ur72fUCkz8mihBfbhsAAAAASUVORK5CYII=)}
+.sp-i636{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAABwklEQVR42u2YsU7DQAyG83iIlbFiYGfoA9CJAbZurAysfQAegLlvUBYGnqIKddu/chw7d+e7S4IgkpUq6qmffb/9X9o0/1fetVnftRRvT4tj/DpwmcDsE5HgFPvdbQf+5eHmGLMEJ1hZ+f3XqpMEwT8vr9vH+6t2dhUnWE0yvPIEjpgEmiAtuQyBo+qTJ5AKLqs+WQKx4JpcqAe0BLCbk0+WGLmMVn2Ck9NEVlybLLHggK9mcpYsQjrn8JZkLJPjxciG//786EUs+FDE9FCWyXH4Zv16CTyDbDh4DDy8QZqdtaMuk+vBv29PE+Jw50nIH0mtOMzOOl64mxwJAB7g/DMS8MJXMzlUo5OAckcCPYnQ1DpU1QNezOSQwEU2Azug6lwZu9rItcDl1MpvYIArPeCRSopXuF02NIU4vNWgo4FL86BtxmfLB+hHtO+nmlwxvYfMSsLUMLnyZiWajQBQ7ZC8Us9EySfRmEblbguIFJOjtcWrrpkVBwiZVYrJmdU+j8nsY7LHrHJMrujZ31NJ1aVj1pEUz+5c9GXcY1Zek6vytpViViXWVXld1OY5nlsQ2jrsKKbPqP8yaGYVA+Bd92evH2vmDTAChaXxAAAAAElFTkSuQmCC)}
+.sp-i934{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAtUlEQVR42u2YSwqAMAxE25u49Ejew4Wn8ayVCkIp+TRFTVMykGVhXjMmxRBcLpfL5RJqOZeUawqI7VjvMg1htiNxj+mpsiMOMQKEWYCpIEwDSCDKSZbPmelCbRyqYbvAGX/FfM/H2AJAmVffthwAZv7zaLSCtAD8nnFoxlMgGEB9++rbFgOBAFTNcxu3hoDyzZnHRqpapFrGI7UHVGNFAahOI8kCk9aw7yETxntATL5Q/X8OoAt5KZQY3B11IQAAAABJRU5ErkJggg==)}
+.sp-i1358{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAABFUlEQVR42u2YMQ7DIAxFOTiH6NaJM+QAmbL2Umk9GH2+DGWKnRZLVtUUqf/Z3xCR0ooVKy6JUsopGVLYjPBt285932u6C1cho8rKc1yDMJJu4rWa8imCcs6nJV5/R0CECCO+B6DVH8Fd7ncU3wPg6usaTTcb6Z+ypxGAfc/iXQGsYWSRCFC78ziaRAi3/bw3CwzG4tPz1ayz5ufSeWAI7BALr/n57g6Aw8qebyBQOIhHm7mfxLwz4ZBac/PtDHGZCRWFovn1gS3nchbMzgN3wuoI2i8MhCW2ByD2weehumD5n8VrhujCTwDgDtOzzQLwABhBhBlifk+agQi1jc5CWCBhbyBmAMJfo4wOs1vdB92i6iv+Md4VNhfMJgO+gQAAAABJRU5ErkJggg==)}
+.sp-i1652{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAFZUlEQVR4nO2X228UVRzHv2cuO7PXXiitWxdaCt1tpYVChPDkP+CTCYnRKN5oJAQSCQbRB29vvvsiogmCCjzIi0ZDwoskhsQEUVqxrOyl22W3u9u9tDu7O9djzimlYApSpKUP/SaTnd3szPn8fvP9/X5ngFWt6n+JYAVqqKOF9gQVUADnrmTvyyhhBWl7eytdF5TRE1QR8IpITzX+85oVEcDm1hYa6fKgf70KUXRgWYBlUyQnzZUfwHNDnXSg2wu3AhSrOow6hUsS4XYRdHXIGCw006v5MllxNbB7eyftW+9Fk1eEVjeQKGhIF2czHvAICLW4EfBImK5Z+HVUwy8TRbJinsDwM+voU90BlGYayJV1KJKIVMbBhegs5JZggBqWg552L1o8MrZFVGh6M/19gSchLDf83pf2UMO9BolMCbrlQCACCAEUZZ7tj8w0SU9aiGY1lOsW1jQp2NSlPF4LHXpzP90Y6UGpVEY8noSevIig34YsSaCUQhAILo9V8dNf+dtMQ51NtL9bQXerF5Q4uByr4vzoFFnWAPa/8gZd17MeodCToKAwDQNj12NI3xiBXL6CYLMHDmUgFKIIXLw6jZ9vzPv92S1r6a5IK7SGzoOs1hyMJmq4EJ0NdMlqYPjFl2lPZCNCoRAHNE0LDnUgSRJCnR3QajWUGkVMa2k0+92wLBvUBnb2+UEoocUZG25VRH+oCXAcGLYDySGo2zoarM8u1RN4dfcLtKd3AzZGNgGUQNcboCzDzOjE4cHIoojx8Qkkx8cxk/oNHWIeXo8bbPQKhMB2bDRMB2v8bpimiWiuyruRKBDkShYuxStkSQJ479BhGtkchqq4oWl1OI4NQSQ8EE5H2OZgXtFoDNl0CuX4JXhIFV7FBY8iQJFlbpf8tI6JYh3ZvIUrmZkFWR9JAIf3H6Dhvl60trWgVqvDMEyIImtwc/Bzq7EAKC9aURRRr9UR/TuG6XIJ9UoeVjUDo1aBX2pA022kCyZmKgJGi6WlGWQHXttL+wb60RFsR6Ohc7swqxCBgTNWdntyG/xOzdpKgKHrvDNVZqpoa2tFe3s7fvzuDL79/vwDsUkP6/Nwfy82RcKwbAOVyjQIYa3w1liZY/2XZebkOJQfAgH8/gCCwU5uGWa5ZCLxwPB8icXCf/DOURruD/NuUq1WQakzD36vFSjg2Aza4dZxuRR4fV6oqoJGo4FYPIFY9Dr0GQNfnP16UUwP/Oe3Dxykg1sH4PX5oVWrMEydw9xPPNM2C1CEqqrw+X2QJRmWZSKRiGM8kURlqoLjpxcHvagADr4+TAeGBtHWvha1Wo0XniCy8U+4be4Sy7TDDodvD1imA/4AZEWGbVlIp1NIJsaRzxTw5ZmHh75T97zJ8PN7aHgwjN5ImINrVY1DzdqFzVRWhKwYCajj8GyzoGRZhs/ng9ujQtcN3EynkUqlkE1nceLs6Uc+d8hCP75/5Ajdum2IQ1bKZT5BGTgD5lc4rOBmPc2gmT08bjcUt4p6vYbJTBb5XAE3U2l8/s3JJd2ukDu/vLVvH316xw54/T6US2U+BSX5Vj9neXcobOYRCqiKyrPs8Xp4pvOTOcRjMZSmivjs5FfLtkkkcycfHn2X7ti1k4NrWpUXHmttbOiwbLNP1nmYPVwumff8YrGIVHIChVwBx06deCwvR9LcSaVUQT6fg2lYEEWJ28OyHMiyCx6vAo/HDVEQMTExgUQ8gUw6sySeXqzuAvjk44/oE8Eg3zkya7hVlQ+Xel3H2LVrKJUq+PT4sccOfc9JPDZ6HV0butHU3IypQh5/jowgm8nh+Knl8/RiRRbaUZqWiUwshVM/nFux4KtaFR6N/gEGO4nI2xgWRwAAAABJRU5ErkJggg==)}
+.sp-i1653{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAFg0lEQVR4nO2Y248bVx3HP3Mf27O+rL3XNN2S7iZdtk2bsAkVQqpAtBIqQqWIB8QDEi8gIV6QeOCf4ZU/ASEEQlWREAVB1YhWUelmHdbry6zH47nanpmD5uQ1gU2zm0Qo3zePjj3n9zvfy+8YnuEZHgkKTwG+9sUNceVii8NexG8+OnyoPek8YfzwjSvi1e0WmqbiVFWajUvi1+9/pjz1J/Cta8+L65c7bHZqHI9DgnjOWrNGu17h9pHH32+7/O5WT3kqC/jZ26+I3ecbBMmM/jjGqRisNmvMs5yBF2PqChtth0+6Ez7454g/HwyVp6KAH3z1srj+0gqWAXf7U3Ih2Fh2MA0N14+J0gWtuk29YuGHM+Z5TtXWud0N+dUfPlaeWAHf2H1O7O+tsH2hweAkYOindBo2y04VP04ZT1Oqlk6nWWGRFfKzpik0HAtLU/GTOe99eMxvPzxSHruIf/LWK+LqTgeKBQc9j0LApY06eQ7d0RQhT6GGYWiMpwmzRU7TsahVDKbRnAPXJ0rnKA9o9bkV8O7+JbG/t85ay8afRkyiOfWaRcXScf2EMFnQXrKpOxZhPMedJlRMjY12jUVe0B0EjCYxKALb0uXJPDYK/fzb18TL2x2SOCVJ56CCoalEacY4SLBNnZVmlTwvOJmmqAq0lmx0XWUcpPTckNk8xzI1Kew7xzF//Pj4/DVQevqNvU2WqibDsQ9FgW0ZpPNMbrSkS7tuU7UNJuFMirZeNXGqJkmacXQS4gWpdCFVVei5Mf8epPzj6OR8XejtV7fE9d1Vrmy1pXv4QYxtKCiKIjuazDIajk2jZoIQjPxEdr3dqJDnguEkZuhF0pUsQ2caLegeR/zpX4Pzz4GffvOq+NLuGgIYuIEUo6WBH6b48ZyabUhRlkmbZTlDL6Zim7Trlux27ySSJ2EZKnkhOBxE/P7W/elypgV8/yuXxY29dWl9I69M0gVNxyTPMgZehKaqdBoVuTbLC4pC4IWpLKbscs8NcIMUXVOlZfZPUnrDmL923Yfa0+cq4JffuyFe2lrGCxLZ6TJJDU1hNIlIZgs69aoUYJjM731BIJ1lqWISJHPJ9VLApqkRJQsO+xHv335w2p5ZAT9+62Wxv7tOIQSDcUDFMqnZOmM/xJsmLNUsmo5NnC4k70uxGroiu1/a4PE4wo9nWIZWSoFuPzrVvPPIBbx780Xx5b0NNlcc+u6U2SJjbbkuQ+dOz0VTFdZbVbJC4EczTF3FqZiSHuk8lyId+bFcVz4b+SndQczf7jwcXT5XAb/4zjVxdWeNIEol11v1GlXbpOf6hHFKy7Gkr5e2mBeFtEXb0MmKex5f6iHL7tElmeUcDkLe++R/u8tp8cAf+tHXd8XNvU1sS+Nu30NVNdbaSwTRjP6JT3OpxnLdZjSeShcp3ab0/5Lv5Sn0vUhqwNI1hALdYcTxKOWj3vhMs0e538N39rfEO29clhsZeRGrLUcG0tGoDCfB5mpD8vpoOEGhYLlewdDLpF3QP4kYh/eGMV1VGU9nkut/OQO6nHoWsiulzXm4k5Sdi6uS892+R6dZw6lacqIMo4R6rUzRCvNFzpEbSrqUXl6KNJ5lfDoIzpQupy4gThaYpkHFzhiMPWbzgi9c6Eh3+bQ7lKPv+nJNjgbuJKbvxdJ1bFOVZ3pnEJ4LXe6HB77gu6+/IF68UJfhVA5h5aVjGszYbC9hGqqkV3l7msYzdFWRSetOU+4OYz747Hzocj/81xfd3FoTO1sOO8/VJcfLtG05tpwoy6ugqqiymFKsjxJGjwLltH977L7QYLVVpWrqHPR9FouCAiE7fuwm3Op5T+R+rTzM4jevborXttsk84yD40DOL2cRRo8Vr11cFq9vr5TD5zM8A/8H+A+3Gt2r04F02AAAAABJRU5ErkJggg==)}
+.sp-i1654{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAFl0lEQVR4nO2Y24scWR3HP6cufZvu6etcMrOZzCYxEHRffVXwUVGfBMUXQUSz2XXFRfFFJQ+yY2C9MUJkJRpwFRRZVhLXuK7sg//BImycdKfTPZmevlRXdXX1rS5H6gTDviSZSyZZIT+66OpzqfP7/s73fH+/LnhqT+1QJniCdv3KeZmvpGnd8PjcS788kC8aT8je/dO35PpHFyku5ymdSPLGz78m/y924Oql5+VHnltEZExGzojdZo+5+TQLK0Xslsedmxaff/FX4kMJ4PpvX5SnnlsklGB3XGYzn1whQyJlghDxB00K7tR6fPILPxUfGgBXL52Ty8/myZYy6rfdGTD2Jiw+U0EzBGEYghRoukYYRuzWO+TyWcZ9n0988VXxRAG8+8dvy9WTRUIBw/6IwA/QNI35UpYwCpAhyvH46rcHDCyXynKRbDFDQtd4+633+Op3X7+vn8ZROX7t0jm5fraCnjGY+aFq03RBykiQzCQVEITAMDWmY592o0silWDl2SVSaZNOy6ZW79O2hw9c50gAvPP7l+Qzp8tITRD6IQKJFIL0XBIpQUqpdkEKcPse7aZFYSFHeblA4IfUbnbYqrURQkM8RJseKYA3f3FOrpzJU1jK4lhDZmOfQiV3rz8KJUIIRsMJhqmre6frsnyiQr6UxeoOee/f23ijgGRSZ+e2hd0e8VjOwPUrL8i1M2X0VAJr16F3p8/q6SXMhKEWiaREoBEEgTrEMbBIgmnqakx1q83thq0USoY+rYbFhc2/PdS/QwP4y+Y35LFTebLlOYJZgN11CYOIfCVLMp1QdAlm4V0gMaWCUNFHLa6B506o1Xq0u0OEDuPBhN2Gw8blt/fk26EodO3X5+Wpjy0gdU3Rxe44ZHJpMvkMmogpE+H0hsr5OFTWTp/KakndR0FIq+mwVe0RRBLT0GhWO1zYfGtfQT0QgN9d/IpcXi9w/GSJKEI5P7CGlJYKGAlDRX08nKq2GFCsLnbbITWXwjQNBs6YarWD1R8jdI2h7dJvebxy+e/7ZoQ4SDZdPV3ESBmKGhNvqmiRnEuSSJrK+el4xmgwZr6cwxuMmXgTpe1myqBxq0f9dp+JH8Ung+6dPj/42bUDU3nPE//8k6/LylqGpbWiypYjd6yST6wo5aWCGhM7H5s3GJHOpvEcT/G+EANxp7x/YxfLvjsvmM5o1nq88tr+o75vAFcvnZdrZ8skcyajwURJXyabVtkylsKY6/HlzwJSmeQ9MHGbYeg0Gxa36hZx0EN/Rm93cKiof9Ae+pB/vfGyPLZeZOCMaDf6JJIGlZWi4npMnRhAnFFjysRFWazv/3uwN5wox1ttD90Q+JMp2zd7bPzmH49MvsWDKHP248fQUhqDrofTc8kV55gvZ+PwEkUS3dBBgtW21Xd8iOPIyyhie9umWuspXY+H9XYdvvfjNx957WXcr8OKRjiDEcKVeM6YlZOLirtREKkSIHbec0aMvSm6oTFfyRLnfafnUW9Y9PojdFNn5o6p37LYuPzoor4nANPxlFbTJpk2WFkr3UtCQovrE6nUw+0PWVgtqZ2ZTQLaOzZb1S5TPyKZ1Oju2FhNl4uv//PIql7jfh3+yCeVMphOQ6rv71KsZCkv5uJTSG/HURQ6fmZFVY5W1+U/NzrY7gTNiP+UhOxsuXx/8+qRl+viQZ0/+uZn5Np6mWIpw3QSksqYzKUTzJczZPNp/FlIo27RaPaZBrHioBSqUx8cadQ/aHta5LWNL8nFhXlVCseRL1bmyBcz1GpdtndskqkE08mM7erhdX2/tufFLjz/aXnydEXthj+LaLYdNNPEMMTd6nPH5eKVdx77SwKxn8Hf+fKn5IlTRY6fqHC7ZeP7EU7b5Yebf31i75fEQSZtvPxZKXVBuz7g1T88Hq4/tafG0dh/AcjBu0PHvRPsAAAAAElFTkSuQmCC)}
+.sp-i1655{background-image:url(data:image/png;base64,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)}
+.sp-i1656{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAE00lEQVR4nO1Y224UVxCsuZ257o69NtjmYgEhREqEojzl/38hEnlLhJ2AsWMb7+5czv1E3WseQCEYY4MfXE9H2qOdqt7q6p4FbnGLW9w4PJ+04XnThovcjXBDsJ3mYaeucKcWSJIIb9WI5ejxYrmMbrSAZ0UTtqYF1kuBgIC5UvABqLMM0hm8lRpwMX5bLKIbJeC7og67bY1ZKdBbg6XRiCKgTom4w2gNyjTFw3qCRmT4/eQtXhzNcRJs9M0E3EuKMKsE7tY51sucSVPF4yjCLC/hgsebscNMlLjfNCjSBAul8GrooJzlO4edxunSYd910VcT8Dgvw860wnZdIk8SLIzC4dijSQVaUcAHj2M58mdbZYU2F5hrhdd9h84abOQV1vICgyFLKRx0I16O8voFPBJV2JkWeLLWIEsS/DNIHMseWRxjKgq4ENjnMSLcKStMMoHBGhZHAog0Vb0zBseDhLSObXYmLfbleH0CfmrasFEJ3J9USOMIp1LiaBz44VORM+HOaNSZwGZRQiQxllTxoYdHwJoQLLA3dkXcOSZqnEevHfbVqvpXLuDHpgm7bYPNKodyDodDD+ks0jjBNCugvYXxDlUimLzxDmd6gPEeSRxzA5dJhtFaTp8V8eicuH2P+JUJoMZ8MC1xb1KhyBKu7LEcEELE1abq5nGGw3GJLE7YEto5dEZhcJQ0GTaKgqks1MrjhnIUAdoFDB8h/sUCKL83aoH70xp5GuOg77HQiqOPGjOJIq5knQr2vPYOg7NMPEbAZlnxZ4O1OBklOmPhPE2ClVUG7bCnVj7/P0SXGfM0dHanFSwC/l4uOeKaTKBKBXwImGvJiZInKaz3WBrFEZnGMbaqBpMsQ6cNjqVka9gQ4D2grIO2Afv608Q/W8Av7XrYmRRYLwR6Y3AkBzjvMRE5V7I35FkLEcdMnCpOduKmzAu0ZKcowVxJnCgFaT1PXEfVNhbSRDhwFyd+YQG0VN2dCGTpKjno5xVxykOGiJIF1DnxIk2x1JrJp1GMB3WDWmTQznMSHY+Sz/RY6zzbZk9+3N+XFvBUNKGtUmxQmgTDBCkN7pY1yiTl9DhRku0hkoSbku4QNUqSrbLGJEt5RTgeFRYkyq387VzAqC3+vIC/L4L3vuRZOQlbkxxpEiD9qqk2ihJrouCLlC4Lo7lBJ1mOEIBTPXC1KXEo0xNEGB01psKZ0jysSBhVXBqP0Tq8serK4jt6d/i+rsOjtsSZVaiSjEnTRkh5fioHKOc5u8kq1HS9UbAeWM9zFkmxR8PoVCr0xvOdEAKMpYp77JnhWoZm+u5QixQ7TY3QUdNV7OP95ZwXLcrqMo15Q6REiRFjs6D95Dx1FK0ICoNxbBPvA5+V8Xhlv8zjFxbQq5VlnrRr+GM+54bdrhr2/okceYoWSYaH9RQFxWNwOBrIUoYzm4kHGjweWnv8dYlEuQyiD3f0HzYmaIuc0+JMj/xmtF1OMREr+4xWY641zhQ1t+OvoIqPxmE0Hq+vueIf4j8f9nPbhqfrRDrhrdA4sJXoTOPenb+tUqJ02sJoj9fh6hrzc/DRh1IiPZnVeNzWOOgG7C07+LC6zqPeOLw8X2m/JaJPXfh1NguzKsOr5cCkjcG1Jcq1YVeU4aEoLvQ3xy1ucQt8VfwLUv/2Sb7tng8AAAAASUVORK5CYII=)}
+.sp-i1657{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAFHUlEQVR4nO2X3W8bxxXFf0vuLpfLD4nily3KlmVHTO3ESNE2KAoURR/79/a9z31sgaZVnMYxUqQtTIrUfnF3Zndmp9hRnCJpYji15QiIDrAAOcsZnnvn3DN34AY3+HHD4Rpivlwad9qjSgSrv5y9lKPLNcLswQMT3pkwPL7FaHZAr9vh2cmhOfv9H5xrvQPz5dJ0D0fs3V8wmh4w7HUxWhPtdlSqpopSzp98zud//JNzrQKYL98xweGE/fuHlvheP6RWiijJ2BWCMAxwW21UramUIv30C9Zn/2T97Knzg0po8dP3TW8+IlxMGc3GDMIArRSbTUwuJJ7bZtgLUbomE5Je6DOejOzjzw9w9wLz7z//1XnrAbz3u9+YyekdpAO9fsig20WVis02RsoKt92yuje1oZAl3SBgMRqiasN6k5BuImSaUTv6qzWvPIDpyQMzWS6Y/eQYJwyQhaTX6bAfdllvU/JCEHQ8wq5PXWtct0273eYgGKCNYb2NSdYRMoop84K6rqlVffU10BCfvbtg+vAedHyEkISux6AfIkrJNsroeB6ttkNZKnzfZdgPMY6DrjVJnBOtzpFRihLC7ooSJSoSrD75u3NlAczuPzDj0wXzR/cg6CB2krDj0e8HSHlZoMYYBr2AvJB4nstw0MNxHJKsIEky8s0FVbpDSYkxoIsSFX+d+BsP4PjXPzOdXo+j904Y35qy2SaUheT2/IA0K7hIMpSqrcZxjJ0z7Ic4rTZxuiM63yIuElRRoMuK5hdqV6Iywerj/yX+xgJ497e/MgfLI4a3J9Y5ZFmRJzm+5+L6LpuLlCwrCEOfjuciS0Wla3ph186/WG8ptheU6Y5aa5yWg8pLVHMKP/lu4q8dQEN88vAu3t6AwPcJ3Bbbi8xKot8LLrMep3iex3g0oBCSvChxWi2oFUW8o4gTS9zU2rpRlQmoDOtXIP5/B/CCuL8/wDEOgeta395GKaXSBL5LmgvaLYfxaEjQ8clzSZILtKoQUUK+iai+LMxaacp4h8k05/949r35vNKEux9+YFpdn/H9BeOjW9YlPMfBbTVkc8rGw902tTHo2tii7HY8eyg1hanK0mb6BfEGWiqqeMfq7NPXkvFLJx/+/H0zXR4zWszxA5/A9zCND9cGIUrKsrTF1rhK4xaDXpdut8OuaIjnyCxD5ZIiSqgKYf+tIa6SnOd/e3WZvAzfusjs8UMzPj1isbzHcK+HrmqkEAhZUmmNZQ02457XptsJCALf6jxu+phtat2kynOqQmIcMEJRJjmrszdD/AWcb/Yog5Nb3D69y2g0pMgFUZRSY/DaLo6DzX6r5eD7Hv1e2OTf+vlF0w7sCsS2OTFzuyu6VCghLfnXlcp34atF5794ZI4/fMyde4eInSCOM3RdW1dpSFZVbbPcDXw7VlaKJM3J0wwRp1bjSpZ2V0xTmElBnVecP/3sSjte92vfZMm/nn5BoWv2R0McrakqRafjM50MrM6b3mW12iIbjac7KwuDtu+aVriKC55/9OSttenuiw86FiTPNwQHQ1SpiZUiGPQZT/abKiVKcrI0QyYN6ZQyF5cHTyMrXSPjnPVHn7z1+4XzzYGjX35gwvk+bd9ndnsGbpssF1YijYc3HaF1nbq2x7wqStYf//eC8bbhfNvg7PjEeIdDpu/cQWtzKZckvbTMRlaJQGXyyvX9KngpgfmjUzM4ntvbUpULqp3AJCWrz3544t8L88dLMzs9/dL9b3CDG3CN8B/1zQLD8SVgsAAAAABJRU5ErkJggg==)}
+.sp-i1658{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAEpUlEQVR4nO1WPY/cVBQ9z34f9swm0SakgCAqWnqqkIKCAqEQ8Q8QNEnBn6GjQkJCAikFDRSQICQkCqCDEgkpBcqyOzvjGft9o3ttzy5RsuxkIxakudKMx57r984599xrA9vYxja2cZ4hzmvjH26/kwuVEX3Cqx/eFf9pAt+/93YWpoBREtNKoiwFYszwEDCyhHMei6bFbNbijU++FOdO4Lv3b2YpFaZ1iUmtoGWB1gfszRs8nC3w5+ESL16a4IWrlxFFgVIp1EYBMWHvYI5m0eH1j78S/xqB++++lacTDVOV2Kk0ikJgvrLYXywZ9GLVwvuInDMqVWKiFXZrg4lR0EqiKAoIKVGain/XqsRy2WF22OL6R1+IZ06AFJ7UGloXuFBrQBDgDg8P56wuAXY+MJhKlgy01hJaShQCyDmxhXLOva0mFSpjUBgNoOA9ckooc8QfezP8+vs+bn/942OxytN6WNUFylLi4oQUBg7bDg/2Z9hfLLBqHTrrWfmpVrhYKUwvTaHLAkIIpJyREoEOSKKAkhJ1rWEMiaAhyh60dx7Oejhn0VmHVWfRhQCj8xOxPZHAp29ez9eu7eD5565AqhI+ZoSUsNc0+OW3B5g3HYwqMK0026G+NIWSJevXA87wMVFxmHhVGxhDHwUp+21DCHDOoWs7BuxdQOsdbIhIGUjIbBEX0+YEdi4WkEiYH84gjQFKCRQlpvUUr7z8ElarFsE6pBTZiaRwCJFNWRYlTGVgKg2je8BUiRgjq9wslnDWwZLaMcCFCJ8Skx61JuIEnu7jk00J2BDQtI7tYbRFXRsobQClMKkqTKsKzjsG01oHrTQqAmwM1NCYRI4AH87mrDRZwofIlQypr1LKmZEW9DWChkBPpQdOZxsTINZEPOaMlfWwPsAoO/jWQGgNKTUuXzEMhHKpCt57NE2DrvPobAdLvg6Bm5bWIsAMq+jhFdTV1LTjdSH497oKfRmeggB5mRYe7g85I1qPzgVoaTGpNFRVoU29l621aDu7BhxiYsAMbrACrVPQka8dKTxGHirAieO9GbzWxgTE447DSecjXGyhWosEgYNlyzZKjxSeQQ8EjgeBygOhMYgY5Y33j8eTGvhEAjHlfqKs4fSL8mSg0UhjLyUsbcDS2j5nAMy5rCDZoVebm/FYRY9y+mBCTGRgyOkZMSRE14/ZjQiokkD27bSOsQy0Pn2oR1Kv0Aiw3/ZYMNjhv0HWI+CCLx7Zi9YVcCHhoPUoY4k793868WH7RAKdy7g6LbiENDVYob/Zlk7oQXVU7jVGVvDYvkMVKIu1ZLv0TVvStIoZTRdgXUaMwAff/nzqN4QTEz+/eSNrk7F7QTMRUlukXq2x2eadQ9N1fQVG4I8yGmpCE6d3hoD1ESsbkWOB2/ce/5pwZgJrIrdu5EoDu1MNOxAZ8GPBBCwTGH0/TMZ1Ds34GBPmbUQK9A4k/tEap42NFrl7iyoisLuj0NHjPgksOssVoCkyrkg2IdDWE+jABbjzzeltsUk81aJExFQCO5XEQWsxX7UMmvzbuIAYgCKfzRqnjTNt8NnN1/Lcr/gZAJoY956NLbaxjW1sA/+b+AsQSITo/pbjrgAAAABJRU5ErkJggg==)}
+.sp-i1659{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAEKElEQVR4nO2YaU9bRxSGn2u84wUvMSXswRBcG5JAPpBWtGlaoaZRpP7VqB8jVWqqKFHVhKoNsTG2IeAFsPFyN++eKkhETZqmLDW4Up5PV7r3nnPemXfOjAY+cnrurnwrbi0siTOEwMAFEZoKiT6zifBCmK++vHNqEUYuCLvdTj6fR5ZlgsEgDud9EVuNsZHZkP4XAlwDLiSjxHp0nXq9TjgcwrG8iOWZRbzYeCH1vIVURUVXdMaGxrD323j008+omsrC0g0WIgvHttSJpqsbLH+2LKw2K6lYCv+on1azTejTq2wlt8gmc6T2UlJPWugIpVihZmmQzCSlwKhfmEwmzCYzg0ODWO12jGaDiO8kpJ6dgSNCI34xGl7E4/GQ38+TTqe5dn0es8lCbDXKs5fPpJ4VsBIJiNkJN1uyjUzVRK1SALOTRq3G3Pw1nE4n2Z0MD398KPWUhZaDA2JuyoupD6R2A6FVULNNzEYbw1dGSf6RIBqNMjk5znRoGoPBIBKxBMl0UrpQAYuj/eL6dIBhvxUhBGvbB1T0JuVSh/WcLEGJjsUjXu8Jd+e/E/FYnPx+gVA4hH/Qh+s3l1hdW5UuRMD3C4NibsqDhIFXuTJFrU62UEfXO0QL+puRXUusHT6bjSYSqYS0dGlJRF/GCAQCWJ3WN/HORcCU0yZCky4uB2x84rFTVmvkFZ2trMaTlPLBdfjghweH771eL5sbm1R1DVHn/ATcGneL2Ukn44NubGYj8cwBGxkZRW2zmtGO3UQqpQrRRFRa+foboZf17gu4OewQLqeZxZlLOO1G8hWdolJl96DGo/XXPj8Zj58+Pvyn3enQbLa720Y/DzrFjekAI34HB7JGPFOmpDZR1RbP08cf9fcxMzEj4ltxqSsCwl6HmLvqZnbMTbsjkLU6OwWZzUz1RHY5Cf9J0GmfUUQm/EwNu7BZjFRUnX25yvauTq0Kz7MfXqhn4cyBbwe9IhJ043PbsZoMxHaK5EoaitLmyWb3Cj/i1Am+mPQJl6ePyLgPmxn2ylVyByr75SaK3OL3/e5Y5l1OleTeNZ+YHfMx5HOQzpdJHyioeoudbJ21v2xG54F0ko8jQ1ZxcybAzLALtdY67DDZYpVcoUqnYeD5bvct8y7HTnhvPiDmrgxgNpnYLcnIep1UVqOmc252eR//mvjOrFcM+uyERgZotVu8ysts5xWqOjzdOv8Rf5d/LOD2tFdMXHYycqkfRIe9is72vkJJafLLpnrhhR/xt0IWhx1i4rKDq2MeLH2wW9LIlTVUvU0u22StdHF2eR9vnYXuX/eLyBUfNpORWqNFfK9CUW2wV6jRqff1XPFvCbg15RSvd1KDkNjcLVGpNtjO1dG1Di+L59saTyXAIIFWa5ApqKSLGq2axK87veP1Y58ib471n+my9SOcjD8B4iPdm7IjixsAAAAASUVORK5CYII=)}
+.sp-i1660{background-image:url(data:image/png;base64,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)}
+.sp-i1661{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAFNElEQVR4nN2Y22/c1BbGf9u3scfTmWSaNrc2aSChKTltgSIQnMNFRVDBI68gbv8hT0iIp3PE5RwdwQMtTWmb0jbJzHiSTGbGM7a3LxvZ6QNIEJqSJoHPD5a8t+3v2/7W2msZ/uIQHAHomEo3QCmI03hPnAwOGQJDvXFphheeOk4kJZ9+c1f9uNZ5aBEah4zJUYc3nplkrGozPVbl/csLXDhzQoGhjrwAgVDz08colwwCmRBIiWubvPuvM7x9aZKKZasjLUChxCCMUWmKrmnomoFMMuI44aXFcV5eGsPULHVkY8A2LfXPf0yjmyZJFJLEkjjNSNKMZmeArgk0LYPsCApwTVt9/M4ir5yfxev0CcIQrzsgSXcW3B/GRHGKELub5FAEuJatPrqyyGsXTtPc7OJt9fj2ZptbzR7qgatNXWNjOySMpThSAsqmoz586yyvX5xl+acGQRTxw/1t/vPDBr0gRPsF3UypP0ynByqgpJfUR1fOcvm5Ga6tNAjCgJvrPp//32MYBwXZ7KGS5yEIcHRbffLOIq9ePM3VlQaxlNxpDvjsfw2GSfjIFcGBCHAMW31w5amC/PLdFlJGXP2pyxff5eR39/ih10I5+Q+vnOXNS2eKlc9t8/WNTf57vU2Y7K3u2ecvIFQecJnKs0b6m0RMoav3Ls/xyvlprt1pEMmQr5Y3+fJqm5Q/Tz7HIz2kZrlqpLaT7vxA0h0mJNmvRYyPnVRzsxMs1mNGyxqWpfPv7z2+Xm7/ruBHwZ4fNDV6TE3XbeYmKwgluN3oMYhiml3Jth+jSMTUxKR66cXnGQwGrK6tcdLs09oKubbaA5J9ta2xl8njVVedOekwWikRxxl3mj1qbglD10jTtJhTq0+qS89eQEqJ12qSJjHf3uuwPdhJk/sNYy+758vnxpCJomRpxU45US9j6jqbvYBzM3WOd4bU5+aLXL62ep9hGHL33jpJtMfkvt8CHM1RC9NlhCYIZUy5VCrOmqbR2BpiWzpJpora5fb1a5RHxoqC7N7qOlGUkO2zbfZUThfkZyo8fapGnGT0hjHtXkiWCdJEYZk6rm3R6UkM0yAO+3S9VUZqVc4vLVGyzaLu5zFB7DZoG7ZamD3OTE0QxhmBTKmVLaquSShTmp2QEddC1xSNzQHjdZcwTllvdzGcY8zMLzEYDrl5a4Wm5x1sDDi6rRYWn2CiFGHokophEiUZ3aHMGxG6A1k04c0tv+imbNMorkUyJsVADvwikEdqNUZqFVpeW+UNzIFZKNMyatUqIpUINNrbIbqAimPS6eciBFmWYZkGJ0fKVByLTAmGUUwUBcwvXsC2bdpeg5a3iUmJAw9iBWxFOuFmh5JlMlZz2egFaEJgmRrb/pCaWy5sk7eG+Yo71VHmTp3Adl1ansftO3fpdX3Sfdy8HkpAnmHcsoNjnaZnV/Hb92lt9RGaUbR67U6fLMuDKC1s4w8D6iemmF9cIghCri/f4P66B1I9NvK7fwEl6PX7HHNdyrpkWCqTF71GKosmRHOqjNdP0OtsoDkVzj15HrvssNZc58aNFYZ+iEyjx14sGr83EMUhnrfB6MIIjc1tNNNmevZJfL9PmsZYWYDXWuXUwkXKrsPA97l1e4VGc4Nut09GdiB//cRug6enptSLLzxH3tnl/lYqRXtgIX97gzCS2G6V/sBnba1Fs9Xe86/BP4tdX1aipI5P1KmPVqlUyjuzlSBNE5IkIc03Nn/AVnuDMFDIwmQHC/EwkzQhlKb03BYPbhA7h6aROyXm8Xudvyt+BgpmhAZEjjN8AAAAAElFTkSuQmCC)}
+.sp-i1662{background-image:url(data:image/png;base64,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)}
+.sp-i1663{background-image:url(data:image/png;base64,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)}
+</style>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="top-in">
+    <a class="mark" href="../">RSCX <b>&middot;</b> The Hunted</a>
+    </div>
+</header>
+
+
+<main id="main">
+
+
+
+<div class="wiki">
+
+<p class="wiki-src">A guide to a feature of this server, written in the style of the RuneScape Classic Wiki. Every number here was read from the server's code on 20 October 2026.</p>
+
+<h1>Carpentry &amp; Estates</h1>
+<p class="hatnote">This article is about owning a plot and the Carpentry skill. For the other skills, see Skills &amp; levels.</p>
+
+<table class="infobox">
+  <caption>Player estate</caption>
+  <tr><td class="ib-icons" colspan="2"><span class="sp sp-lg sp-i1652" role="img" aria-label="Saw" title="Saw"></span> <span class="sp sp-lg sp-i410" role="img" aria-label="Plank" title="Plank"></span></td></tr>
+  <tr><th>Skill</th><td>Carpentry (1-99)</td></tr>
+  <tr><th>Plot</th><td>1 West Fields, Varrock - the fields north-west of Varrock, south of the wilderness</td></tr>
+  <tr><th>Sold by</th><td>The Estate agent, in the front hall of Varrock castle</td></tr>
+  <tr><th>Price</th><td>100,000 coins<br><span class="dim">bought back for 50,000</span></td></tr>
+  <tr><th>Tools</th><td>Saw, hammer, rake, spade, bucket of water</td></tr>
+  <tr><th>Houses</th><td>Shack (Carpentry 1)<br>Cottage (20)<br>Manor (50)</td></tr>
+  <tr><th>Garden</th><td>2, 4 or 8 planter beds; herbs every 30 minutes</td></tr>
+  <tr><th>Uses</th><td>Carpentry, Herblaw, Crafting, Smithing, Magic, Cooking, Prayer</td></tr>
+</table>
+
+<p>An <b>estate</b> is a fenced plot of land that belongs to one player. The owner raises a house on it piece by piece, furnishes it, and grows herbs in its garden. It is the only land in the world a player can own.</p>
+<p>Everything you build trains <b>Carpentry</b>, a skill added by this server. The garden trains <b>Herblaw</b>, and the bricks and nails a house needs train Crafting and Smithing.</p>
+<p>A plot is yours for good: there is no rent, and it is never taken back. Your house stands in the open world, so everyone walking past can see it.</p>
+
+<div class="toc" role="navigation" aria-label="Contents">
+  <b>Contents</b>
+  <ol>
+    <li><a href="#quick-start">Quick start</a></li>
+    <li><a href="#agent">The estate agent</a></li>
+    <li><a href="#plot">Your plot</a></li>
+    <li><a href="#materials">Materials</a>
+      <ol><li><a href="#planks">Planks</a></li><li><a href="#bricks">Bricks</a></li><li><a href="#nails">Nails</a></li></ol></li>
+    <li><a href="#garden">The garden</a>
+      <ol><li><a href="#beds">Planter beds</a></li><li><a href="#growing">Growing a herb</a></li><li><a href="#tending">Tending and yield</a></li><li><a href="#compost">The compost bin</a></li><li><a href="#weeds">Weeds</a></li></ol></li>
+    <li><a href="#house">The house</a>
+      <ol><li><a href="#tiers">The three tiers</a></li><li><a href="#building">How building works</a></li><li><a href="#costs">Material costs</a></li><li><a href="#upgrading">Upgrading</a></li></ol></li>
+    <li><a href="#furniture">Furniture</a>
+      <ol><li><a href="#useful">Pieces that do something</a></li><li><a href="#decoration">Decoration and lights</a></li><li><a href="#rooms">What goes in each house</a></li></ol></li>
+    <li><a href="#training">Training Carpentry</a></li>
+    <li><a href="#messages">Messages and what they mean</a></li>
+  </ol>
+</div>
+
+<!-- ================================================================ QUICK START -->
+<h2 id="quick-start">Quick start</h2>
+<p>Your first afternoon as a landowner, in order:</p>
+<ol class="steps">
+  <li><b>Save 100,000 coins</b> and talk to the <b>Estate agent</b> in the front hall of Varrock castle, just inside the main doors. Choose to buy the plot.</li>
+  <li>From the agent, also buy a <span class="sp sp-sm sp-i1652" role="img" aria-label="Saw" title="Saw"></span> <b>Saw</b> (50 coins), a <span class="sp sp-sm sp-i1659" role="img" aria-label="Rake" title="Rake"></span> <b>Rake</b> (30) and, if you like, the <span class="sp sp-sm sp-i1662" role="img" aria-label="Gardening book" title="Gardening book"></span> <b>gardening book</b> (10).</li>
+  <li>Get a <span class="sp sp-sm sp-i168" role="img" aria-label="Hammer" title="Hammer"></span> <b>hammer</b> and a <b>bucket</b> from any general store. You will need a <span class="sp sp-sm sp-i211" role="img" aria-label="Spade" title="Spade"></span> <b>spade</b> as well.</li>
+  <li>Smith <b>bronze bars</b> into <span class="sp sp-sm sp-i419" role="img" aria-label="Nails" title="Nails"></span> <b>nails</b> at an anvil (10 nails per bar, Smithing 1).</li>
+  <li>Cut <span class="sp sp-sm sp-i14" role="img" aria-label="Logs" title="Logs"></span> <b>logs</b> and walk to your plot, north-west of Varrock. Only you and your guests can open its gate.</li>
+  <li>Use the logs on your <b>carpentry table</b> to saw them into planks.</li>
+  <li>Click <b>Build</b> on the table. Build a <b>planter bed</b> and start your first herb (see <a href="#growing">Growing a herb</a>).</li>
+  <li>While it grows, choose <b>House &rarr; Shack</b> at the table and hammer the markers that appear (see <a href="#building">How building works</a>).</li>
+</ol>
+<div class="note tip"><p><b>Tip</b> The bank chest on your plot opens your own bank, so you can store materials right beside the table.</p></div>
+
+<!-- ================================================================ AGENT -->
+<h2 id="agent">The estate agent</h2>
+<p>The <b>Estate agent</b> stands in the open front hall of <b>Varrock castle</b>, just inside the main doors, beside a sign that reads <i>estate agent</i>. They cannot be attacked. Talk to them to:</p>
+<ul>
+  <li><b>buy a plot</b>, for 100,000 coins. One plot per player.</li>
+  <li><b>sell your plot back</b>, for 50,000 coins (see the warning below).</li>
+  <li><b>manage your guest list</b>, up to 10 players. You pick guests from your friends list or from players standing nearby; if neither has anyone, the agent says <span class="msg">Add them to your friends list, or bring them here.</span></li>
+  <li><b>buy tools</b>:</li>
+</ul>
+<table class="wt">
+  <thead><tr><th></th><th>Item</th><th class="n">Price</th><th>Used for</th></tr></thead>
+  <tbody>
+    <tr><td><span class="sp sp-i1652" role="img" aria-label="Saw" title="Saw"></span></td><td>Saw</td><td class="n">50</td><td>Sawing logs into planks. It must be in your inventory.</td></tr>
+    <tr><td><span class="sp sp-i1659" role="img" aria-label="Rake" title="Rake"></span></td><td>Rake</td><td class="n">30</td><td>Clearing weeds from a planter bed before planting.</td></tr>
+    <tr><td><span class="sp sp-i1662" role="img" aria-label="Gardening book" title="Gardening book"></span></td><td>Gardening book</td><td class="n">10</td><td>Read it for a short version of the garden steps.</td></tr>
+  </tbody>
+</table>
+<div class="note warn"><p><b>Warning</b> Selling your plot <b>wipes everything on it</b>: the house, the furniture, the beds and the garden. No materials are refunded. The agent asks you to confirm and says what you will lose.</p></div>
+<p>There is <b>one plot</b> in the world right now, <b>1 West Fields, Varrock</b>. If it has an owner, the agent tells you there are none for sale.</p>
+
+<!-- ================================================================ PLOT -->
+<h2 id="plot">Your plot</h2>
+<p>The plot is 14 &times; 14 tiles: a fence around a 12 &times; 12 yard, with open ground around the outside. It is in the fields north-west of Varrock, about 50 tiles south of the wilderness. You can walk there from Varrock West bank.</p>
+
+<div class="plotmap" role="img" aria-label="Plan of the plot with a Manor built: house in the north, path from the gate in the south, two bed patches either side of the path">
+    <span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span>
+    <span class="r"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h"></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span class="h"></span><span class="h"></span><span class="h"></span><span class="h">D</span><span class="h"></span><span class="h"></span><span class="h"></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span></span><span></span><span></span><span class="p"></span><span class="p"></span><span class="p"></span><span></span><span></span><span class="b"></span><span class="b"></span><span class="x">C</span><span class="r"></span>
+    <span class="r"></span><span></span><span class="b"></span><span class="b"></span><span></span><span></span><span class="p"></span><span class="p"></span><span></span><span></span><span class="b"></span><span class="b"></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span class="b"></span><span class="b"></span><span></span><span></span><span class="p"></span><span class="p"></span><span></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span></span><span></span><span></span><span></span><span></span><span class="p"></span><span class="p"></span><span></span><span></span><span class="x">T</span><span></span><span class="x">K</span><span class="r"></span>
+    <span class="r"></span><span></span><span></span><span></span><span></span><span></span><span class="g">G</span><span class="g">G</span><span></span><span></span><span></span><span></span><span></span><span class="r"></span>
+    <span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="x">S</span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span><span class="r"></span>
+</div>
+<p class="legend">North is up. Shown with the Manor built.<i style="background:#8a8378"></i>house (D the door)<i style="background:#6e6a62"></i>stone path<i style="background:var(--ember)"></i>G the gate<i style="background:#6b4a2a"></i>bed patches<i style="background:var(--slate)"></i>T table, K bank chest, C compost bin, S signpost</p>
+
+<table class="wt">
+  <thead><tr><th>Object</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td><b>Gate</b></td><td>Two tiles wide, in the middle of the south fence. From outside it opens only for the owner and their guests; everyone else gets <span class="msg">The gate is locked.</span> Anyone <i>inside</i> can always leave, so nobody gets trapped.</td></tr>
+    <tr><td><b>Signpost</b></td><td>Outside, beside the gate. Shows the address and <i>Home of &lt;owner&gt;</i>, or <i>For sale - see the estate agent in Varrock castle</i>.</td></tr>
+    <tr><td><b>Carpentry table</b></td><td>Where you saw planks and start every build: beds, the bin, the house and its furniture.</td></tr>
+    <tr><td><b>Bank chest</b></td><td>Opens your own bank, behind your bank PIN. It does not work in combat or for Ultimate Ironmen. Nothing is stored in the plot itself, so selling it never costs you any items.</td></tr>
+    <tr><td><b>Compost bin</b></td><td>Rots weeds into compost. See <a href="#compost">The compost bin</a>.</td></tr>
+    <tr><td><b>Bed patches</b></td><td>Two 2 &times; 2 squares of mud on either side of the path, where planter beds are built.</td></tr>
+  </tbody>
+</table>
+
+<h3>Who may do what</h3>
+<table class="wt">
+  <thead><tr><th></th><th>Owner</th><th>Guest</th><th>Anyone else</th></tr></thead>
+  <tbody>
+    <tr><td>Open the gate from outside</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Leave through the gate</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Enter a finished house</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Build, saw, garden, use the bin, bank chest or bed</td><td>Yes</td><td>No</td><td>No</td></tr>
+  </tbody>
+</table>
+
+<!-- ================================================================ MATERIALS -->
+<h2 id="materials">Materials</h2>
+
+<h3 id="planks">Planks</h3>
+<p>Use logs on <b>your own carpentry table</b> with a <b>Saw</b> in your inventory. Each log becomes one plank, and the saw works through every log of that kind in your inventory until you stop. Each plank grade needs a Carpentry level:</p>
+<table class="wt">
+  <thead><tr><th colspan="2">Logs</th><th></th><th colspan="2">Plank</th><th>Carpentry</th><th class="n">XP each</th></tr></thead>
+  <tbody>
+    <tr><td><span class="sp sp-i14" role="img" aria-label="Logs" title="Logs"></span></td><td>Logs</td><td>&rarr;</td><td><span class="sp sp-i410" role="img" aria-label="Plank" title="Plank"></span></td><td>Plank</td><td class="lv">1</td><td class="n">10</td></tr>
+    <tr><td><span class="sp sp-i632" role="img" aria-label="Oak logs" title="Oak logs"></span></td><td>Oak logs</td><td>&rarr;</td><td><span class="sp sp-i1653" role="img" aria-label="Oak plank" title="Oak plank"></span></td><td>Oak plank</td><td class="lv">15</td><td class="n">15</td></tr>
+    <tr><td><span class="sp sp-i633" role="img" aria-label="Willow logs" title="Willow logs"></span></td><td>Willow logs</td><td>&rarr;</td><td><span class="sp sp-i1654" role="img" aria-label="Willow plank" title="Willow plank"></span></td><td>Willow plank</td><td class="lv">30</td><td class="n">22</td></tr>
+    <tr><td><span class="sp sp-i634" role="img" aria-label="Maple logs" title="Maple logs"></span></td><td>Maple logs</td><td>&rarr;</td><td><span class="sp sp-i1655" role="img" aria-label="Maple plank" title="Maple plank"></span></td><td>Maple plank</td><td class="lv">45</td><td class="n">35</td></tr>
+    <tr><td><span class="sp sp-i635" role="img" aria-label="Yew logs" title="Yew logs"></span></td><td>Yew logs</td><td>&rarr;</td><td><span class="sp sp-i1656" role="img" aria-label="Yew plank" title="Yew plank"></span></td><td>Yew plank</td><td class="lv">60</td><td class="n">50</td></tr>
+    <tr><td><span class="sp sp-i636" role="img" aria-label="Magic logs" title="Magic logs"></span></td><td>Magic logs</td><td>&rarr;</td><td><span class="sp sp-i1657" role="img" aria-label="Magic plank" title="Magic plank"></span></td><td>Magic plank</td><td class="lv">75</td><td class="n">70</td></tr>
+  </tbody>
+</table>
+<p class="dim">All XP on this page is the base amount. The server's XP rate multiplies it.</p>
+
+<h3 id="bricks">Bricks</h3>
+<p>Use <span class="sp sp-sm sp-i243" role="img" aria-label="Soft clay" title="Soft clay"></span> <b>soft clay</b> on any <b>pottery oven</b> (for example, the one in Barbarian Village) to fire a <span class="sp sp-sm sp-i1658" role="img" aria-label="Brick" title="Brick"></span> <b>brick</b>. It needs <b>Crafting 5</b> and gives 8 Crafting XP per brick, working through all the soft clay in your inventory. Bricks are needed for the Cottage, the Manor and the ranges.</p>
+
+<h3 id="nails">Nails</h3>
+<p>Use a <span class="sp sp-sm sp-i169" role="img" aria-label="Bronze bar" title="Bronze bar"></span> <b>bronze bar</b> on an anvil and choose <b>Nails (1 bar)</b> from the craft items. You get <b>10 nails per bar</b> at Smithing 1. Nails give no Carpentry XP themselves, but almost everything uses them.</p>
+
+<!-- ================================================================ GARDEN -->
+<h2 id="garden">The garden</h2>
+<p>The garden grows <b>herbs from unidentified herbs</b>. There are no seeds; any grimy herb is the seed. Each one grows into a random herb in half an hour, whether you are online or not, and gives you Herblaw XP when you pick it.</p>
+
+<h3 id="beds">Planter beds</h3>
+<p>Click <b>Build &rarr; Planter bed</b> at the carpentry table. Each bed costs <b>4 planks of its grade and 10 nails</b>. How many beds you may have depends on your house:</p>
+<table class="wt">
+  <thead><tr><th>House</th><th class="n">Beds</th></tr></thead>
+  <tbody>
+    <tr><td>None yet, or the Shack</td><td class="n">2</td></tr>
+    <tr><td>Cottage</td><td class="n">4</td></tr>
+    <tr><td>Manor</td><td class="n">8</td></tr>
+  </tbody>
+</table>
+<p>Beds <b>wear out</b>. Every harvest uses one point of the bed's durability. A broken bed cannot be planted until you repair it with <b>2 planks of its grade, 5 nails and a hammer</b>, which also gives Carpentry XP. Examine a bed to see its condition. Better wood lasts longer, and the top grades add bonuses:</p>
+<table class="wt">
+  <thead><tr><th colspan="2">Bed</th><th>Carpentry</th><th class="n">Harvests before repair</th><th>Bonus</th><th class="n">Build XP</th></tr></thead>
+  <tbody>
+    <tr><td><span class="sp sp-sm sp-i410" role="img" aria-label="Plank" title="Plank"></span></td><td>Plank</td><td class="lv">1</td><td class="n">2</td><td>-</td><td class="n">40</td></tr>
+    <tr><td><span class="sp sp-sm sp-i1653" role="img" aria-label="Oak plank" title="Oak plank"></span></td><td>Oak</td><td class="lv">15</td><td class="n">4</td><td>-</td><td class="n">60</td></tr>
+    <tr><td><span class="sp sp-sm sp-i1654" role="img" aria-label="Willow plank" title="Willow plank"></span></td><td>Willow</td><td class="lv">30</td><td class="n">5</td><td>-</td><td class="n">88</td></tr>
+    <tr><td><span class="sp sp-sm sp-i1655" role="img" aria-label="Maple plank" title="Maple plank"></span></td><td>Maple</td><td class="lv">45</td><td class="n">7</td><td>+5% survival</td><td class="n">140</td></tr>
+    <tr><td><span class="sp sp-sm sp-i1656" role="img" aria-label="Yew plank" title="Yew plank"></span></td><td>Yew</td><td class="lv">60</td><td class="n">8</td><td>+1 minimum herb</td><td class="n">200</td></tr>
+    <tr><td><span class="sp sp-sm sp-i1657" role="img" aria-label="Magic plank" title="Magic plank"></span></td><td>Magic</td><td class="lv">75</td><td class="n">10</td><td>+1 minimum herb, +5% survival</td><td class="n">280</td></tr>
+  </tbody>
+</table>
+<p>When the garden is full, the table lets you <b>rebuild</b> an empty bed in a better wood.</p>
+
+<h3 id="growing">Growing a herb</h3>
+<ol class="steps">
+  <li><b>Rake</b> the bed with a <span class="sp sp-sm sp-i1659" role="img" aria-label="Rake" title="Rake"></span> rake. An empty bed always has weeds, even straight after a harvest. Raking gives <b>1-2 weeds</b>; keep them for the compost bin. If you leave the bed empty, the weeds grow back after 20 minutes.</li>
+  <li><b>Plant</b> any of the eleven <b>unidentified herbs</b> (needs <b>Herblaw 3</b>). An identified herb won't grow: <span class="msg">Oh no, it's missing its roots.</span></li>
+  <li><b>Water</b> it with a <span class="sp sp-sm sp-i50" role="img" aria-label="Bucket of water" title="Bucket of water"></span> bucket of water or a <span class="sp sp-sm sp-i1358" role="img" aria-label="Watering can" title="Watering can"></span> watering can. <b>It does not start growing until it is watered.</b></li>
+  <li><b>Weed</b> it in the first 15 minutes (tend 1), and use a <b>spade of compost</b> on it in the last 15 (tend 2). Both are optional, but see <a href="#tending">Tending and yield</a>.</li>
+  <li>After <b>30 minutes</b>, choose <b>Gather</b> on the plant to pick its herbs. They come out <b>already identified</b>, with the Herblaw XP you would get for identifying each one.</li>
+</ol>
+
+<div class="timeline" role="img" aria-label="Thirty-minute growth timeline: seedling, growing, then flowering from 15 minutes, ready at 30. Weeding in the first half, compost in the second.">
+  <div class="tl-bar"><div class="tl-seed">seedling</div><div class="tl-grow">growing</div><div class="tl-flow">flowering - herb revealed</div></div>
+  <div class="tl-ticks"><span>0 min (watered)</span><span>7&frac12;</span><span>15</span><span>30 - Gather</span></div>
+  <div class="tl-wins"><div>Tend 1: <b>weed</b> (gives 1-2 weeds)</div><div>Tend 2: <b>spade of compost</b></div></div>
+</div>
+
+<p><b>Which herb you get is random.</b> Whatever you plant, the plant becomes one of the eleven herbs with an equal chance (about 9% each). A cheap guam can turn into a torstol. Every plant looks the same until it <b>flowers</b> at about 15 minutes; then it takes on that herb's look, and examining it names the herb.</p>
+<p>Time passes while you are logged out, and server restarts don't stop it.</p>
+
+<table class="wt">
+  <thead><tr><th>Herb</th><th class="n">Herblaw XP per herb picked</th></tr></thead>
+  <tbody>
+    <tr><td><span class="sp sp-sm sp-i444" role="img" aria-label="Guam leaf" title="Guam leaf"></span> Guam</td><td class="n">2.5</td></tr>
+    <tr><td><span class="sp sp-sm sp-i445" role="img" aria-label="Marrentill" title="Marrentill"></span> Marrentill</td><td class="n">3.75</td></tr>
+    <tr><td><span class="sp sp-sm sp-i446" role="img" aria-label="Tarromin" title="Tarromin"></span> Tarromin</td><td class="n">5</td></tr>
+    <tr><td><span class="sp sp-sm sp-i447" role="img" aria-label="Harralander" title="Harralander"></span> Harralander</td><td class="n">6.25</td></tr>
+    <tr><td><span class="sp sp-sm sp-i448" role="img" aria-label="Ranarr weed" title="Ranarr weed"></span> Ranarr</td><td class="n">7.5</td></tr>
+    <tr><td><span class="sp sp-sm sp-i449" role="img" aria-label="Irit leaf" title="Irit leaf"></span> Irit</td><td class="n">8.75</td></tr>
+    <tr><td><span class="sp sp-sm sp-i450" role="img" aria-label="Avantoe" title="Avantoe"></span> Avantoe</td><td class="n">10</td></tr>
+    <tr><td><span class="sp sp-sm sp-i451" role="img" aria-label="Kwuarm" title="Kwuarm"></span> Kwuarm</td><td class="n">11.25</td></tr>
+    <tr><td><span class="sp sp-sm sp-i452" role="img" aria-label="Cadantine" title="Cadantine"></span> Cadantine</td><td class="n">12.5</td></tr>
+    <tr><td><span class="sp sp-sm sp-i453" role="img" aria-label="Dwarf weed" title="Dwarf weed"></span> Dwarf weed</td><td class="n">13.75</td></tr>
+    <tr><td><span class="sp sp-sm sp-i934" role="img" aria-label="Torstol" title="Torstol"></span> Torstol</td><td class="n">15</td></tr>
+  </tbody>
+</table>
+
+<h3 id="tending">Tending and yield</h3>
+<p>A plant that got <b>both</b> tends, the weeding and the compost, is <b>tended</b>. A tended plant <b>always survives</b>, and its minimum harvest goes up by 2. An untended plant may die, and how well it does depends on your <b>Herblaw</b> level:</p>
+<div class="wt-wrap"><table class="wt">
+  <thead><tr><th>Herblaw</th><th class="n">Untended survives</th><th class="n">Untended herbs</th><th class="n">Tended survives</th><th class="n">Tended herbs</th></tr></thead>
+  <tbody>
+    <tr><td class="lv">1-24</td><td class="n">70%</td><td class="n">3-6</td><td class="n">100%</td><td class="n">5-6</td></tr>
+    <tr><td class="lv">25-49</td><td class="n">80%</td><td class="n">3-9</td><td class="n">100%</td><td class="n">5-9</td></tr>
+    <tr><td class="lv">50-74</td><td class="n">90%</td><td class="n">6-9</td><td class="n">100%</td><td class="n">8-9</td></tr>
+    <tr><td class="lv">75-98</td><td class="n">95%</td><td class="n">6-12</td><td class="n">100%</td><td class="n">8-12</td></tr>
+    <tr><td class="lv">99</td><td class="n">97%</td><td class="n">9-12</td><td class="n">100%</td><td class="n">11-12</td></tr>
+  </tbody>
+</table></div>
+<p>The bed's own bonus (Maple, Yew, Magic) is added on top. A plant that dies gives nothing back, and the herb you planted is lost. Clear the dead plant away to use the bed again.</p>
+<div class="note tip"><p><b>Tip</b> Tend everything. Weeding is free, and compost comes from those same weeds. A new plot's bin starts with 5 compost, so even your first plants can be tended.</p></div>
+
+<h3 id="compost">The compost bin</h3>
+<ul>
+  <li><b>Put weeds in.</b> Each weed rots into one compost after <b>20 minutes</b>, one at a time, in the order they went in. This keeps going while you are offline.</li>
+  <li><b>Take compost out.</b> Use a <span class="sp sp-sm sp-i211" role="img" aria-label="Spade" title="Spade"></span> spade on the bin to get a <span class="sp sp-sm sp-i1661" role="img" aria-label="Spade of compost" title="Spade of compost"></span> <b>spade of compost</b>. Use it on a plant in its second half, and it becomes a plain spade again.</li>
+  <li><b>Examine</b> the bin to see what is inside: <span class="msg">3 weeds rotting, 5 compost ready.</span></li>
+  <li><b>Capacity counts weeds and compost together.</b> A full bin refuses more weeds, so use compost to make room.</li>
+  <li><b>The bin wears</b> one point per scoop. A broken bin keeps its compost, but you can't take any out until you repair it with <b>3 planks of its wood, 6 nails and a hammer</b>.</li>
+</ul>
+<p>Build a better bin with <b>Build &rarr; Compost bin</b> at the table (6 planks of the bin's wood and 12 nails). The new bin replaces the old one, and the weeds and compost inside are kept.</p>
+<table class="wt">
+  <thead><tr><th>Bin</th><th>Carpentry</th><th class="n">Holds</th><th class="n">Scoops before repair</th><th class="n">Build XP</th></tr></thead>
+  <tbody>
+    <tr><td>Plank</td><td class="lv">1</td><td class="n">10</td><td class="n">30</td><td class="n">60</td></tr>
+    <tr><td>Oak</td><td class="lv">20</td><td class="n">15</td><td class="n">45</td><td class="n">90</td></tr>
+    <tr><td>Maple</td><td class="lv">45</td><td class="n">20</td><td class="n">60</td><td class="n">210</td></tr>
+    <tr><td>Magic</td><td class="lv">75</td><td class="n">25</td><td class="n">80</td><td class="n">420</td></tr>
+  </tbody>
+</table>
+
+<h3 id="weeds">Weeds</h3>
+<p><span class="sp sp-sm sp-i1660" role="img" aria-label="Weeds" title="Weeds"></span> <b>Weeds</b> come from raking a bed and from weeding a young plant. They <b>rot away 20 minutes after you pick them</b>, online or offline, with <span class="msg">Your weeds have rotted away.</span> Get them into the bin before then.</p>
+<p>Weeds can't be banked or traded, and dropping them throws them away.</p>
+
+<!-- ================================================================ HOUSE -->
+<h2 id="house">The house</h2>
+
+<h3 id="tiers">The three tiers</h3>
+<div class="wt-wrap"><table class="wt">
+  <thead><tr><th>Tier</th><th>Carpentry</th><th>Size</th><th>Walls</th><th class="n">Pieces</th><th>Rooms</th><th class="n">Beds allowed</th></tr></thead>
+  <tbody>
+    <tr><td><b>Shack</b></td><td class="lv">1</td><td>4 &times; 4</td><td>Timber</td><td class="n">21</td><td>One room</td><td class="n">2</td></tr>
+    <tr><td><b>Cottage</b></td><td class="lv">20</td><td>6 &times; 5</td><td>Brick</td><td class="n">33</td><td>Kitchen and bedroom</td><td class="n">4</td></tr>
+    <tr><td><b>Manor</b></td><td class="lv">50</td><td>7 &times; 6, two floors</td><td>Brick</td><td class="n">77</td><td>Downstairs: hall, dining room, kitchen.<br>Upstairs: bedroom, chapel, study</td><td class="n">8</td></tr>
+  </tbody>
+</table></div>
+
+<h3 id="building">How building works</h3>
+<ol class="steps">
+  <li>At the carpentry table, choose <b>Build &rarr; House</b> and pick a tier. The table marks out the house with <b>building markers</b>, little flagged stakes that <b>only you can see</b>.</li>
+  <li>Walk around the house and use each marker, with a <span class="sp sp-sm sp-i168" role="img" aria-label="Hammer" title="Hammer"></span> <b>hammer</b> and that piece's materials in your inventory. Each marker builds one piece: a wall section, a window, a floor, a roof row, the stairs or the door. You see it appear straight away, and get Carpentry XP for it.</li>
+  <li><b>Examine</b> a marker to see what it builds next and what it costs: <span class="msg">Next here: the brick wall (6 bricks, 1 maple plank).</span></li>
+  <li>The order matters: <b>walls and windows before the roof over them</b>. In the Manor, the <b>stairs and upstairs floor</b> come before anything upstairs. <b>The door is always last.</b></li>
+  <li>The house stays <b>shut, even to you</b>, until the door is fitted. Then it opens, and you can furnish it.</li>
+</ol>
+<div class="note"><p><b>Roofs</b> If houses look open-topped, you have <b>Hide Roofs</b> switched on in your settings. Switch it off to see your roof go up row by row.</p></div>
+<div class="note warn"><p><b>Client</b> The house is drawn by this server's own client. An out-of-date client can't draw the walls, and can't saw or hold the new items (<span class="msg">Your client needs updating to make that.</span>). The launcher keeps you up to date.</p></div>
+
+<h3 id="costs">Material costs</h3>
+<table class="wt">
+  <thead><tr><th>Tier</th><th>Total materials</th><th class="n">Bronze bars for the nails</th><th class="n">Total Carpentry XP</th></tr></thead>
+  <tbody>
+    <tr><td><b>Shack</b></td><td>49 planks, 84 nails</td><td class="n">9</td><td class="n">490</td></tr>
+    <tr><td><b>Cottage</b></td><td>110 bricks, 42 oak planks, 20 willow planks, 62 nails</td><td class="n">7</td><td class="n">1,620</td></tr>
+    <tr><td><b>Manor</b></td><td>306 bricks, 189 maple planks, 188 nails</td><td class="n">19</td><td class="n">8,145</td></tr>
+  </tbody>
+</table>
+<p>The pieces, one by one:</p>
+<div class="wt-wrap"><table class="wt">
+  <thead><tr><th>Piece</th><th>Shack</th><th>Cottage</th><th>Manor</th></tr></thead>
+  <tbody>
+    <tr><td>Wall section</td><td>2 planks, 4 nails <span class="dim">&times;13</span></td><td>5 bricks, 1 oak plank <span class="dim">&times;22</span></td><td>6 bricks, 1 maple plank <span class="dim">&times;51 (both floors)</span></td></tr>
+    <tr><td>Window</td><td>2 planks, 3 nails <span class="dim">&times;2</span></td><td>2 oak planks, 4 nails <span class="dim">&times;3</span></td><td>2 maple planks, 4 nails <span class="dim">&times;10</span></td></tr>
+    <tr><td>Floor</td><td>4 planks, 4 nails <span class="dim">&times;1</span></td><td>4 oak planks, 6 nails <span class="dim">&times;2</span></td><td>4 maple planks, 6 nails <span class="dim">&times;2</span></td></tr>
+    <tr><td>Staircase</td><td>-</td><td>-</td><td>15 maple planks, 20 nails <span class="dim">&times;1</span></td></tr>
+    <tr><td>Upstairs floor row</td><td>-</td><td>-</td><td>10 maple planks, 10 nails <span class="dim">&times;6</span></td></tr>
+    <tr><td>Roof row</td><td>3 planks, 4 nails <span class="dim">&times;4</span></td><td>4 willow planks, 6 nails <span class="dim">&times;5</span></td><td>5 maple planks, 8 nails <span class="dim">&times;6</span></td></tr>
+    <tr><td>Door</td><td>3 planks, 6 nails</td><td>6 oak planks, 8 nails</td><td>5 maple planks, 8 nails</td></tr>
+  </tbody>
+</table></div>
+<p>A piece gives 5 XP per brick plus the plank's XP (from the <a href="#planks">plank table</a>) per plank. A Manor wall, for example, gives 6 &times; 5 + 35 = 65 XP.</p>
+
+<h3 id="upgrading">Upgrading</h3>
+<p>Starting the next tier <b>knocks the old house down first</b>, and the table warns you before it does. Your plot has no house until the new door is fitted. <b>Your furniture is kept</b>: each piece reappears in the matching room of the new house once it opens. A slot the new house has no room for waits for one that does.</p>
+<p>While the house is being rebuilt, your bed respawn goes back to normal (see below).</p>
+
+<!-- ================================================================ FURNITURE -->
+<h2 id="furniture">Furniture</h2>
+<p>Once the door is fitted, choose <b>Build &rarr; Furniture</b> at the carpentry table. Each house has fixed spots for furniture; pick a spot, then a grade. You need the materials in your inventory and a hammer.</p>
+
+<h3 id="useful">Pieces that do something</h3>
+<div class="wt-wrap"><table class="wt">
+  <thead><tr><th>Piece</th><th>Grade</th><th>Carpentry</th><th>Materials</th><th class="n">XP</th><th style="width:36%">Effect</th></tr></thead>
+  <tbody>
+    <tr><td rowspan="3"><b>Bed</b></td><td>Wooden bed</td><td class="lv">5</td><td>4 planks, 6 nails</td><td class="n">58</td><td rowspan="3"><b>Sleep in</b> it once and you respawn beside it when you die. You can switch back to Lumbridge at the bed. The grades only change how it looks.</td></tr>
+    <tr><td>Oak bed</td><td class="lv">25</td><td>4 oak planks, 6 nails</td><td class="n">78</td></tr>
+    <tr><td>Yew bed</td><td class="lv">60</td><td>4 yew planks, 6 nails</td><td class="n">218</td></tr>
+    <tr><td rowspan="3"><b>Range</b></td><td>Iron range</td><td class="lv">25</td><td>4 iron bars, 10 bricks</td><td class="n">62</td><td rowspan="3">Cook on it like any range. Each grade burns less: it cooks as if your Cooking were <b>3, 6 or 10 levels</b> higher.</td></tr>
+    <tr><td>Steel range</td><td class="lv">40</td><td>4 steel bars, 15 bricks</td><td class="n">87</td></tr>
+    <tr><td>Stove</td><td class="lv">60</td><td>4 mithril bars, 20 bricks</td><td class="n">112</td></tr>
+    <tr><td><b>Altar</b></td><td>Altar</td><td class="lv">50</td><td>20 bricks, 4 maple planks</td><td class="n">240</td><td>Recharges your Prayer points. Manor chapel only.</td></tr>
+    <tr><td><b>Lectern</b></td><td>Lectern</td><td class="lv">50</td><td>6 maple planks, 10 nails</td><td class="n">240</td><td><b>Study</b> it to make a <span class="sp sp-sm sp-i1663" role="img" aria-label="House teleport tablet" title="House teleport tablet"></span> <b>house teleport tablet</b> from soft clay and a law rune (<b>Magic 40</b>, 30 Magic XP). Manor study only.</td></tr>
+  </tbody>
+</table></div>
+<p><b>House teleport tablets</b> take you to your plot from anywhere a normal teleport works. They don't work above level 20 wilderness, and they don't work while you have no finished house.</p>
+<div class="note warn"><p><b>Respawn</b> The plot is close to the wilderness, so a bed respawn wakes you about 50 tiles from it. Your respawn returns to normal while the house is being rebuilt, and is forgotten if you sell the plot.</p></div>
+
+<h3 id="decoration">Decoration and lights</h3>
+<div class="wt-wrap"><table class="wt">
+  <thead><tr><th>Piece</th><th>Carpentry</th><th>Materials</th><th class="n">XP</th></tr></thead>
+  <tbody>
+    <tr><td>Stool</td><td class="lv">1</td><td>2 planks, 2 nails</td><td class="n">26</td></tr>
+    <tr><td>Rug</td><td class="lv">3</td><td>4 balls of wool</td><td class="n">12</td></tr>
+    <tr><td>Candlestick</td><td class="lv">5</td><td>1 plank, 2 nails, 1 lit candle</td><td class="n">19</td></tr>
+    <tr><td>Wall torch</td><td class="lv">10</td><td>2 planks, 4 nails, and a tinderbox (kept)</td><td class="n">32</td></tr>
+    <tr><td>Table</td><td class="lv">10</td><td>4 oak planks, 6 nails</td><td class="n">78</td></tr>
+    <tr><td>Chairs</td><td class="lv">10</td><td>3 oak planks, 4 nails</td><td class="n">57</td></tr>
+    <tr><td>Wardrobe</td><td class="lv">25</td><td>6 oak planks, 6 nails</td><td class="n">108</td></tr>
+    <tr><td>Painting</td><td class="lv">50</td><td>2 maple planks, 2 nails</td><td class="n">76</td></tr>
+    <tr><td>Long table</td><td class="lv">50</td><td>6 maple planks, 8 nails</td><td class="n">234</td></tr>
+  </tbody>
+</table></div>
+<p><b>Candlesticks</b> and the <b>wall torch</b> light up at night, just like the ones in towns. The torch hangs outside on the front wall, just west of the door, and moves with the door when you upgrade.</p>
+
+<h3 id="rooms">What goes in each house</h3>
+<div class="wt-wrap"><table class="wt">
+  <thead><tr><th>House</th><th>Room</th><th>Spots</th></tr></thead>
+  <tbody>
+    <tr><td><b>Shack</b></td><td>The one room</td><td>Bed, stool, rug, 1 candlestick</td></tr>
+    <tr><td rowspan="2"><b>Cottage</b></td><td>Kitchen</td><td>Range, table, chairs, 1 candlestick</td></tr>
+    <tr><td>Bedroom</td><td>Bed, wardrobe, rug, 1 candlestick</td></tr>
+    <tr><td rowspan="6"><b>Manor</b></td><td>Hall</td><td>Painting, 1 candlestick, the ladder up</td></tr>
+    <tr><td>Dining room</td><td>Long table, chairs, 1 candlestick</td></tr>
+    <tr><td>Kitchen</td><td>Range, 1 candlestick</td></tr>
+    <tr><td>Bedroom (upstairs)</td><td>Bed, rug, 1 candlestick</td></tr>
+    <tr><td>Chapel (upstairs)</td><td>Altar, 2 candlesticks</td></tr>
+    <tr><td>Study (upstairs)</td><td>Lectern, 1 candlestick</td></tr>
+  </tbody>
+</table></div>
+<p>Every house also has a spot for the wall torch by the front door. There's no storage furniture; the bank chest outside does that job.</p>
+
+<!-- ================================================================ TRAINING -->
+<h2 id="training">Training Carpentry</h2>
+<p>All Carpentry XP comes from your own plot:</p>
+<ul>
+  <li><b>Sawing planks</b>: 10 to 70 XP each, depending on the wood. This is the steady, bankable part.</li>
+  <li><b>Building the house</b>: 490 XP for a Shack, 1,620 for a Cottage, 8,145 for a Manor.</li>
+  <li><b>Furniture</b>: 12 to 240 XP a piece.</li>
+  <li><b>Beds and bins</b>: building and repairing them.</li>
+</ul>
+<p>A suggested path:</p>
+<table class="wt">
+  <thead><tr><th>Carpentry</th><th>What to do</th></tr></thead>
+  <tbody>
+    <tr><td class="lv">1-15</td><td>Saw normal logs. Build two plank beds and the Shack, then a stool, a candlestick, the wall torch.</td></tr>
+    <tr><td class="lv">15-20</td><td>Saw oak logs. Rebuild your beds in oak (4 harvests each), and build the oak bin at 20.</td></tr>
+    <tr><td class="lv">20-30</td><td>Build the <b>Cottage</b>: start firing bricks early, since it takes 110. Furnish the kitchen at 25 with an iron range.</td></tr>
+    <tr><td class="lv">30-50</td><td>Saw willow, then maple from 45. Rebuild beds in maple for the survival bonus. Stockpile 306 bricks and 189 maple planks.</td></tr>
+    <tr><td class="lv">50</td><td>Build the <b>Manor</b>. Eight beds, the altar and the lectern.</td></tr>
+    <tr><td class="lv">60-99</td><td>Yew and magic planks, yew and magic beds and the magic bin. Past the Manor, keeping the garden running is what uses the skill.</td></tr>
+  </tbody>
+</table>
+
+<!-- ================================================================ MESSAGES -->
+<h2 id="messages">Messages and what they mean</h2>
+<div class="wt-wrap"><table class="wt">
+  <thead><tr><th>Message</th><th>What to do</th></tr></thead>
+  <tbody>
+    <tr><td><span class="msg">You need a saw to cut planks.</span></td><td>Buy a saw from the estate agent (50 coins) and carry it.</td></tr>
+    <tr><td><span class="msg">This table isn't yours.</span></td><td>You can only saw at your own plot's table.</td></tr>
+    <tr><td><span class="msg">You need a Carpentry level of 15 to saw oak logs.</span></td><td>See the <a href="#planks">plank table</a>.</td></tr>
+    <tr><td><span class="msg">The gate is locked.</span></td><td>Only the owner and their guests can open it from outside.</td></tr>
+    <tr><td><span class="msg">Rake the weeds out of the bed first.</span></td><td>Use the rake on the bed before planting.</td></tr>
+    <tr><td><span class="msg">Oh no, it's missing its roots.</span></td><td>Plant an <b>unidentified</b> herb instead.</td></tr>
+    <tr><td><span class="msg">It doesn't need compost yet.</span></td><td>Compost only goes on in the second 15 minutes, after the plant flowers.</td></tr>
+    <tr><td><span class="msg">There are no weeds to pull.</span></td><td>The plant has no weeds to pull. Weeding is only in the first 15 minutes, and only once.</td></tr>
+    <tr><td><span class="msg">The bed is broken. Repair it with planks and nails.</span></td><td>2 planks of the bed's wood, 5 nails and a hammer.</td></tr>
+    <tr><td><span class="msg">The compost bin is full.</span></td><td>Take some compost out with a spade first.</td></tr>
+    <tr><td><span class="msg">Your weeds have rotted away.</span></td><td>Weeds last 20 minutes. Put them in the bin sooner.</td></tr>
+    <tr><td><span class="msg">The roof row has to wait. Build the brick wall first.</span></td><td>Walls and windows go up before the roof, and the door goes last.</td></tr>
+    <tr><td><span class="msg">The door is locked.</span></td><td>The house is not finished, or it isn't yours and you aren't a guest.</td></tr>
+    <tr><td><span class="msg">Finish the house before you furnish it.</span></td><td>Fit the door first.</td></tr>
+    <tr><td><span class="msg">Your client needs updating to make that.</span></td><td>Restart through the launcher to update.</td></tr>
+  </tbody>
+</table></div>
+
+</div>
+
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>RSCX &middot; The Hunted</h4>
+        <p style="color:var(--bone-2);font-size:16px;max-width:46ch">
+          A RuneScape Classic world with the wilderness populated. Built on
+          <a href="https://gitlab.com/openrsc/openrsc">OpenRSC</a>, unmodified.
+        </p>
+      </div>
+    </div>
+    <p class="fine">
+      No player counter, no hiscores and no uptime figure on this page, because
+      there is no data behind one and a server site that invents them is a server
+      site you cannot trust about anything else. Last updated 2026-10-20.<br>
+      RuneScape and RuneScape Classic are trademarks of Jagex Ltd. This is a
+      non-commercial preservation project and is not affiliated with Jagex.
+    </p>
+  </div>
+</footer>
+
+
+<script>
+/* Shared behaviour for every page. Everything here is optional: each initialiser
+   looks for its own markup and does nothing if the page has none, so the same
+   script ships on the home page and on a 700-row bestiary. No library. */
+(function () {
+  "use strict";
+
+  var reduced = window.matchMedia
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* -------------------------------------------------- scroll spy
+     Lights the section link and the wilderness gauge mark for whatever the
+     reader is looking at. Only runs where a page carries a sub-nav. */
+  function initSpy() {
+    var links = [].slice.call(document.querySelectorAll(".subnav a[href^='#']"));
+    var marks = [].slice.call(document.querySelectorAll(".gauge li[data-for]"));
+    if (!links.length && !marks.length) return;
+
+    var ids = {};
+    links.forEach(function (a) { ids[a.getAttribute("href").slice(1)] = true; });
+    marks.forEach(function (li) { ids[li.getAttribute("data-for")] = true; });
+
+    var sections = Object.keys(ids)
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    function spy() {
+      var best = sections[0], bestTop = Infinity;
+      sections.forEach(function (s) {
+        var top = s.getBoundingClientRect().top;
+        if (top <= 150 && Math.abs(top) < bestTop) { bestTop = Math.abs(top); best = s; }
+      });
+      links.forEach(function (a) {
+        a.classList.toggle("here", a.getAttribute("href") === "#" + best.id);
+      });
+      marks.forEach(function (li) {
+        li.classList.toggle("here", li.getAttribute("data-for") === best.id);
+      });
+    }
+
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () { spy(); ticking = false; });
+    }, { passive: true });
+    spy();
+  }
+
+  /* -------------------------------------------------- filter + search + sort
+     A table opts in with data-table="<key>". Its controls point back at that
+     key, so a page can carry several independent tables.
+
+       <table data-table="drops" data-empty="nothing matched">
+       <button data-filter="drops" data-value="rare">
+       <input  data-search="drops">
+       <span   data-count="drops">
+       <th data-sort="num|text">                                             */
+  function initTables() {
+    [].forEach.call(document.querySelectorAll("table[data-table]"), function (table) {
+      var key = table.getAttribute("data-table");
+      var body = table.tBodies[0];
+      if (!body) return;
+      /* A disclosure row's detail row lives in the same tbody and is NOT a row
+         of the table as far as filtering, counting or sorting is concerned. It
+         follows its owner: hidden when the owner is filtered out, and open only
+         while the owner says it is open. */
+      var rows = [].slice.call(body.rows).filter(function (tr) {
+        return !tr.classList.contains("detail");
+      });
+      rows.forEach(function (tr) {
+        var id = tr.getAttribute("data-opens");
+        tr.__detail = id ? document.getElementById(id) : null;
+      });
+      var count = document.querySelector('[data-count="' + key + '"]');
+      var empty = document.querySelector('[data-emptymsg="' + key + '"]');
+      var search = document.querySelector('input[data-search="' + key + '"]');
+      var buttons = [].slice.call(
+        document.querySelectorAll('button[data-filter="' + key + '"]'));
+      var filter = "all";
+      var noun = table.getAttribute("data-noun") || "shown";
+
+      /* The searchable text of a row, computed once. */
+      rows.forEach(function (tr) {
+        tr.__text = (tr.getAttribute("data-search-text") || tr.textContent)
+          .toLowerCase().replace(/\s+/g, " ");
+      });
+
+      function apply() {
+        var q = search ? search.value.trim().toLowerCase() : "";
+        var shown = 0;
+        rows.forEach(function (tr) {
+          var byTag = filter === "all"
+            || (" " + (tr.getAttribute("data-tags") || "") + " ").indexOf(" " + filter + " ") >= 0;
+          var byText = !q || tr.__text.indexOf(q) >= 0;
+          var hit = byTag && byText;
+          tr.hidden = !hit;
+          if (tr.__detail) {
+            tr.__detail.hidden = !hit || tr.getAttribute("aria-expanded") !== "true";
+          }
+          if (hit) shown++;
+        });
+        if (count) count.textContent = shown + " " + noun;
+        if (empty) empty.hidden = shown !== 0;
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          filter = btn.getAttribute("data-value");
+          buttons.forEach(function (b) {
+            b.setAttribute("aria-pressed", String(b === btn));
+          });
+          apply();
+        });
+      });
+      if (search) search.addEventListener("input", apply);
+
+      var dir = {};
+      [].forEach.call(table.tHead ? table.tHead.rows[0].cells : [], function (th, index) {
+        var kind = th.getAttribute("data-sort");
+        if (!kind) return;
+        th.classList.add("sortable");
+        th.setAttribute("tabindex", "0");
+        function sort() {
+          var asc = dir[index] = !dir[index];
+          [].forEach.call(table.tHead.rows[0].cells, function (o) {
+            o.removeAttribute("aria-sort");
+          });
+          th.setAttribute("aria-sort", asc ? "ascending" : "descending");
+          rows.sort(function (a, b) {
+            var x = cell(a, index), y = cell(b, index);
+            if (kind === "num") {
+              var n = num(x) - num(y);
+              return asc ? n : -n;
+            }
+            return asc ? x.localeCompare(y) : y.localeCompare(x);
+          });
+          rows.forEach(function (tr) {
+            body.appendChild(tr);
+            if (tr.__detail) body.appendChild(tr.__detail);   // keep the pair together
+          });
+        }
+        th.addEventListener("click", sort);
+        th.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sort(); }
+        });
+      });
+
+      function cell(tr, i) {
+        var td = tr.cells[i];
+        if (!td) return "";
+        return (td.getAttribute("data-value") || td.textContent).trim();
+      }
+      function num(s) {
+        var v = parseFloat(String(s).replace(/[^\d.eE+-]/g, ""));
+        return isNaN(v) ? -Infinity : v;
+      }
+
+      apply();
+    });
+  }
+
+  /* -------------------------------------------------- disclosure rows
+     A <tr> with data-opens="<id>" toggles the detail row that follows it.
+     Used by the bestiary, where every beast carries a full drop table. */
+  function initDisclosure() {
+    [].forEach.call(document.querySelectorAll("[data-opens]"), function (el) {
+      var target = document.getElementById(el.getAttribute("data-opens"));
+      if (!target) return;
+      el.setAttribute("role", "button");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("aria-expanded", "false");
+      el.setAttribute("aria-controls", target.id);
+      function toggle() {
+        var open = el.getAttribute("aria-expanded") === "true";
+        el.setAttribute("aria-expanded", String(!open));
+        target.hidden = open;
+        el.classList.toggle("open", !open);
+      }
+      el.addEventListener("click", function (e) {
+        if (e.target.closest("a")) return;
+        toggle();
+      });
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+      });
+    });
+  }
+
+  /* -------------------------------------------------- level slider
+     The skills page filters a ladder down to what a given level can reach. */
+  function initLevelFilter() {
+    [].forEach.call(document.querySelectorAll("input[data-level-for]"), function (input) {
+      var scope = document.getElementById(input.getAttribute("data-level-for"));
+      if (!scope) return;
+      var out = document.querySelector(
+        '[data-level-out="' + input.getAttribute("data-level-for") + '"]');
+      var items = [].slice.call(scope.querySelectorAll("[data-level]"));
+      function apply() {
+        var lvl = parseInt(input.value, 10);
+        if (out) out.textContent = lvl;
+        items.forEach(function (el) {
+          el.classList.toggle("locked", parseInt(el.getAttribute("data-level"), 10) > lvl);
+        });
+      }
+      input.addEventListener("input", apply);
+      apply();
+    });
+  }
+
+  /* -------------------------------------------------- combat bracket
+     Wilderness attack eligibility is symmetric: the combat difference has to
+     fit inside BOTH parties' depth. At the border road that depth is 3. Drag
+     your own level and everyone you cannot legally fight there goes grey. */
+  function initBracket() {
+    [].forEach.call(document.querySelectorAll("input[data-bracket]"), function (input) {
+      var key = input.getAttribute("data-bracket");
+      var depth = parseInt(input.getAttribute("data-bracket-depth"), 10) || 3;
+      var table = document.querySelector('table[data-table="' + key + '"]');
+      if (!table || !table.tBodies[0]) return;
+      var out = document.querySelector('[data-bracket-out="' + key + '"]');
+      var note = document.querySelector('[data-bracket-note="' + key + '"]');
+      var rows = [].slice.call(table.tBodies[0].rows).map(function (tr) {
+        var cell = tr.cells[2];
+        return { tr: tr, cb: cell ? parseInt(cell.textContent, 10) : NaN };
+      });
+
+      function apply() {
+        var mine = parseInt(input.value, 10);
+        var hit = 0;
+        rows.forEach(function (r) {
+          var can = !isNaN(r.cb) && Math.abs(r.cb - mine) <= depth;
+          r.tr.classList.toggle("out", !can);
+          r.tr.classList.toggle("in", can);
+          if (can) hit++;
+        });
+        if (out) out.textContent = mine;
+        if (note) {
+          note.textContent = hit
+            ? "at the ditch you can fight " + hit + " of " + rows.length
+              + " — combat " + Math.max(1, mine - depth) + " to " + (mine + depth)
+            : "nothing on the road is inside your bracket at this depth — go deeper, or rebuild";
+        }
+      }
+      input.addEventListener("input", apply);
+      apply();
+    });
+  }
+
+  function boot() {
+    initSpy();
+    initTables();
+    initDisclosure();
+    initLevelFilter();
+    initBracket();
+    if (reduced) document.documentElement.style.scrollBehavior = "auto";
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
+
+</script>
+</body>
+</html>
