@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "aws",
   "client_version": 10089,
-  "label": "10089: Cataclysm region and its wanderers, Fisher King realms moved, Dead Branch ruined room",
-  "published": "2026-10-20T09:17:11Z",
+  "label": "",
+  "published": "2026-10-20T09:20:29Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10089/files/",
   "files": [
     {
