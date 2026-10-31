@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "channel": "aws",
-  "client_version": 10085,
+  "client_version": 10090,
   "label": "",
-  "published": "2026-10-13T23:09:43Z",
-  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10085/files/",
+  "published": "2026-10-31T21:25:33Z",
+  "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/aws/10090/files/",
   "files": [
     {
       "path": "Cache/MD5.SUM",
@@ -203,8 +203,8 @@
     },
     {
       "path": "Cache/config.txt",
-      "size": 147,
-      "sha256": "d6d9c2fe79b08ef2bb5a6c7a6356b2f658964ca3e006fde1c3c25a9456f64111"
+      "size": 195,
+      "sha256": "8a6989bbf8e3b33b1b41a698fa8453c5cdc23593dd31210e9e448be465a210d6"
     },
     {
       "path": "Cache/enhanced/ambience/ambient_bubbling_noises__0832.ogg",
@@ -1468,8 +1468,8 @@
     },
     {
       "path": "Cache/video/Authentic_Landscape.orsc",
-      "size": 971938,
-      "sha256": "16e212f087be33128ab1590f1bb609541e3ac9078b34f5e0c5b2bde805ce9871"
+      "size": 986187,
+      "sha256": "9af19998688c726cc1c85a32ace21ec3a93e23959c66ed382c5a22f473917821"
     },
     {
       "path": "Cache/video/Authentic_Sprites.orsc",
@@ -1493,8 +1493,18 @@
     },
     {
       "path": "Cache/video/models.orsc",
-      "size": 1946591,
-      "sha256": "4fb9d44c716b041a8b2f82337d3267dde7b602472ac19d5fef1cfe492ec0e998"
+      "size": 2098827,
+      "sha256": "62b2bb8cc7036bdaa3565ac0b073b81da5a06e0c3d1e3b7f44614151e8e90c65"
+    },
+    {
+      "path": "Cache/video/spritepacks/CarpetFray.osar",
+      "size": 5256,
+      "sha256": "13a1eee6d5be5ca69f71153e18555ca22cd7cedeeb929d6d40942c17b9351210"
+    },
+    {
+      "path": "Cache/video/spritepacks/DeadBranch.osar",
+      "size": 1119,
+      "sha256": "8728dacc29b53ec95a2eee88e781917b1cd791a0f263ecb3e8cc43393b3abbfa"
     },
     {
       "path": "Cache/video/spritepacks/DragonHelm.osar",
@@ -1513,13 +1523,18 @@
     },
     {
       "path": "Cache/video/spritepacks/DragonPlate.osar",
-      "size": 6227,
-      "sha256": "6a10cf0381bb7b2b6381b94cc3179c4cbb638d8fb622d41dbfb555d31b6c3a04"
+      "size": 6210,
+      "sha256": "1bfd0accfecd27e6e16f3bf852e34607ef821399b85b10668e84c0068d5a6d3b"
     },
     {
       "path": "Cache/video/spritepacks/Dragonite.osar",
       "size": 229,
       "sha256": "26778fa5f906d2b8e976fa2464b33d02177b4421bf60040444d03dca01610f1f"
+    },
+    {
+      "path": "Cache/video/spritepacks/Estate.osar",
+      "size": 14854,
+      "sha256": "afd46e25d55f6343f7ea38a64bba14f59fa5d2621b9ebb1d217fefb94df9768e"
     },
     {
       "path": "Cache/video/spritepacks/Hair.osar",
@@ -1535,6 +1550,11 @@
       "path": "Cache/video/spritepacks/Menus.osar",
       "size": 3126,
       "sha256": "d74f281331be202af13972433d14209247ce89a2d7572c2b140f4afcde68bcac"
+    },
+    {
+      "path": "Cache/video/spritepacks/Portal.osar",
+      "size": 1278,
+      "sha256": "17bb7584da391a53af3d064e1b224a10b6749e1e2ce49c47993a000bf12e940e"
     },
     {
       "path": "Cache/video/spritepacks/Saradomin.osar",
@@ -1563,8 +1583,8 @@
     },
     {
       "path": "Open_RSC_Client.jar",
-      "size": 3939760,
-      "sha256": "672ff6d4a91f1aea5a03d4777020b55a6df6680151bbb8a7b49850e3a622ba4f"
+      "size": 3965683,
+      "sha256": "77d24ada1de74555ea09fc24f3320c9e1f09719c57be6ed0dfe5eb4b28dc2610"
     },
     {
       "path": "Play-Dev.cmd",
@@ -1573,8 +1593,8 @@
     },
     {
       "path": "README.txt",
-      "size": 5581,
-      "sha256": "daf307eca9eebb153f27154089eb0393773a5c3759003cfbdc65f407732205a8"
+      "size": 5524,
+      "sha256": "bfd30c9f4e4ae2b6887e6f5a147c3b173501ac74e159d3de93dafda7718e8311"
     },
     {
       "path": "discord-rpc.jar",
@@ -1582,9 +1602,14 @@
       "sha256": "197b5686e2e98dd7aebfc69b2a7ac64294316ae8a36cd196c7591fcc419729bb"
     },
     {
+      "path": "retired.txt",
+      "size": 54,
+      "sha256": "e17b15f3e05034d325ade27bab56e186db4aa0d9aca504419e58293f5a58e4fa"
+    },
+    {
       "path": "update/Launch.cmd",
-      "size": 3534,
-      "sha256": "bf9765e6e232895228583095dcdd1a36b9c9e01cc8e78aed7b3e5105dcf73477"
+      "size": 1128,
+      "sha256": "4211063e5835fedce9b6a0c6913a23374fcd78902eac3ac0501233b5670ff67e"
     },
     {
       "path": "update/Update-Client.ps1",
@@ -1604,10 +1629,5 @@
     "port": 43594,
     "pinned": true
   },
-  "setup": {
-    "path": "setup.zip",
-    "size": 49778291,
-    "sha256": "8c6417bc19cf78760c901880e0bc6045710c9459fb6f29404a95e8b482a7373c"
-  },
-  "content": "2807478e75609c25"
+  "content": "837366e8def8db9d"
 }
