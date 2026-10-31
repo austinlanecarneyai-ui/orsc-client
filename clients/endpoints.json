@@ -1,0 +1,7 @@
+{
+  "_what": "Every public address the launcher, the client and the website use. Change them HERE, then run python mod\\tools\\endpoints.py --write and publish. Installed launchers read the published copy at <updates>endpoints.json on each start, so a new domain needs no new launcher.",
+  "site": "https://www.rsclassic-continuum.com/",
+  "api": "https://api.rsclassic-continuum.com/",
+  "updates": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/",
+  "download": "https://austinlanecarneyai-ui.github.io/orsc-client/"
+}
