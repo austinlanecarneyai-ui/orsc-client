@@ -2,8 +2,8 @@
   "schema": 1,
   "channel": "rscx",
   "client_version": 10090,
-  "label": "",
-  "published": "2026-11-04T13:17:29Z",
+  "label": "Launcher 0.6.1: confirm-email notice",
+  "published": "2026-11-04T13:18:29Z",
   "base": "https://austinlanecarneyai-ui.github.io/orsc-client/clients/rscx/10090/files/",
   "files": [
     {
